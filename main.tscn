@@ -1,16 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bee5ds54ef40t"]
+[gd_scene load_steps=5 format=3 uid="uid://bee5ds54ef40t"]
 
-[ext_resource type="Texture2D" uid="uid://r6gg2yufg6pq" path="res://dude/Dude_1.png" id="1_lyqof"]
+[ext_resource type="Script" path="res://main.gd" id="1_5hoxr"]
+[ext_resource type="PackedScene" uid="uid://dk0hhrgupuhic" path="res://workshop/cauldron.tscn" id="2_ghow2"]
+[ext_resource type="PackedScene" uid="uid://cgjcrfxvgjx77" path="res://workshop/bottle.tscn" id="3_sce6h"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vf0sc"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_5hoxr")
 
-[node name="Dude1" type="Sprite2D" parent="."]
-position = Vector2(448, 278)
-texture = ExtResource("1_lyqof")
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 648)
+metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="."]
-offset_left = 652.0
-offset_top = 369.0
-offset_right = 715.0
-offset_bottom = 392.0
-text = "It works"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_vf0sc")
+
+[node name="Cauldron" parent="." instance=ExtResource("2_ghow2")]
+position = Vector2(182, 537)
+
+[node name="FPS" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Bottle" parent="." instance=ExtResource("3_sce6h")]
+position = Vector2(532, 301)
