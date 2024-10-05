@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db30ob1ls2bvy"
-path="res://.godot/imported/background_front.png-8b1f50067302ac564f867ebb2514b930.ctex"
+uid="uid://ra851ou483ls"
+path="res://.godot/imported/wooden_barricade.png-a21998ab8fe9f0685ee14aeab5ec48a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://battle/background_front.png"
-dest_files=["res://.godot/imported/background_front.png-8b1f50067302ac564f867ebb2514b930.ctex"]
+source_file="res://battle/wooden_barricade.png"
+dest_files=["res://.godot/imported/wooden_barricade.png-a21998ab8fe9f0685ee14aeab5ec48a2.ctex"]
 
 [params]
 

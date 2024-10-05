@@ -11,6 +11,16 @@ class_name Furble
 
 @export var type := CreatureTypes.FIRE
 
+var state = MovementStates.FALLING
+
+enum MovementStates {
+	FALLING,
+	WALK,
+	PREPARING_JUMP,
+	JUMPING,
+	PILED
+}
+
 var jumped = false
 
 enum CreatureTypes {
@@ -34,36 +44,106 @@ func _ready() -> void:
 	gravity_scale *= configuration.gravity_multiplier
 	torque_gain_proportional *= (configuration.gravity_multiplier * configuration.weight_multiplier)
 
+	%Sprite.play("default")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
 func _physics_process(delta):
-	var is_grounded = false
 	var bodies = get_colliding_bodies()
+	var is_grounded = false
 	
 	for body in bodies:
-		jumped = false
-		
 		if body.is_in_group("ground"):
-			# The contact normal is pointing upwards (assuming y-down coordinate system)
 			is_grounded = true
-			break
-
-	if is_grounded:
-		if linear_velocity.x < max_speed:
-			move()
-
-
+			
+	var should_jump := randf() <= jump_probability
+	
+	# State transitions
+	match state:
+		MovementStates.FALLING:
+			if is_grounded:
+				walk()
+			elif !bodies.is_empty() and linear_velocity.length() <= 100.0:
+				piled()
+		MovementStates.WALK:
+			if bodies.is_empty():
+				falling()
+			elif should_jump:
+				preparing_jump()
+			elif !is_grounded and !bodies.is_empty():
+				piled()
+		MovementStates.PREPARING_JUMP:
+			if %Sprite.frame == 5:
+				jump()
+		MovementStates.JUMPING:
+			if linear_velocity.y <= 0.0:
+				falling()
+		MovementStates.PILED:
+			if bodies.is_empty():
+				falling()
+			elif should_jump:
+				preparing_jump()
+			elif is_grounded:
+				walk()
+	
 	rotate_upright()
 	
-	if jumped == false and randf() <= jump_probability:
-		jump()
+	match state:
+		MovementStates.FALLING:
+			falling_tick()
+		MovementStates.WALK:
+			walk_tick()
+		MovementStates.PREPARING_JUMP:
+			preparing_jump_tick()
+		MovementStates.JUMPING:
+			jump_tick()
+		MovementStates.PILED:
+			piled_tick()
+	
+
+# State transition functions
+func piled():
+	%Sprite.play("default")
+	state = MovementStates.PILED
+		
+func falling():
+	%Sprite.play("falling")
+	state = MovementStates.FALLING
+	
+func walk():
+	%Sprite.play("walk")
+	state = MovementStates.WALK
+
+func preparing_jump():
+	%Sprite.play("jump")
+	state = MovementStates.PREPARING_JUMP
 
 func jump():
+	state = MovementStates.JUMPING
 	apply_central_impulse(jump_impulse)
+
+
+# State tick functions
+func piled_tick():
+	pass
 	
-	jumped = true
+func walk_tick():
+	if linear_velocity.x < max_speed:
+		# Create a force vector pointing to the right
+		var force = Vector2(1, 0) * force_magnitude
+		# Apply the force to the center of mass
+		apply_central_force(force)
+	
+func falling_tick():
+	pass
+	
+func preparing_jump_tick():
+	pass
+
+func jump_tick():
+	pass
 
 func rotate_upright():
 	 #Get global up rotation
@@ -80,13 +160,10 @@ func rotate_upright():
 	# Apply the torque
 	apply_torque(torque)
 
-func move():
-	if linear_velocity.x < max_speed:
-		# Create a force vector pointing to the right
-		var force = Vector2(1, 0) * force_magnitude
-		# Apply the force to the center of mass
-		#add_constant_central_force(force)
-		apply_central_force(force)
-
 func normalize_angle(angle):
 	return fmod(angle + PI, 2 * PI) - PI
+
+func _on_sprite_animation_looped() -> void:
+	#if %Sprite.animation == "Jump":
+		#%Sprite.play("default")
+	pass
