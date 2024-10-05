@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bee5ds54ef40t"]
+
+[ext_resource type="Texture2D" uid="uid://r6gg2yufg6pq" path="res://dude/Dude_1.png" id="1_lyqof"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Dude1" type="Sprite2D" parent="."]
+position = Vector2(448, 278)
+texture = ExtResource("1_lyqof")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 652.0
+offset_top = 369.0
+offset_right = 715.0
+offset_bottom = 392.0
+text = "It works"
