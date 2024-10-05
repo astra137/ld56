@@ -16,7 +16,6 @@ linear_damp = 3.0
 angular_damp = 20.0
 script = ExtResource("1_bckxk")
 torque_gain_proportional = 6500.0
-jump_impulse = Vector2(300, -600)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_t0xu7")
