@@ -2,12 +2,14 @@ extends RigidBody2D
 
 class_name Furble
 
-@export var torque_gain_proportional = 6000.0
-@export var torque_gain_derivative = 900.0
-@export var max_speed = 20.0
-@export var force_magnitude = 10000.0
-@export var jump_impulse = Vector2(300.0, -600.0)
-@export var jump_probability = 0.001
+@export var torque_gain_proportional := 6000.0
+@export var torque_gain_derivative := 900.0
+@export var max_speed := 20.0
+@export var force_magnitude := 10000.0
+@export var jump_impulse := Vector2(300.0, -600.0)
+@export var jump_probability := 0.001
+
+@export var type := CreatureTypes.FIRE
 
 var jumped = false
 
@@ -20,7 +22,9 @@ enum CreatureTypes {
 	ELECTRICITY,
 	WIND,
 	GRAVITY
-} 
+}
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

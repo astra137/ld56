@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://bpxpr0cexmstu"]
+
+[ext_resource type="Script" path="res://Battle/creature_configuration.gd" id="1_m66vh"]
+[ext_resource type="Script" path="res://Battle/creature_type_attribute.gd" id="2_hdcue"]
+
+[sub_resource type="Resource" id="Resource_b86ix"]
+script = ExtResource("2_hdcue")
+type = 0
+color = Color(0.957769, 0.397084, 0.370897, 1)
+weight_multiplier = 1.0
+speed_multiplier = 2.0
+gravity_multiplier = 1.0
+
+[sub_resource type="Resource" id="Resource_2qs3c"]
+script = ExtResource("2_hdcue")
+type = 1
+color = Color(0.449035, 0.840926, 0.979987, 1)
+weight_multiplier = 1.0
+speed_multiplier = 0.3
+gravity_multiplier = 1.0
+
+[sub_resource type="Resource" id="Resource_i87uk"]
+script = ExtResource("2_hdcue")
+type = 2
+color = Color(0.325667, 0.212467, 0.121583, 1)
+weight_multiplier = 2.0
+speed_multiplier = 1.0
+gravity_multiplier = 1.0
+
+[sub_resource type="Resource" id="Resource_yym8f"]
+script = ExtResource("2_hdcue")
+type = 3
+color = Color(0.677681, 0.420176, 0.726897, 1)
+weight_multiplier = 0.5
+speed_multiplier = 1.0
+gravity_multiplier = 1.0
+
+[sub_resource type="Resource" id="Resource_c20up"]
+script = ExtResource("2_hdcue")
+type = 4
+color = Color(0.171626, 0.263124, 0.688165, 1)
+weight_multiplier = 0.5
+speed_multiplier = 1.5
+gravity_multiplier = 0.6
+
+[sub_resource type="Resource" id="Resource_38867"]
+script = ExtResource("2_hdcue")
+type = 5
+color = Color(0.859471, 0.850455, 0.288443, 1)
+weight_multiplier = 0.7
+speed_multiplier = 2.0
+gravity_multiplier = 1.0
+
+[sub_resource type="Resource" id="Resource_ywj5f"]
+script = ExtResource("2_hdcue")
+type = 6
+color = Color(0.509497, 0.936885, 0.731434, 1)
+weight_multiplier = 0.3
+speed_multiplier = 1.0
+gravity_multiplier = 0.3
+
+[sub_resource type="Resource" id="Resource_g0g63"]
+script = ExtResource("2_hdcue")
+type = 7
+color = Color(0.230091, 0.00226787, 0.30102, 1)
+weight_multiplier = 1.0
+speed_multiplier = 1.0
+gravity_multiplier = 1.0
+
+[node name="CreatureConfiguration" type="Node"]
+script = ExtResource("1_m66vh")
+type_configuration = Array[ExtResource("2_hdcue")]([SubResource("Resource_b86ix"), SubResource("Resource_2qs3c"), SubResource("Resource_i87uk"), SubResource("Resource_yym8f"), SubResource("Resource_c20up"), SubResource("Resource_38867"), SubResource("Resource_ywj5f"), SubResource("Resource_g0g63")])
