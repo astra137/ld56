@@ -22,7 +22,7 @@ gravity_multiplier = 1.0
 [sub_resource type="Resource" id="Resource_i87uk"]
 script = ExtResource("2_hdcue")
 type = 2
-color = Color(0.325667, 0.212467, 0.121583, 1)
+color = Color(0.560839, 0.382783, 0.240808, 1)
 weight_multiplier = 2.0
 speed_multiplier = 1.0
 gravity_multiplier = 1.0
@@ -31,7 +31,7 @@ gravity_multiplier = 1.0
 script = ExtResource("2_hdcue")
 type = 3
 color = Color(0.677681, 0.420176, 0.726897, 1)
-weight_multiplier = 0.5
+weight_multiplier = 0.7
 speed_multiplier = 1.0
 gravity_multiplier = 1.0
 
@@ -39,15 +39,15 @@ gravity_multiplier = 1.0
 script = ExtResource("2_hdcue")
 type = 4
 color = Color(0.171626, 0.263124, 0.688165, 1)
-weight_multiplier = 0.5
+weight_multiplier = 1.0
 speed_multiplier = 1.5
-gravity_multiplier = 0.6
+gravity_multiplier = 0.9
 
 [sub_resource type="Resource" id="Resource_38867"]
 script = ExtResource("2_hdcue")
 type = 5
 color = Color(0.859471, 0.850455, 0.288443, 1)
-weight_multiplier = 0.7
+weight_multiplier = 0.8
 speed_multiplier = 2.0
 gravity_multiplier = 1.0
 
@@ -55,14 +55,14 @@ gravity_multiplier = 1.0
 script = ExtResource("2_hdcue")
 type = 6
 color = Color(0.509497, 0.936885, 0.731434, 1)
-weight_multiplier = 0.3
+weight_multiplier = 0.6
 speed_multiplier = 1.0
-gravity_multiplier = 0.3
+gravity_multiplier = 0.4
 
 [sub_resource type="Resource" id="Resource_g0g63"]
 script = ExtResource("2_hdcue")
 type = 7
-color = Color(0.230091, 0.00226787, 0.30102, 1)
+color = Color(0.350895, 0.00537722, 0.45187, 1)
 weight_multiplier = 1.0
 speed_multiplier = 1.0
 gravity_multiplier = 1.0

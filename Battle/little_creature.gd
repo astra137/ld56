@@ -24,12 +24,15 @@ enum CreatureTypes {
 	GRAVITY
 }
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	var configuration: CreatureTypeAttribute = CreatureConfiguration.type_configuration[type]
+	
+	%Sprite.modulate = configuration.color
+	mass *= configuration.weight_multiplier
+	max_speed *= configuration.speed_multiplier
+	gravity_scale *= configuration.gravity_multiplier
+	torque_gain_proportional *= (configuration.gravity_multiplier * configuration.weight_multiplier)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
