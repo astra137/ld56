@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://kfch1r3nj1jm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8xwo"]
-size = Vector2(20, 1080)
+size = Vector2(20, 540)
 
 [node name="GoalPoint" type="Area2D"]
 collision_layer = 4
