@@ -1,11 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk0hhrgupuhic"]
+[gd_scene load_steps=3 format=3 uid="uid://dk0hhrgupuhic"]
 
+[ext_resource type="Script" path="res://workshop/cauldron.gd" id="1_5vegq"]
 [ext_resource type="Texture2D" uid="uid://caws017gjfrr8" path="res://workshop/cauldron.png" id="1_a5vfq"]
 
-[node name="Cauldron" type="StaticBody2D"]
+[node name="Cauldron" type="Node2D"]
+script = ExtResource("1_5vegq")
 
-[node name="Cauldron" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_a5vfq")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-94, -55, -90, -65, -84, -73, -79, -78, -103, -96, -107, -74, -115, -48, -116, -16, -107, 19, -91, 47, -75, 62, -37, 74, 53, 73, 88, 51, 110, 11, 118, -40, 103, -97, 77, -79, 90, -64, 95, -38, 94, -14, 86, 11, 76, 28, 58, 44, 35, 51, -48, 50, -70, 35, -86, 12, -96, -14, -97, -42)
+[node name="Clickable" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Clickable"]
+polygon = PackedVector2Array(-106, -97, -95, -84, -111, -68, -117, -44, -111, 9, -87, 52, -44, 75, 56, 74, 95, 43, 113, 1, 118, -45, 109, -71, 97, -84, 104, -97)
+
+[node name="FurbleContainer" type="StaticBody2D" parent="."]
+collision_layer = 257
+collision_mask = 257
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FurbleContainer"]
+polygon = PackedVector2Array(-94, -55, -90, -65, -84, -73, -78, -79, -104, -97, -104, -76, -115, -48, -116, -16, -107, 19, -91, 47, -83, 54, -100, 80, -103, 93, -113, 104, -84, 104, -63, 67, -41, 74, 48, 74, 63.7145, 66.2652, 84, 104, 112, 104, 102, 94, 100, 81, 82.1407, 54.683, 88, 51, 110, 11, 118, -40, 104, -77, 104, -99, 77, -79, 90, -64, 95, -38, 94, -14, 86, 11, 76, 28, 58, 44, 35, 51, -39, 51, -70, 35, -86, 12, -96, -14, -97, -42)
+
+[connection signal="input_event" from="Clickable" to="." method="_on_clickable_input_event"]
+[connection signal="mouse_entered" from="Clickable" to="." method="_on_clickable_mouse_entered"]
+[connection signal="mouse_exited" from="Clickable" to="." method="_on_clickable_mouse_exited"]

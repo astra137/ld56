@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bee5ds54ef40t"]
+
+[ext_resource type="Script" path="res://workshop/workshop.gd" id="1_3vfhv"]
+[ext_resource type="PackedScene" uid="uid://dk0hhrgupuhic" path="res://workshop/cauldron.tscn" id="2_weu8n"]
+[ext_resource type="PackedScene" uid="uid://cgjcrfxvgjx77" path="res://workshop/bottle.tscn" id="3_hxohg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vf0sc"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_3vfhv")
+
+[node name="FPS" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 540)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_vf0sc")
+
+[node name="Cauldron" parent="." instance=ExtResource("2_weu8n")]
+position = Vector2(480, 425)
+
+[node name="Bottle" parent="." instance=ExtResource("3_hxohg")]
+position = Vector2(148, 78)
+
+[connection signal="clicked" from="Cauldron" to="." method="_on_cauldron_clicked"]

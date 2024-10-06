@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgxcsilhby6u0"
-path="res://.godot/imported/goal_post.png-00e93442e23f27ec6495c5604bb300bd.ctex"
+uid="uid://dv5wndkllolbn"
+path="res://.godot/imported/shards-sheet.png-a30cd72176da2e40d72365c4dfbf6503.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Battle/goal_post.png"
-dest_files=["res://.godot/imported/goal_post.png-00e93442e23f27ec6495c5604bb300bd.ctex"]
+source_file="res://workshop/shatter/shards-sheet.png"
+dest_files=["res://.godot/imported/shards-sheet.png-a30cd72176da2e40d72365c4dfbf6503.ctex"]
 
 [params]
 

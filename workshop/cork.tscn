@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://xjuighokdi1k"]
+
+[ext_resource type="Texture2D" uid="uid://b5gbrw2g8ls25" path="res://workshop/cork.png" id="1_c2ols"]
+
+[node name="Cork" type="RigidBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, -6, -6, -7, -4, -8, 4, -8, 6, -7, 7, -6, 7, 1, 6, 5, 5, 10, 4, 11, -4, 11, -5, 10, -6, 5, -7, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c2ols")

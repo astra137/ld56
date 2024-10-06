@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgxcsilhby6u0"
-path="res://.godot/imported/goal_post.png-00e93442e23f27ec6495c5604bb300bd.ctex"
+uid="uid://l25iam0fqx0g"
+path="res://.godot/imported/2.png-96b4374eb114e043569f64b33e7f7c33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Battle/goal_post.png"
-dest_files=["res://.godot/imported/goal_post.png-00e93442e23f27ec6495c5604bb300bd.ctex"]
+source_file="res://workshop/shatter/sprites/2.png"
+dest_files=["res://.godot/imported/2.png-96b4374eb114e043569f64b33e7f7c33.ctex"]
 
 [params]
 

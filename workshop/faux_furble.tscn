@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://btjeodbojes83"]
+
+[ext_resource type="Script" path="res://workshop/faux_furble.gd" id="1_fbfjr"]
+[ext_resource type="Texture2D" uid="uid://r6gg2yufg6pq" path="res://dude/Dude_1.png" id="2_6qxd5"]
+[ext_resource type="Texture2D" uid="uid://fkix4mtclp41" path="res://dude/Dude_2.png" id="3_oaa71"]
+[ext_resource type="Texture2D" uid="uid://ib32l1k3k0xq" path="res://dude/Dude_3.png" id="4_ffetr"]
+[ext_resource type="Texture2D" uid="uid://1emm6daxc4ir" path="res://dude/Dude_4.png" id="5_bxrp0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_masmm"]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_txaqr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6qxd5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oaa71")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ffetr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bxrp0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="FauxFurble" type="RigidBody2D"]
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 6
+script = ExtResource("1_fbfjr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_masmm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_txaqr")
+autoplay = "default"
+frame_progress = 0.689408
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
