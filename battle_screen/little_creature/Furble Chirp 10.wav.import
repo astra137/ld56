@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bxb1v27oqh1w0"
+path="res://.godot/imported/Furble Chirp 10.wav-9c928ac19a4bec22636d25280134abda.sample"
+
+[deps]
+
+source_file="res://battle_screen/little_creature/Furble Chirp 10.wav"
+dest_files=["res://.godot/imported/Furble Chirp 10.wav-9c928ac19a4bec22636d25280134abda.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -5,6 +5,7 @@ class_name Obstacle
 @export var burn_health := 50.0
 @export var can_stick := false
 @export var wind_furble_impulse := Vector2(2000, -20000)
+@export var can_wash_away := false
 
 var fire_sound_counter := 0.0
 

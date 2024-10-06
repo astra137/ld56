@@ -8,6 +8,7 @@ class_name Furble
 @export var force_magnitude := 10000.0
 @export var jump_impulse := Vector2(300.0, -600.0)
 @export var jump_probability := 0.001
+@export var chirp_probability := 0.005
 
 @export var type := CreatureTypes.FIRE:
 	set(value):
@@ -25,6 +26,13 @@ const unstuck_breaking_speed := -250.0
 const stuck_max_time := 5.0
 var stuck_current_time := 0.0
 
+# Knock down variables
+var knock_down_target: Obstacle
+const knock_down_force := 800.0
+const knock_down_max_time := 5.0
+var knock_down_current_time := 0.0
+
+
 enum MovementStates {
 	BOTTLED,
 	FALLING,
@@ -32,7 +40,8 @@ enum MovementStates {
 	PREPARING_JUMP,
 	JUMPING,
 	PILED,
-	STUCK
+	STUCK,
+	KNOCK_DOWN
 }
 
 enum CreatureTypes {
@@ -86,21 +95,17 @@ func _physics_process(delta):
 	match state:
 		MovementStates.FALLING:
 			if is_grounded:
+				%LandingSounds.play()
 				walk()
 			elif !bodies.is_empty() and linear_velocity.length() <= 100.0:
+				#%LandingSounds.play()
 				piled()
 		MovementStates.WALK:
 			if bodies.is_empty():
-				%MovementSounds.stop()
-				%MovementSounds.finished.disconnect(walking_sounds)
 				falling()
 			elif should_jump:
-				%MovementSounds.stop()
-				%MovementSounds.finished.disconnect(walking_sounds)
 				preparing_jump()
 			elif !is_grounded and !bodies.is_empty():
-				%MovementSounds.stop()
-				%MovementSounds.finished.disconnect(walking_sounds)
 				piled()
 		MovementStates.PREPARING_JUMP:
 			if %Sprite.frame == 5:
@@ -116,7 +121,9 @@ func _physics_process(delta):
 			elif is_grounded:
 				walk()
 		MovementStates.STUCK:
-			if stuck_object.linear_velocity.y <= unstuck_breaking_speed or stuck_current_time >= stuck_max_time:
+			if stuck_object == null:
+				falling()
+			elif stuck_object.linear_velocity.y <= unstuck_breaking_speed or stuck_current_time >= stuck_max_time:
 				stuck_object = null
 				falling()
 
@@ -136,6 +143,8 @@ func _physics_process(delta):
 			piled_tick()
 		MovementStates.STUCK:
 			stuck_tick(delta)
+		MovementStates.KNOCK_DOWN:
+			knock_down_tick()
 
 
 # State transition functions
@@ -148,13 +157,9 @@ func falling():
 	state = MovementStates.FALLING
 
 func walk():
+	chirp()
 	%Sprite.play("walk")
-	%MovementSounds.play()
-	%MovementSounds.finished.connect(walking_sounds)
 	state = MovementStates.WALK
-
-func walking_sounds():
-	%MovementSounds.play()
 
 func preparing_jump():
 	%Sprite.play("jump")
@@ -170,9 +175,13 @@ func stuck(body: Obstacle):
 	stuck_object = body
 	state = MovementStates.STUCK
 
+func knock_down(object: Obstacle):
+	knock_down_target = object
+	state = MovementStates.KNOCK_DOWN
 
 # State tick functions
 func piled_tick():
+	chirp()
 	pass
 
 func walk_tick():
@@ -192,9 +201,19 @@ func jump_tick():
 	pass
 
 func stuck_tick(delta: float):
+	chirp()
 	apply_central_force(global_position.direction_to(stuck_object.global_position) * stuck_force)
 	stuck_object.apply_central_force(stuck_object.wind_furble_impulse)
 	stuck_current_time += delta
+
+func knock_down_tick():
+	chirp()
+	knock_down_target.apply_force(Vector2.RIGHT * -knock_down_force, global_position)
+	walk_tick()
+
+func chirp():
+	if randf() <= chirp_probability:
+		%ChirpSounds.play()
 
 func rotate_upright():
 	 #Get global up rotation
@@ -243,10 +262,18 @@ func _on_area_obstacle_entered(body: Node2D) -> void:
 				if state != MovementStates.STUCK:
 					if (body as Obstacle).can_stick:
 						stuck(body as Obstacle)
+			CreatureTypes.WATER:
+				if (body as Obstacle).can_wash_away:
+					knock_down(body as Obstacle)
+
 
 
 func _on_area_obstacle_exited(body: Node2D) -> void:
-	if body is Obstacle:
-		match type:
-			CreatureTypes.FIRE:
-				(body as Obstacle).try_stop_burn()
+	if !is_queued_for_deletion():
+		if body is Obstacle:
+			match type:
+				CreatureTypes.FIRE:
+					(body as Obstacle).try_stop_burn()
+				CreatureTypes.WATER:
+					if state == MovementStates.KNOCK_DOWN:
+						falling()
