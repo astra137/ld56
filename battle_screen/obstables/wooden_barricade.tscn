@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://crbeqqerg6bu"]
+[gd_scene load_steps=4 format=3 uid="uid://crbeqqerg6bu"]
 
 [ext_resource type="PackedScene" uid="uid://vm7g05yf7ijp" path="res://battle_screen/obstables/obstacle.tscn" id="1_gk3h1"]
 [ext_resource type="Texture2D" uid="uid://ra851ou483ls" path="res://battle_screen/obstables/wooden_barricade.png" id="2_5lv2q"]
+[ext_resource type="Script" path="res://battle_screen/obstables/wooden_barricade.gd" id="2_yqkog"]
 
 [node name="Obstacle" instance=ExtResource("1_gk3h1")]
 collision_layer = 24
 collision_mask = 5
 mass = 50.0
+script = ExtResource("2_yqkog")
+wind_furble_impulse = Vector2(2000, -20000)
 burn_health = 25.0
 
 [node name="MainSprite" parent="." index="0"]

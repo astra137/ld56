@@ -32,6 +32,9 @@ func try_burn():
 			ObstacleStates.DEFAULT:
 				burning()
 
+func try_knock_over():
+	pass
+
 func burning():
 	%FireParticles.emitting = true
 	%AshParticles.emitting = true

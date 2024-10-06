@@ -50,10 +50,10 @@ func update_type() -> void:
 	mass *= configuration.weight_multiplier
 	max_speed *= configuration.speed_multiplier
 	gravity_scale *= configuration.gravity_multiplier
-	torque_gain_proportional *= ((configuration.gravity_multiplier ** 2) * (configuration.weight_multiplier ** 2))
-	torque_gain_derivative*= ((configuration.gravity_multiplier ** 2) * (configuration.weight_multiplier ** 2))
-	force_magnitude *= ((configuration.gravity_multiplier ** 2) * (configuration.weight_multiplier ** 2))
-	jump_impulse *= ((configuration.gravity_multiplier ** 2) * (configuration.weight_multiplier ** 2))
+	torque_gain_proportional *= ((configuration.gravity_multiplier) * (configuration.weight_multiplier))
+	torque_gain_derivative*= ((configuration.gravity_multiplier) * (configuration.weight_multiplier))
+	force_magnitude *= ((configuration.gravity_multiplier) * (configuration.weight_multiplier)) * configuration.speed_multiplier
+	jump_impulse *= ((configuration.gravity_multiplier) * (configuration.weight_multiplier))
 
 	match type:
 		CreatureTypes.WATER:
@@ -208,6 +208,8 @@ func _on_area_obstacle_entered(body: Node2D) -> void:
 		match type:
 			CreatureTypes.FIRE:
 				(body as Obstacle).try_burn()
+			CreatureTypes.WIND:
+				(body as Obstacle).try_knock_over()
 
 
 func _on_area_obstacle_exited(body: Node2D) -> void:
