@@ -3,10 +3,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var furbles := get_tree().get_nodes_in_group("furble")
-
-	for furble in furbles:
-		(furble as Furble).state = Furble.MovementStates.FALLING
+	get_tree().call_group(&'furble', &'awaken_furble')
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

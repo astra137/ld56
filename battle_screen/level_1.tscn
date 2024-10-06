@@ -17,8 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://uxfgncang0kq" path="res://battle_screen/background/cloud_3.png" id="15_1d4dp"]
 [ext_resource type="Texture2D" uid="uid://7uja4y22g5l3" path="res://battle_screen/background/cloud_4.png" id="16_6tyd5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmqk3"]
-size = Vector2(230.536, 78.9124)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_aamix"]
 
 [node name="BattleScreen" type="Node2D"]
 script = ExtResource("1_uy42u")
@@ -26,9 +25,8 @@ script = ExtResource("1_uy42u")
 [node name="Ground" type="StaticBody2D" parent="." groups=["ground"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(509, 862.059)
-scale = Vector2(8.97038, 2.38138)
-shape = SubResource("RectangleShape2D_vmqk3")
+position = Vector2(0, 768)
+shape = SubResource("WorldBoundaryShape2D_aamix")
 
 [node name="Ground" type="Sprite2D" parent="Ground"]
 z_index = 1

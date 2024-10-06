@@ -53,6 +53,10 @@ func update_type() -> void:
 	torque_gain_proportional *= (configuration.gravity_multiplier * configuration.weight_multiplier)
 
 
+func awaken_furble() -> void:
+	state = MovementStates.FALLING
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
