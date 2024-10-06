@@ -6,7 +6,7 @@
 [node name="Obstacle" instance=ExtResource("1_fr4pq")]
 mass = 50.0
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_fi1mk")
 
 [node name="CollisionPolygon2D" parent="." index="1"]

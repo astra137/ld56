@@ -86,27 +86,35 @@ texture = ExtResource("7_crwak")
 
 [node name="ObstacleWoodenBarricade" parent="." instance=ExtResource("8_ll4mj")]
 position = Vector2(990, 737)
+collision_layer = 1
 
 [node name="ObstacleWoodenBarrel" parent="." instance=ExtResource("9_dgv4n")]
 position = Vector2(926, 736)
+collision_layer = 1
 
 [node name="ObstacleWoodenTower" parent="." instance=ExtResource("10_w8m2m")]
 position = Vector2(1118, 636)
+collision_layer = 1
 mass = 200.0
 
 [node name="ObstacleWoodenLog" parent="." instance=ExtResource("11_lqc6w")]
 position = Vector2(863, 672)
+collision_layer = 1
 
 [node name="ObstacleStoneWall" parent="." instance=ExtResource("12_370uc")]
 position = Vector2(800, 672)
+collision_layer = 1
 
 [node name="ObstacleStoneTower" parent="." instance=ExtResource("13_bx4i8")]
 position = Vector2(669, 640)
+collision_layer = 1
 
 [node name="ObstacleMagicTower" parent="." instance=ExtResource("14_xrv7o")]
 position = Vector2(494, 641)
+collision_layer = 1
 
 [node name="ObstacleMagicBarrier" parent="." instance=ExtResource("15_km1a5")]
 position = Vector2(290, 726)
+collision_layer = 1
 
 [connection signal="body_entered" from="GoalPoint" to="." method="_on_goal_point_body_entered"]

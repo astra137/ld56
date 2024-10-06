@@ -188,3 +188,17 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		_teleport_vector = Vector2.ZERO
 
 #endregion
+
+
+func _on_area_obstacle_entered(body: Node2D) -> void:
+	if body is Obstacle:
+		match type:
+			CreatureTypes.FIRE:
+				(body as Obstacle).try_burn()
+
+
+func _on_area_obstacle_exited(body: Node2D) -> void:
+	if body is Obstacle:
+		match type:
+			CreatureTypes.FIRE:
+				(body as Obstacle).try_stop_burn()

@@ -1,0 +1,76 @@
+extends RigidBody2D
+class_name Obstacle
+
+@export var type := ObstacleTypes.WOOD
+@export var burn_health := 50.0
+
+var burning_entities := 0
+
+var state := ObstacleStates.DEFAULT
+
+enum ObstacleStates {
+	DEFAULT,
+	BURNING,
+	BURNT,
+	CRACKED,
+	BARRIER
+}
+
+enum ObstacleTypes {
+	WOOD,
+	STONE,
+	ARCANE
+}
+
+func try_burn():
+	if type == ObstacleTypes.WOOD:
+		burning_entities += 1
+
+		match state:
+			ObstacleStates.DEFAULT:
+				burning()
+
+func burning():
+	%FireParticles.emitting = true
+	%AshParticles.emitting = true
+	state = ObstacleStates.BURNING
+
+func burnt():
+	%FireParticles.emitting = false
+	%AshParticles.emitting = false
+	state = ObstacleStates.BURNT
+	queue_free()
+
+func default():
+	if !is_queued_for_deletion():
+		%FireParticles.emitting = false
+		%AshParticles.emitting = false
+		state = ObstacleStates.DEFAULT
+
+func try_stop_burn():
+	burning_entities -= 1
+
+	if burning_entities <= 0:
+		default()
+
+func try_crack():
+	pass
+
+func _ready() -> void:
+	pass
+
+func _physics_process(delta: float) -> void:
+	match state:
+		ObstacleStates.BURNING:
+			if burn_health <= 0.0:
+				burnt()
+
+	match state:
+		ObstacleStates.BURNING:
+			if burn_health >= 0.0:
+				burning_tick(delta)
+
+
+func burning_tick(delta: float):
+	burn_health -= delta * burning_entities
+	print("burning health: ", burn_health)

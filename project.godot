@@ -36,6 +36,7 @@ furble=""
 2d_physics/layer_1="General Object Collision"
 2d_physics/layer_2="Trigger areas"
 2d_physics/layer_3="Furbles (for goal post)"
+2d_physics/layer_4="Obstacle Effects"
 2d_physics/layer_9="bottle_shatter"
 
 [rendering]
