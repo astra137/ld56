@@ -62,6 +62,12 @@ func _process(delta: float) -> void:
 		linear_velocity = Vector2.ZERO
 
 
+func _physics_process(delta: float) -> void:
+	if _is_dragging:
+		var fix := get_viewport().get_mouse_position() - global_position
+		apply_central_force(fix * 500.0)
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if _is_dragging:
 		if event is InputEventMouseMotion:
