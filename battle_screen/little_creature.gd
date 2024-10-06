@@ -95,7 +95,8 @@ func _physics_process(delta):
 			elif is_grounded:
 				walk()
 
-	rotate_upright()
+	if state != MovementStates.BOTTLED:
+		rotate_upright()
 
 	match state:
 		MovementStates.FALLING:

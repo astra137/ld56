@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://bbn7s4ner10sp" path="res://workshop/shatter/sprites/15.png" id="15_bwn15"]
 
 [node name="Shard" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_qhsis")
 
 [node name="1" type="Sprite2D" parent="."]

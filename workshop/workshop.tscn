@@ -1,18 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bee5ds54ef40t"]
+[gd_scene load_steps=7 format=3 uid="uid://bee5ds54ef40t"]
 
 [ext_resource type="Script" path="res://workshop/workshop.gd" id="1_3vfhv"]
 [ext_resource type="PackedScene" uid="uid://dk0hhrgupuhic" path="res://workshop/cauldron.tscn" id="2_weu8n"]
 [ext_resource type="PackedScene" uid="uid://cgjcrfxvgjx77" path="res://workshop/bottle.tscn" id="3_hxohg"]
+[ext_resource type="PackedScene" uid="uid://uj8w2h5msu2s" path="res://workshop/shelf.tscn" id="3_wgtfx"]
+[ext_resource type="Texture2D" uid="uid://c7lavbbmkyqgd" path="res://workshop/workshop.png" id="5_6l35a"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vf0sc"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3vfhv")
 
-[node name="FPS" type="Label" parent="."]
-unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Workshop" type="Sprite2D" parent="."]
+texture = ExtResource("5_6l35a")
+centered = false
+
+[node name="Shelf" parent="." instance=ExtResource("3_wgtfx")]
+position = Vector2(224, 437)
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(0, 810)
@@ -22,9 +26,27 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_vf0sc")
 
 [node name="Cauldron" parent="." instance=ExtResource("2_weu8n")]
-position = Vector2(669, 699)
+position = Vector2(609, 522)
 
 [node name="Bottle" parent="." instance=ExtResource("3_hxohg")]
-position = Vector2(148, 78)
+position = Vector2(114, 316)
+
+[node name="Bottle2" parent="." instance=ExtResource("3_hxohg")]
+position = Vector2(188, 315)
+type = 1
+
+[node name="Bottle3" parent="." instance=ExtResource("3_hxohg")]
+position = Vector2(262, 315)
+type = 2
+
+[node name="Bottle4" parent="." instance=ExtResource("3_hxohg")]
+position = Vector2(332, 317)
+type = 4
+
+[node name="FPS" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 104.0
+offset_bottom = 23.0
+text = "FPS"
 
 [connection signal="clicked" from="Cauldron" to="." method="_on_cauldron_clicked"]

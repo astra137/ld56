@@ -1,36 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgjcrfxvgjx77"]
+[gd_scene load_steps=7 format=3 uid="uid://cgjcrfxvgjx77"]
 
 [ext_resource type="Texture2D" uid="uid://cx8km15ds51f3" path="res://workshop/bottle.png" id="1_61s1m"]
 [ext_resource type="Script" path="res://workshop/bottle.gd" id="1_ynuk4"]
-[ext_resource type="PackedScene" uid="uid://xjuighokdi1k" path="res://workshop/cork.tscn" id="2_8gils"]
+[ext_resource type="Texture2D" uid="uid://b5gbrw2g8ls25" path="res://workshop/cork.png" id="2_1xi41"]
 [ext_resource type="PackedScene" uid="uid://v4cyox7q5hs7" path="res://battle_screen/little_creature.tscn" id="4_op2hc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gf5bm"]
 size = Vector2(50, 66)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t101l"]
-radius = 24.0
+radius = 23.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kf81o"]
-radius = 25.02
-
-[node name="Bottle" type="StaticBody2D"]
+[node name="Bottle" type="RigidBody2D"]
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 6
 script = ExtResource("1_ynuk4")
 
-[node name="Cork" parent="." instance=ExtResource("2_8gils")]
+[node name="Cork" type="Sprite2D" parent="."]
 position = Vector2(0, -36)
-can_sleep = false
-freeze = true
+texture = ExtResource("2_1xi41")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("1_61s1m")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-1, -3)
-polygon = PackedVector2Array(0, -30, 0, -21, -14, -16, -22, -5, -22, 7, -20, 15, -14, 21, -6, 26, 7, 26, 13, 24, 19, 18, 23, 10, 25, 3, 23, -7, 17, -14, 10, -19, 2, -21, 2, -30, 19, -24, 31, -8, 32, 13, 20, 30, 9, 36, -9, 35, -21, 29, -29, 16, -31, -2, -23, -19, -13, -26)
+position = Vector2(0, -8)
+build_mode = 1
+polygon = PackedVector2Array(-5, -29, -5, -24, -5, -15, -16, -8, -19, -4, -22, 4, -22, 12.1, -20, 18, -16, 24, -10, 28, -4, 30, 4, 30, 10, 28, 16, 24, 20, 18, 22, 12, 22, 4, 20, -2, 16, -8, 5, -15, 5, -24, 5, -29)
+metadata/_edit_lock_ = true
 
 [node name="Clickable" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
 position = Vector2(0, -8)
@@ -38,16 +41,11 @@ shape = SubResource("RectangleShape2D_gf5bm")
 
 [node name="Container" type="Area2D" parent="."]
 unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Container"]
 shape = SubResource("CircleShape2D_t101l")
-
-[node name="ShatterTrigger" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShatterTrigger"]
-shape = SubResource("CircleShape2D_kf81o")
 
 [node name="Creatures" type="Marker2D" parent="."]
 unique_name_in_owner = true
@@ -83,4 +81,3 @@ position = Vector2(-13, -12)
 
 [connection signal="input_event" from="Clickable" to="." method="_on_clickable_input_event"]
 [connection signal="body_exited" from="Container" to="." method="_on_container_body_exited"]
-[connection signal="body_entered" from="ShatterTrigger" to="." method="_on_shatter_trigger_body_entered"]
