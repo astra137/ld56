@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dn1wbggy63c18"]
+[gd_scene load_steps=11 format=3 uid="uid://dn1wbggy63c18"]
 
 [ext_resource type="PackedScene" uid="uid://bee5ds54ef40t" path="res://workshop/workshop.tscn" id="1_ldq7e"]
 [ext_resource type="Script" path="res://main.gd" id="1_oj766"]
 [ext_resource type="PackedScene" uid="uid://whj6b7t2m0e4" path="res://battle_screen/level_1.tscn" id="1_vb2us"]
 [ext_resource type="Script" path="res://menus/label_fps.gd" id="4_k0iw8"]
+[ext_resource type="AudioStream" uid="uid://c71s841c4vs0e" path="res://background_music.wav" id="6_82ls8"]
 [ext_resource type="Script" path="res://menus/label_furbles.gd" id="7_swf12"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_0kv1m"]
@@ -67,6 +68,11 @@ script = ExtResource("4_k0iw8")
 layout_mode = 2
 text = "? furbles"
 script = ExtResource("7_swf12")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_82ls8")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonView" to="." method="_on_button_view_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonSpill" to="." method="_on_button_spill_pressed"]

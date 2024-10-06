@@ -38,42 +38,42 @@ shape = SubResource("WorldBoundaryShape2D_3eknv")
 
 [node name="Ground" type="Sprite2D" parent="Ground"]
 z_index = 1
-position = Vector2(256, 872)
+position = Vector2(256, 875)
 texture = ExtResource("2_64jrp")
 
 [node name="Ground4" type="Sprite2D" parent="Ground"]
 z_index = 1
-position = Vector2(-256, 872)
+position = Vector2(-256, 875)
 texture = ExtResource("2_64jrp")
 
 [node name="Ground2" type="Sprite2D" parent="Ground"]
 z_index = 1
-position = Vector2(768, 872)
+position = Vector2(768, 875)
 texture = ExtResource("2_64jrp")
 
 [node name="Ground3" type="Sprite2D" parent="Ground"]
 z_index = 1
-position = Vector2(1280, 872)
+position = Vector2(1280, 875)
 texture = ExtResource("2_64jrp")
 
 [node name="BackgroundBehindGrass" type="Sprite2D" parent="Ground"]
 z_index = -1
-position = Vector2(253, 760)
+position = Vector2(253, 763)
 texture = ExtResource("3_8ilto")
 
 [node name="BackgroundBehindGrass4" type="Sprite2D" parent="Ground"]
 z_index = -1
-position = Vector2(-251, 760)
+position = Vector2(-251, 763)
 texture = ExtResource("3_8ilto")
 
 [node name="BackgroundBehindGrass2" type="Sprite2D" parent="Ground"]
 z_index = -1
-position = Vector2(754, 761)
+position = Vector2(754, 764)
 texture = ExtResource("3_8ilto")
 
 [node name="BackgroundBehindGrass3" type="Sprite2D" parent="Ground"]
 z_index = -1
-position = Vector2(1262, 762)
+position = Vector2(1262, 765)
 texture = ExtResource("3_8ilto")
 
 [node name="GoalPoint" parent="." instance=ExtResource("4_5nyl4")]
@@ -167,7 +167,7 @@ texture = ExtResource("13_jwmk1")
 [node name="GoalSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_xj31y")
-volume_db = -5.0
+volume_db = -10.0
 max_polyphony = 7
 
 [connection signal="body_entered" from="GoalPoint" to="." method="_on_goal_point_body_entered"]

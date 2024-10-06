@@ -98,7 +98,6 @@ func _physics_process(delta):
 				%LandingSounds.play()
 				walk()
 			elif !bodies.is_empty() and linear_velocity.length() <= 100.0:
-				#%LandingSounds.play()
 				piled()
 		MovementStates.WALK:
 			if bodies.is_empty():

@@ -65,7 +65,7 @@ type = 7
 color = Color(0.350895, 0.00537722, 0.45187, 1)
 weight_multiplier = 1.0
 speed_multiplier = 1.0
-gravity_multiplier = 1.6
+gravity_multiplier = 1.1
 
 [node name="CreatureConfiguration" type="Node"]
 script = ExtResource("1_m66vh")

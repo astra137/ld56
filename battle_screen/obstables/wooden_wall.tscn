@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://vm7g05yf7ijp" path="res://battle_screen/obstables/obstacle.tscn" id="1_u2g5s"]
 [ext_resource type="Texture2D" uid="uid://c4r1uckxe2uan" path="res://battle_screen/obstables/wooden_wall.png" id="2_4kimx"]
 
-[node name="Obstacle" instance=ExtResource("1_u2g5s")]
+[node name="Obstacle2" instance=ExtResource("1_u2g5s")]
 mass = 200.0
 can_stick = true
 can_wash_away = true
