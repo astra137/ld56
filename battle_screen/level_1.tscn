@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://whj6b7t2m0e4"]
+[gd_scene load_steps=20 format=3 uid="uid://whj6b7t2m0e4"]
 
 [ext_resource type="Script" path="res://battle_screen/battle_screen.gd" id="1_uy42u"]
 [ext_resource type="Texture2D" uid="uid://db30ob1ls2bvy" path="res://battle_screen/background_front.png" id="2_64jrp"]
@@ -16,9 +16,16 @@
 [ext_resource type="Texture2D" uid="uid://uxfgncang0kq" path="res://battle_screen/background/cloud_3.png" id="15_1d4dp"]
 [ext_resource type="Texture2D" uid="uid://7uja4y22g5l3" path="res://battle_screen/background/cloud_4.png" id="16_6tyd5"]
 [ext_resource type="PackedScene" uid="uid://dpiu1p20emf4t" path="res://battle_screen/spawning_input.tscn" id="16_x1qwj"]
+[ext_resource type="AudioStream" uid="uid://b8ix2gvdesrnk" path="res://battle_screen/goal_sound.wav" id="17_8t5sa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmqk3"]
 size = Vector2(230.536, 78.9124)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xj31y"]
+random_pitch = 1.2
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("17_8t5sa")
 
 [node name="BattleScreen" type="Node2D"]
 script = ExtResource("1_uy42u")
@@ -85,11 +92,9 @@ texture = ExtResource("7_mhdxh")
 
 [node name="ObstacleWoodenBarricade" parent="." instance=ExtResource("8_24tw7")]
 position = Vector2(919, 735)
-wind_furble_impulse = Vector2(2000, -20000)
 
 [node name="ObstacleWoodenBarricade2" parent="." instance=ExtResource("8_24tw7")]
 position = Vector2(797, 731)
-wind_furble_impulse = Vector2(2000, -20000)
 
 [node name="ObstacleWoodenBarrel" parent="." instance=ExtResource("9_j4ixa")]
 position = Vector2(1056, 733)
@@ -161,5 +166,11 @@ scale = Vector2(1, 0.800194)
 texture = ExtResource("13_jwmk1")
 
 [node name="SpawningInput" parent="." instance=ExtResource("16_x1qwj")]
+
+[node name="GoalSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_xj31y")
+volume_db = -5.0
+max_polyphony = 7
 
 [connection signal="body_entered" from="GoalPoint" to="." method="_on_goal_point_body_entered"]

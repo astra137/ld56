@@ -4,6 +4,8 @@ class_name Obstacle
 @export var type := ObstacleTypes.WOOD
 @export var burn_health := 50.0
 
+var fire_sound_counter := 0.0
+
 const disappearing_smoke = preload("res://battle_screen/obstables/effects/disappearing_smoke.tscn")
 
 var burning_entities := 0
@@ -84,4 +86,10 @@ func _physics_process(delta: float) -> void:
 
 func burning_tick(delta: float):
 	burn_health -= delta * burning_entities
+
+	fire_sound_counter += delta
+	if (1.0 / %BurningSound.max_polyphony) < fire_sound_counter:
+		fire_sound_counter = 0.0
+		%BurningSound.play()
+
 	%MainSprite.modulate = Color.RED.lerp(Color.WHITE, clamp((burn_health / 50.0), 0.0, 1.0))

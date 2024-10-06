@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://1grm4pt8jc23"]
+[gd_scene load_steps=19 format=3 uid="uid://1grm4pt8jc23"]
 
 [ext_resource type="Script" path="res://battle_screen/battle_screen.gd" id="1_ehdtu"]
 [ext_resource type="Texture2D" uid="uid://db30ob1ls2bvy" path="res://battle_screen/background_front.png" id="2_182w5"]
@@ -15,9 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://7lgqxcdt8qlm" path="res://battle_screen/obstables/stone_tower.tscn" id="13_bx4i8"]
 [ext_resource type="PackedScene" uid="uid://7g141agq5py" path="res://battle_screen/obstables/magic_tower.tscn" id="14_xrv7o"]
 [ext_resource type="PackedScene" uid="uid://c0aub7ebtuo37" path="res://battle_screen/obstables/magic_barrier.tscn" id="15_km1a5"]
+[ext_resource type="AudioStream" uid="uid://b8ix2gvdesrnk" path="res://battle_screen/goal_sound.wav" id="16_g3l5h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmqk3"]
 size = Vector2(230.536, 78.9124)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fiv8l"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("16_g3l5h")
 
 [node name="BattleScreen2" type="Node2D"]
 script = ExtResource("1_ehdtu")
@@ -123,5 +129,11 @@ collision_mask = 5
 position = Vector2(290, 726)
 collision_layer = 1
 collision_mask = 5
+
+[node name="GoalSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_fiv8l")
+volume_db = -1.0
+max_polyphony = 5
 
 [connection signal="body_entered" from="GoalPoint" to="." method="_on_goal_point_body_entered"]

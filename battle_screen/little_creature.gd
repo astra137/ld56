@@ -88,10 +88,16 @@ func _physics_process(delta):
 				piled()
 		MovementStates.WALK:
 			if bodies.is_empty():
+				%MovementSounds.stop()
+				%MovementSounds.finished.disconnect(walking_sounds)
 				falling()
 			elif should_jump:
+				%MovementSounds.stop()
+				%MovementSounds.finished.disconnect(walking_sounds)
 				preparing_jump()
 			elif !is_grounded and !bodies.is_empty():
+				%MovementSounds.stop()
+				%MovementSounds.finished.disconnect(walking_sounds)
 				piled()
 		MovementStates.PREPARING_JUMP:
 			if %Sprite.frame == 5:
@@ -134,15 +140,21 @@ func falling():
 
 func walk():
 	%Sprite.play("walk")
+	%MovementSounds.play()
+	%MovementSounds.finished.connect(walking_sounds)
 	state = MovementStates.WALK
+
+func walking_sounds():
+	%MovementSounds.play()
 
 func preparing_jump():
 	%Sprite.play("jump")
 	state = MovementStates.PREPARING_JUMP
 
 func jump():
-	state = MovementStates.JUMPING
 	apply_central_impulse(jump_impulse)
+	%JumpSounds.play()
+	state = MovementStates.JUMPING
 
 
 # State tick functions
