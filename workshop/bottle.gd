@@ -89,9 +89,6 @@ func _input(event: InputEvent) -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	if _is_dragging:
-		state.apply_central_force(-state.total_gravity)
-
 	var delta_velocity := state.linear_velocity - _previous_velocity
 	if delta_velocity.length() > 480.0:
 		var valid_hits: Array[PhysicsBody2D] = []
@@ -105,7 +102,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			for body in valid_hits:
 				if body.has_method('shatter'):
 					body.shatter()
-
 	_previous_velocity = state.linear_velocity
 
 

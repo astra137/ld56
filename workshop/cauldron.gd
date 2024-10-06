@@ -15,18 +15,19 @@ func spill() -> void:
 	is_spilling = true
 	var original := global_position
 	var list := furbles.duplicate()
+	for body in list: body.reparent(self)
 	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.set_parallel(true)
-	tween.tween_property(self, ^'global_position', spill_target.global_position, 1.0)
-	tween.tween_property(self, ^'rotation', PI*0.95, 1.0)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, ^'global_position', spill_target.global_position, 2.0)
+	tween.tween_property(self, ^'rotation', PI*0.99, 2.0)
 	tween.chain()
-	tween.tween_interval(3.0)
-	tween.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	tween.set_parallel(true)
+	tween.tween_callback(func(): for body in list: body.reparent(get_tree().root))
+	tween.tween_interval(2.0)
+	tween.chain()
+	tween.set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, ^'global_position', original, 1.0)
 	tween.tween_property(self, ^'rotation', 0, 1.0)
-	tween.chain()
 	await tween.finished
 	for body in furbles: body.queue_free()
 	is_spilling = false
@@ -55,8 +56,8 @@ var gravity: Vector2 = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 	if is_spilling:
-		velocity = Vector2(0, -24)
-		move_and_slide()
+		#velocity = Vector2.ZERO
+		#move_and_slide()
 		return
 
 	if not is_on_floor():
