@@ -24,8 +24,10 @@ region_rect = Rect2(0, 626, 1440, 184)
 [node name="Shelf" parent="." instance=ExtResource("3_wgtfx")]
 position = Vector2(224, 437)
 
-[node name="Cauldron" parent="." instance=ExtResource("2_weu8n")]
+[node name="Cauldron" parent="." node_paths=PackedStringArray("spill_target") instance=ExtResource("2_weu8n")]
+unique_name_in_owner = true
 position = Vector2(609, 522)
+spill_target = NodePath("../CauldronDump")
 
 [node name="Bottle" parent="." instance=ExtResource("3_hxohg")]
 position = Vector2(114, 316)
@@ -41,5 +43,8 @@ type = 2
 [node name="Bottle4" parent="." instance=ExtResource("3_hxohg")]
 position = Vector2(332, 317)
 type = 4
+
+[node name="CauldronDump" type="Marker2D" parent="."]
+position = Vector2(1325, 315)
 
 [connection signal="clicked" from="Cauldron" to="." method="_on_cauldron_clicked"]

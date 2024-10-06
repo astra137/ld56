@@ -23,7 +23,7 @@ func _on_button_view_pressed() -> void:
 
 
 func _on_button_spill_pressed() -> void:
-	pass # Replace with function body.
+	%Workshop.spill()
 
 
 func _on_button_clean_pressed() -> void:

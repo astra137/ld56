@@ -18,8 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://dpiu1p20emf4t" path="res://battle_screen/spawning_input.tscn" id="16_x1qwj"]
 [ext_resource type="AudioStream" uid="uid://b8ix2gvdesrnk" path="res://battle_screen/goal_sound.wav" id="17_8t5sa"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmqk3"]
-size = Vector2(230.536, 78.9124)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3eknv"]
+distance = -1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xj31y"]
 random_pitch = 1.2
@@ -33,9 +33,8 @@ script = ExtResource("1_uy42u")
 [node name="Ground" type="StaticBody2D" parent="." groups=["ground"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(509, 862.059)
-scale = Vector2(8.97038, 2.38138)
-shape = SubResource("RectangleShape2D_vmqk3")
+position = Vector2(0, 767)
+shape = SubResource("WorldBoundaryShape2D_3eknv")
 
 [node name="Ground" type="Sprite2D" parent="Ground"]
 z_index = 1
@@ -98,15 +97,12 @@ position = Vector2(797, 731)
 
 [node name="ObstacleWoodenBarrel" parent="." instance=ExtResource("9_j4ixa")]
 position = Vector2(1056, 733)
-collision_mask = 5
 
 [node name="ObstacleWoodenBarrel2" parent="." instance=ExtResource("9_j4ixa")]
 position = Vector2(1056, 671)
-collision_mask = 5
 
 [node name="ObstacleWoodenLog" parent="." instance=ExtResource("11_b4fk0")]
 position = Vector2(1184, 668)
-collision_mask = 5
 
 [node name="MountainpassFront" type="Sprite2D" parent="."]
 z_index = -2
