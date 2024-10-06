@@ -4,5 +4,6 @@
 override.cfg
 
 # Custom build
-export/*
-!export/.gdignore
+export/*.zip
+export/web/*
+!export/web/.gitkeep
