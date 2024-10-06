@@ -18,13 +18,21 @@ class_name Furble
 
 var state := MovementStates.BOTTLED
 
+# Object sticking variables
+var stuck_object: Obstacle
+const stuck_force := 100.0
+const unstuck_breaking_speed := -250.0
+const stuck_max_time := 5.0
+var stuck_current_time := 0.0
+
 enum MovementStates {
 	BOTTLED,
 	FALLING,
 	WALK,
 	PREPARING_JUMP,
 	JUMPING,
-	PILED
+	PILED,
+	STUCK
 }
 
 enum CreatureTypes {
@@ -63,11 +71,6 @@ func update_type() -> void:
 
 func awaken_furble() -> void:
 	state = MovementStates.FALLING
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
 
 func _physics_process(delta):
 	var bodies = get_colliding_bodies()
@@ -112,6 +115,10 @@ func _physics_process(delta):
 				preparing_jump()
 			elif is_grounded:
 				walk()
+		MovementStates.STUCK:
+			if stuck_object.linear_velocity.y <= unstuck_breaking_speed or stuck_current_time >= stuck_max_time:
+				stuck_object = null
+				falling()
 
 	if state != MovementStates.BOTTLED:
 		rotate_upright()
@@ -127,6 +134,8 @@ func _physics_process(delta):
 			jump_tick()
 		MovementStates.PILED:
 			piled_tick()
+		MovementStates.STUCK:
+			stuck_tick(delta)
 
 
 # State transition functions
@@ -156,6 +165,11 @@ func jump():
 	%JumpSounds.play()
 	state = MovementStates.JUMPING
 
+func stuck(body: Obstacle):
+	stuck_current_time = 0.0
+	stuck_object = body
+	state = MovementStates.STUCK
+
 
 # State tick functions
 func piled_tick():
@@ -176,6 +190,11 @@ func preparing_jump_tick():
 
 func jump_tick():
 	pass
+
+func stuck_tick(delta: float):
+	apply_central_force(global_position.direction_to(stuck_object.global_position) * stuck_force)
+	stuck_object.apply_central_force(stuck_object.wind_furble_impulse)
+	stuck_current_time += delta
 
 func rotate_upright():
 	 #Get global up rotation
@@ -221,7 +240,9 @@ func _on_area_obstacle_entered(body: Node2D) -> void:
 			CreatureTypes.FIRE:
 				(body as Obstacle).try_burn()
 			CreatureTypes.WIND:
-				(body as Obstacle).try_knock_over()
+				if state != MovementStates.STUCK:
+					if (body as Obstacle).can_stick:
+						stuck(body as Obstacle)
 
 
 func _on_area_obstacle_exited(body: Node2D) -> void:

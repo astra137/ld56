@@ -9,8 +9,8 @@ collision_layer = 24
 collision_mask = 5
 mass = 50.0
 script = ExtResource("2_yqkog")
-wind_furble_impulse = Vector2(2000, -20000)
 burn_health = 25.0
+can_stick = true
 
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_5lv2q")

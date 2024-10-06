@@ -6,6 +6,7 @@
 [node name="Obstacle" instance=ExtResource("1_fr4pq")]
 mass = 50.0
 burn_health = 40.0
+can_stick = true
 
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_fi1mk")

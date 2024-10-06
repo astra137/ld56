@@ -3,6 +3,8 @@ class_name Obstacle
 
 @export var type := ObstacleTypes.WOOD
 @export var burn_health := 50.0
+@export var can_stick := false
+@export var wind_furble_impulse := Vector2(2000, -20000)
 
 var fire_sound_counter := 0.0
 
@@ -33,9 +35,6 @@ func try_burn():
 		match state:
 			ObstacleStates.DEFAULT:
 				burning()
-
-func try_knock_over():
-	pass
 
 func burning():
 	%FireParticles.emitting = true
