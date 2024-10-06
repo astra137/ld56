@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://battle_screen/spawning_input.gd" id="1_kix01"]
 
-[node name="SpawningInput" type="Node"]
+[node name="SpawningInput" type="Node2D"]
 script = ExtResource("1_kix01")

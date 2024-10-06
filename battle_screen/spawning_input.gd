@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 const furble := preload("res://battle_screen/little_creature.tscn")
 
@@ -32,7 +32,8 @@ func _input(event: InputEvent) -> void:
 				spawn_furble(Furble.CreatureTypes.GRAVITY)
 
 func spawn_furble(type: Furble.CreatureTypes):
-	var position = get_viewport().get_mouse_position()
+	#var position = get_viewport().get_mouse_position()
+	var position = get_global_mouse_position()
 
 	var instance := furble.instantiate()
 
