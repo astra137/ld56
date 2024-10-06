@@ -36,6 +36,8 @@ furble=""
 2d_physics/layer_1="World"
 2d_physics/layer_3="Furbles"
 2d_physics/layer_4="Obstacle Effects"
+2d_physics/layer_5="Wooden Barricade Obstacle"
+2d_physics/layer_6="Water Furble"
 
 [rendering]
 

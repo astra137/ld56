@@ -50,8 +50,16 @@ func update_type() -> void:
 	mass *= configuration.weight_multiplier
 	max_speed *= configuration.speed_multiplier
 	gravity_scale *= configuration.gravity_multiplier
-	torque_gain_proportional *= (configuration.gravity_multiplier * configuration.weight_multiplier)
+	torque_gain_proportional *= ((configuration.gravity_multiplier ** 2) * (configuration.weight_multiplier ** 2))
+	torque_gain_derivative*= ((configuration.gravity_multiplier ** 2) * (configuration.weight_multiplier ** 2))
+	force_magnitude *= ((configuration.gravity_multiplier ** 2) * (configuration.weight_multiplier ** 2))
+	jump_impulse *= ((configuration.gravity_multiplier ** 2) * (configuration.weight_multiplier ** 2))
 
+	match type:
+		CreatureTypes.WATER:
+			set_collision_mask_value(5, false)
+			set_collision_layer_value(3, false)
+			set_collision_layer_value(6, true)
 
 func awaken_furble() -> void:
 	state = MovementStates.FALLING

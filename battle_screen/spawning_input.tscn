@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpiu1p20emf4t"]
+
+[ext_resource type="Script" path="res://battle_screen/spawning_input.gd" id="1_kix01"]
+
+[node name="SpawningInput" type="Node"]
+script = ExtResource("1_kix01")

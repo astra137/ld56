@@ -186,6 +186,7 @@ rotation = 2.2654
 [node name="LittleCreature37" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(167.04, 324.173)
 rotation = -1.15516
+type = 4
 
 [node name="LittleCreature38" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(29.4793, 219.388)
@@ -194,14 +195,17 @@ rotation = 1.30949
 [node name="LittleCreature39" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(152, 316)
 rotation = -0.627335
+type = 4
 
 [node name="LittleCreature40" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(159.799, 332.618)
 rotation = 1.83732
+type = 4
 
 [node name="LittleCreature41" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(144.533, 279)
 rotation = -0.00298464
+type = 4
 
 [node name="LittleCreature42" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(152.332, 295.618)
@@ -234,10 +238,12 @@ rotation = 1.50575
 [node name="LittleCreature49" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(146, 352)
 rotation = 0.328584
+type = 4
 
 [node name="LittleCreature50" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(160, 358)
 rotation = 2.79323
+type = 4
 
 [node name="LittleCreature51" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(73.3541, 14)
@@ -522,6 +528,7 @@ rotation = 1.83732
 [node name="LittleCreature121" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(167.533, 261)
 rotation = -0.00298464
+type = 4
 
 [node name="LittleCreature122" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(19.6979, 169.618)
@@ -530,6 +537,7 @@ rotation = -3.82152
 [node name="LittleCreature123" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(159.289, 276.001)
 rotation = -0.530814
+type = 4
 
 [node name="LittleCreature124" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(155.989, 294.06)
@@ -538,6 +546,7 @@ rotation = -4.34935
 [node name="LittleCreature125" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(146.799, 300.469)
 rotation = -1.48673
+type = 4
 
 [node name="LittleCreature126" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(107.646, 41.5826)
@@ -774,6 +783,7 @@ rotation = -0.627335
 [node name="LittleCreature184" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(159.811, 241.618)
 rotation = 1.83732
+type = 4
 
 [node name="LittleCreature185" parent="." instance=ExtResource("1_4p2a2")]
 position = Vector2(144.544, 188)

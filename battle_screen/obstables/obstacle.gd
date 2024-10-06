@@ -4,6 +4,8 @@ class_name Obstacle
 @export var type := ObstacleTypes.WOOD
 @export var burn_health := 50.0
 
+const disappearing_smoke = preload("res://battle_screen/obstables/effects/disappearing_smoke.tscn")
+
 var burning_entities := 0
 
 var state := ObstacleStates.DEFAULT
@@ -38,6 +40,12 @@ func burning():
 func burnt():
 	%FireParticles.emitting = false
 	%AshParticles.emitting = false
+
+	var instance = disappearing_smoke.instantiate()
+	get_tree().get_root().add_child(instance)
+	instance.global_position = global_position
+	instance.emitting = true
+
 	state = ObstacleStates.BURNT
 	queue_free()
 
