@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db30ob1ls2bvy"
-path="res://.godot/imported/background_front.png-a4e0466944d15cca11ab620cdfb1e5bb.ctex"
+uid="uid://dd7tar31kdtmv"
+path="res://.godot/imported/furble.png-9f19d2e0b57e3818c091b300d28902cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Battle/background_front.png"
-dest_files=["res://.godot/imported/background_front.png-a4e0466944d15cca11ab620cdfb1e5bb.ctex"]
+source_file="res://battle_screen/furble.png"
+dest_files=["res://.godot/imported/furble.png-9f19d2e0b57e3818c091b300d28902cf.ctex"]
 
 [params]
 

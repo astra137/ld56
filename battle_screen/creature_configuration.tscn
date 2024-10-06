@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bpxpr0cexmstu"]
 
-[ext_resource type="Script" path="res://battle/creature_configuration.gd" id="1_m66vh"]
-[ext_resource type="Script" path="res://battle/creature_type_attribute.gd" id="2_hdcue"]
+[ext_resource type="Script" path="res://battle_screen/creature_configuration.gd" id="1_m66vh"]
+[ext_resource type="Script" path="res://battle_screen/creature_type_attribute.gd" id="2_hdcue"]
 
 [sub_resource type="Resource" id="Resource_b86ix"]
 script = ExtResource("2_hdcue")

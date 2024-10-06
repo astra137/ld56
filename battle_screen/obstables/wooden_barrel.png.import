@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd7tar31kdtmv"
-path="res://.godot/imported/furble.png-96797ee543e9266f0b01a88cb8f55fb3.ctex"
+uid="uid://dc45hdjvppaf1"
+path="res://.godot/imported/wooden_barrel.png-4274bc0817d105b77e244bcd542c80cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Battle/furble.png"
-dest_files=["res://.godot/imported/furble.png-96797ee543e9266f0b01a88cb8f55fb3.ctex"]
+source_file="res://battle_screen/obstables/wooden_barrel.png"
+dest_files=["res://.godot/imported/wooden_barrel.png-4274bc0817d105b77e244bcd542c80cd.ctex"]
 
 [params]
 

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://crbeqqerg6bu"]
+
+[ext_resource type="PackedScene" uid="uid://vm7g05yf7ijp" path="res://battle_screen/obstables/obstacle.tscn" id="1_gk3h1"]
+
+[node name="Obstacle" instance=ExtResource("1_gk3h1")]

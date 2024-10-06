@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cyo576o0yu7wi"]
 
-[ext_resource type="PackedScene" uid="uid://v4cyox7q5hs7" path="res://battle/little_creature.tscn" id="1_4p2a2"]
+[ext_resource type="PackedScene" uid="uid://v4cyox7q5hs7" path="res://battle_screen/little_creature.tscn" id="1_4p2a2"]
 
 [node name="TestFurbles" type="Node2D"]
 

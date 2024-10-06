@@ -1,15 +1,15 @@
 [gd_scene load_steps=9 format=3 uid="uid://1grm4pt8jc23"]
 
-[ext_resource type="Script" path="res://battle/battle_screen.gd" id="1_ehdtu"]
-[ext_resource type="Texture2D" uid="uid://db30ob1ls2bvy" path="res://battle/background_front.png" id="2_182w5"]
-[ext_resource type="PackedScene" uid="uid://kfch1r3nj1jm" path="res://battle/goal_point.tscn" id="3_ama50"]
-[ext_resource type="Texture2D" uid="uid://bnfrdcvcpq00x" path="res://battle/background_behind_grass.png" id="3_w407b"]
-[ext_resource type="Texture2D" uid="uid://bevyce63t3o8p" path="res://battle/skycolor.png" id="5_ertd1"]
-[ext_resource type="PackedScene" uid="uid://cyo576o0yu7wi" path="res://battle/test_furbles.tscn" id="6_xxhjp"]
-[ext_resource type="Texture2D" uid="uid://cgxcsilhby6u0" path="res://battle/goal_post.png" id="7_crwak"]
+[ext_resource type="Script" path="res://battle_screen/battle_screen.gd" id="1_ehdtu"]
+[ext_resource type="Texture2D" uid="uid://db30ob1ls2bvy" path="res://battle_screen/background_front.png" id="2_182w5"]
+[ext_resource type="PackedScene" uid="uid://kfch1r3nj1jm" path="res://battle_screen/goal_point.tscn" id="3_ama50"]
+[ext_resource type="Texture2D" uid="uid://bnfrdcvcpq00x" path="res://battle_screen/background_behind_grass.png" id="3_w407b"]
+[ext_resource type="Texture2D" uid="uid://bevyce63t3o8p" path="res://battle_screen/skycolor.png" id="5_ertd1"]
+[ext_resource type="PackedScene" uid="uid://cyo576o0yu7wi" path="res://battle_screen/test_furbles.tscn" id="6_xxhjp"]
+[ext_resource type="Texture2D" uid="uid://cgxcsilhby6u0" path="res://battle_screen/goal_post.png" id="7_crwak"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmqk3"]
-size = Vector2(189.275, 78.9124)
+size = Vector2(230.536, 78.9124)
 
 [node name="BattleScreen" type="Node2D"]
 script = ExtResource("1_ehdtu")
@@ -18,37 +18,47 @@ script = ExtResource("1_ehdtu")
 
 [node name="Ground" type="Sprite2D" parent="StaticBody2D"]
 z_index = 1
-position = Vector2(256, 894)
+position = Vector2(256, 891)
+texture = ExtResource("2_182w5")
+
+[node name="Ground4" type="Sprite2D" parent="StaticBody2D"]
+z_index = 1
+position = Vector2(-256, 891)
 texture = ExtResource("2_182w5")
 
 [node name="Ground2" type="Sprite2D" parent="StaticBody2D"]
 z_index = 1
-position = Vector2(768, 894)
+position = Vector2(768, 891)
 texture = ExtResource("2_182w5")
 
 [node name="Ground3" type="Sprite2D" parent="StaticBody2D"]
 z_index = 1
-position = Vector2(1280, 894)
+position = Vector2(1280, 891)
 texture = ExtResource("2_182w5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(730.001, 879.059)
+position = Vector2(509, 879.059)
 scale = Vector2(8.97038, 2.38138)
 shape = SubResource("RectangleShape2D_vmqk3")
 
 [node name="BackgroundBehindGrass" type="Sprite2D" parent="StaticBody2D"]
 z_index = -1
-position = Vector2(258, 782)
+position = Vector2(253, 779)
+texture = ExtResource("3_w407b")
+
+[node name="BackgroundBehindGrass4" type="Sprite2D" parent="StaticBody2D"]
+z_index = -1
+position = Vector2(-251, 779)
 texture = ExtResource("3_w407b")
 
 [node name="BackgroundBehindGrass2" type="Sprite2D" parent="StaticBody2D"]
 z_index = -1
-position = Vector2(759, 783)
+position = Vector2(754, 780)
 texture = ExtResource("3_w407b")
 
 [node name="BackgroundBehindGrass3" type="Sprite2D" parent="StaticBody2D"]
 z_index = -1
-position = Vector2(1267, 784)
+position = Vector2(1262, 781)
 texture = ExtResource("3_w407b")
 
 [node name="GoalPoint" parent="." instance=ExtResource("3_ama50")]
@@ -56,8 +66,8 @@ position = Vector2(1391, 436)
 
 [node name="Skycolor" type="Sprite2D" parent="."]
 z_index = -3
-position = Vector2(709, 395)
-scale = Vector2(2.902, 1.8)
+position = Vector2(474.456, 395)
+scale = Vector2(3.81819, 1.8)
 texture = ExtResource("5_ertd1")
 
 [node name="TestFurbles" parent="." instance=ExtResource("6_xxhjp")]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://v4cyox7q5hs7"]
 
-[ext_resource type="Script" path="res://battle/little_creature.gd" id="1_bckxk"]
-[ext_resource type="Texture2D" uid="uid://dd7tar31kdtmv" path="res://battle/furble.png" id="2_w2s3r"]
+[ext_resource type="Script" path="res://battle_screen/little_creature.gd" id="1_bckxk"]
+[ext_resource type="Texture2D" uid="uid://dd7tar31kdtmv" path="res://battle_screen/furble.png" id="2_w2s3r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2pafy"]
 atlas = ExtResource("2_w2s3r")

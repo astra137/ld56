@@ -37,7 +37,7 @@ enum CreatureTypes {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var configuration: CreatureTypeAttribute = CreatureConfiguration.type_configuration[type]
-	
+
 	%Sprite.modulate = configuration.color
 	mass *= configuration.weight_multiplier
 	max_speed *= configuration.speed_multiplier
@@ -49,17 +49,17 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	
+
 func _physics_process(delta):
 	var bodies = get_colliding_bodies()
 	var is_grounded = false
-	
+
 	for body in bodies:
 		if body.is_in_group("ground"):
 			is_grounded = true
-			
+
 	var should_jump := randf() <= jump_probability
-	
+
 	# State transitions
 	match state:
 		MovementStates.FALLING:
@@ -87,9 +87,9 @@ func _physics_process(delta):
 				preparing_jump()
 			elif is_grounded:
 				walk()
-	
+
 	rotate_upright()
-	
+
 	match state:
 		MovementStates.FALLING:
 			falling_tick()
@@ -101,17 +101,17 @@ func _physics_process(delta):
 			jump_tick()
 		MovementStates.PILED:
 			piled_tick()
-	
+
 
 # State transition functions
 func piled():
 	%Sprite.play("default")
 	state = MovementStates.PILED
-		
+
 func falling():
 	%Sprite.play("falling")
 	state = MovementStates.FALLING
-	
+
 func walk():
 	%Sprite.play("walk")
 	state = MovementStates.WALK
@@ -128,17 +128,17 @@ func jump():
 # State tick functions
 func piled_tick():
 	pass
-	
+
 func walk_tick():
 	if linear_velocity.x < max_speed:
 		# Create a force vector pointing to the right
 		var force = Vector2(1, 0) * force_magnitude
 		# Apply the force to the center of mass
 		apply_central_force(force)
-	
+
 func falling_tick():
 	pass
-	
+
 func preparing_jump_tick():
 	pass
 
@@ -149,14 +149,14 @@ func rotate_upright():
 	 #Get global up rotation
 	var current_rotation = global_rotation
 	var angle_difference = normalize_angle((2*PI) - global_rotation)
-	
+
 	# Calculate the angular velocity difference (aiming for zero angular velocity)
 	var angular_velocity_difference = -angular_velocity
-	
+
 	# Calculate the torque to apply
 	var torque = (angle_difference * torque_gain_proportional) + (angular_velocity_difference * torque_gain_derivative)
 	#print(torque)
-	
+
 	# Apply the torque
 	apply_torque(torque)
 

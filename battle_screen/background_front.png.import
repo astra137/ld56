@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnfrdcvcpq00x"
-path="res://.godot/imported/background_behind_grass.png-6158a7177cb75f0f8d15baace500279f.ctex"
+uid="uid://db30ob1ls2bvy"
+path="res://.godot/imported/background_front.png-5647c4350d4ef137911159ccdb4871aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Battle/background_behind_grass.png"
-dest_files=["res://.godot/imported/background_behind_grass.png-6158a7177cb75f0f8d15baace500279f.ctex"]
+source_file="res://battle_screen/background_front.png"
+dest_files=["res://.godot/imported/background_front.png-5647c4350d4ef137911159ccdb4871aa.ctex"]
 
 [params]
 

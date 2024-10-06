@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ra851ou483ls"
-path="res://.godot/imported/wooden_barricade.png-8ef2c2909485c7c2766c7ac5c9978d13.ctex"
+uid="uid://bxybwwo1imffc"
+path="res://.godot/imported/wooden_tower.png-bc5ec573a9ae6ab80a8cb5c5b6004b50.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Battle/wooden_barricade.png"
-dest_files=["res://.godot/imported/wooden_barricade.png-8ef2c2909485c7c2766c7ac5c9978d13.ctex"]
+source_file="res://battle_screen/obstables/wooden_tower.png"
+dest_files=["res://.godot/imported/wooden_tower.png-bc5ec573a9ae6ab80a8cb5c5b6004b50.ctex"]
 
 [params]
 
