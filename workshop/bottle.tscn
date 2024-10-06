@@ -11,7 +11,7 @@ size = Vector2(50, 66)
 [sub_resource type="CircleShape2D" id="CircleShape2D_t101l"]
 radius = 23.0
 
-[node name="Bottle" type="RigidBody2D"]
+[node name="Bottle" type="RigidBody2D" groups=["bottles"]]
 can_sleep = false
 contact_monitor = true
 max_contacts_reported = 6

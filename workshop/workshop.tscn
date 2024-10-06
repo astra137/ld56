@@ -9,9 +9,17 @@
 [node name="Workshop" type="Node2D"]
 script = ExtResource("1_3vfhv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BG" type="Sprite2D" parent="."]
 texture = ExtResource("5_6l35a")
 centered = false
+
+[node name="FG" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 626)
+texture = ExtResource("5_6l35a")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 626, 1440, 184)
 
 [node name="Shelf" parent="." instance=ExtResource("3_wgtfx")]
 position = Vector2(224, 437)

@@ -1,25 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://dn1wbggy63c18"]
+[gd_scene load_steps=10 format=3 uid="uid://dn1wbggy63c18"]
 
 [ext_resource type="PackedScene" uid="uid://bee5ds54ef40t" path="res://workshop/workshop.tscn" id="1_ldq7e"]
 [ext_resource type="Script" path="res://main.gd" id="1_oj766"]
 [ext_resource type="PackedScene" uid="uid://whj6b7t2m0e4" path="res://battle_screen/level_1.tscn" id="1_vb2us"]
-[ext_resource type="Texture2D" uid="uid://cmyy80ckagjrt" path="res://menus/arrow-left.svg" id="4_fayjb"]
 [ext_resource type="Script" path="res://menus/label_fps.gd" id="4_k0iw8"]
-[ext_resource type="Texture2D" uid="uid://dspp3t1fja7h6" path="res://menus/arrow-right.svg" id="5_dp4ic"]
+[ext_resource type="Script" path="res://menus/label_furbles.gd" id="7_swf12"]
 
-[sub_resource type="InputEventAction" id="InputEventAction_7ra5c"]
-action = &"ui_left"
+[sub_resource type="InputEventAction" id="InputEventAction_0kv1m"]
+action = &"ui_focus_next"
 pressed = true
 
 [sub_resource type="Shortcut" id="Shortcut_g005w"]
-events = [SubResource("InputEventAction_7ra5c")]
-
-[sub_resource type="InputEventAction" id="InputEventAction_j1hj4"]
-action = &"ui_right"
-pressed = true
-
-[sub_resource type="Shortcut" id="Shortcut_4kvut"]
-events = [SubResource("InputEventAction_j1hj4")]
+events = [SubResource("InputEventAction_0kv1m")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_yfvsd"]
 action = &"ui_accept"
@@ -48,26 +40,33 @@ metadata/_edit_lock_ = true
 offset_right = 177.0
 offset_bottom = 40.0
 
-[node name="ButtonLeft" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="ButtonView" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_g005w")
-icon = ExtResource("4_fayjb")
-
-[node name="ButtonRight" type="Button" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
-shortcut = SubResource("Shortcut_4kvut")
-icon = ExtResource("5_dp4ic")
+text = "View"
 
 [node name="ButtonSpill" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_8w8y7")
 text = "Spill"
 
+[node name="ButtonClean" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Clean"
+
 [node name="LabelFPS" type="Label" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
-text = "0 fps"
+text = "? fps"
 script = ExtResource("4_k0iw8")
 
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]
+[node name="LabelFurbles" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "? furbles"
+script = ExtResource("7_swf12")
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonView" to="." method="_on_button_view_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonSpill" to="." method="_on_button_spill_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonClean" to="." method="_on_button_clean_pressed"]

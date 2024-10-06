@@ -5,12 +5,18 @@ extends RigidBody2D
 var should_shatter := false
 var _shattering := false
 var _mouse_motion: InputEventMouseMotion = null
-var _tracking: Array[Furble] = []
+var _previous_position := global_position
 var _previous_velocity := linear_velocity
 var _is_dragging := false:
 	set(value):
 		_is_dragging = value
 		#custom_integrator = value
+
+
+func drain_mouse_motion() -> Vector2:
+	var rel := _mouse_motion.relative
+	_mouse_motion = null
+	return rel
 
 
 func shatter() -> void:
@@ -27,10 +33,9 @@ func _shatter() -> void:
 	cork.linear_velocity = Vector2.UP.rotated(randf_range(-PI/2., PI/2.)) * 480.0
 	cork.angular_velocity = TAU
 
-	for body in _tracking:
+	for body in get_furbles():
 		body.reparent(get_tree().root)
 		body.freeze = false
-	_tracking.clear()
 
 	for node in BottleShard.spawn_shards():
 		get_tree().root.add_child(node)
@@ -41,37 +46,36 @@ func _shatter() -> void:
 	queue_free()
 
 
+func get_furbles() -> Array[Furble]:
+	var list: Array[Furble] = []
+	list.assign(%Creatures.get_children())
+	return list
+
+
+func has_furble(body: Furble) -> bool:
+	return %Creatures == body.get_parent()
+
+
 func _ready() -> void:
 	#body_entered.connect(_body_entered)
-	for body: Furble in %Creatures.get_children():
+	for body in get_furbles():
 		body.type = type
 		body.freeze = true
-		_tracking.push_back(body)
 
 
 func _process(delta: float) -> void:
 	if should_shatter:
 		should_shatter = false
 		shatter()
-	if _mouse_motion:
-		var rel := _mouse_motion.relative
-		_mouse_motion = null
-		position += rel
-		linear_velocity = rel / delta
-	elif _is_dragging:
-		linear_velocity = Vector2.ZERO
-
-
-func _physics_process(delta: float) -> void:
 	if _is_dragging:
-		var fix := get_viewport().get_mouse_position() - global_position
-		apply_central_force(fix * 500.0)
+		global_position = get_global_mouse_position()
+		linear_velocity = drain_mouse_motion() / delta if _mouse_motion else Vector2.ZERO
+		sleeping = false
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _is_dragging:
 		if event is InputEventMouseMotion:
-			sleeping = false
 			if not _mouse_motion:
 				_mouse_motion = event
 			else:
@@ -87,16 +91,6 @@ func _input(event: InputEvent) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if _is_dragging:
 		state.apply_central_force(-state.total_gravity)
-
-	#for idx in state.get_contact_count():
-		#var impulse := state.get_contact_impulse(idx)
-		#if not impulse.is_zero_approx():
-			#if impulse.length() > 128.0:
-				#var other = state.get_contact_collider_object(idx)
-				#if other is Furble: continue
-				#print('%s _integrate_forces %s %s' % [self, impulse.length(), other])
-				#should_shatter = true
-				#break
 
 	var delta_velocity := state.linear_velocity - _previous_velocity
 	if delta_velocity.length() > 480.0:
@@ -115,7 +109,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	_previous_velocity = state.linear_velocity
 
 
-
 func _on_clickable_input_event(viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -124,7 +117,7 @@ func _on_clickable_input_event(viewport: Node, event: InputEvent, _shape_idx: in
 
 
 func _on_container_body_exited(body: Node2D) -> void:
-	if body is Furble and _tracking.has(body):
+	if body is Furble and has_furble(body):
 		body.linear_velocity = Vector2.ZERO
 		body.global_position = global_position
 		#body.teleport(global_position - body.global_position)
