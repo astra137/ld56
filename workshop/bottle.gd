@@ -66,8 +66,8 @@ func _on_clickable_input_event(viewport: Node, event: InputEvent, _shape_idx: in
 func _on_container_body_exited(body: Node2D) -> void:
 	if body is Furble and _tracking.has(body):
 		body.linear_velocity = Vector2.ZERO
-		body.global_position = global_position
-		#body.teleport(global_position - body.global_position)
+		#body.global_position = global_position
+		body.teleport(global_position - body.global_position)
 
 
 func _on_shatter_trigger_body_entered(body: Node2D) -> void:

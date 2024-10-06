@@ -176,3 +176,22 @@ func _on_sprite_animation_looped() -> void:
 	#if %Sprite.animation == "Jump":
 		#%Sprite.play("default")
 	pass
+
+
+
+#region Teleport
+
+var _teleport_pending := false
+var _teleport_vector := Vector2.ZERO
+
+func teleport(delta: Vector2) -> void:
+	_teleport_pending = true
+	_teleport_vector += delta
+
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	if _teleport_pending:
+		state.transform.origin += _teleport_vector
+		_teleport_pending = false
+		_teleport_vector = Vector2.ZERO
+
+#endregion
