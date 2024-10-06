@@ -1,5 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://crbeqqerg6bu"]
+[gd_scene load_steps=3 format=3 uid="uid://crbeqqerg6bu"]
 
 [ext_resource type="PackedScene" uid="uid://vm7g05yf7ijp" path="res://battle_screen/obstables/obstacle.tscn" id="1_gk3h1"]
+[ext_resource type="Texture2D" uid="uid://ra851ou483ls" path="res://battle_screen/obstables/wooden_barricade.png" id="2_5lv2q"]
 
 [node name="Obstacle" instance=ExtResource("1_gk3h1")]
+mass = 50.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_5lv2q")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-4, -4, -25, -17, -19, -8, 0, 18, -3, 22, -3, 32, 2.2, 32, 13.5, 32, 16, 32, 21, 32, 26, 32, 29, 32, 22.9, 20, 28, 15, 27, 8.1, 22.7, 6, 16.6, 6, 12.3, 11.1, 8, 7)

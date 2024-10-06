@@ -159,7 +159,7 @@ animations = [{
 radius = 4.0
 height = 12.0
 
-[node name="LittleCreature" type="RigidBody2D"]
+[node name="LittleCreature" type="RigidBody2D" groups=["furble"]]
 collision_layer = 3
 gravity_scale = 0.7
 contact_monitor = true
@@ -173,9 +173,9 @@ jump_probability = 0.005
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_ehn78")
 animation = &"falling"
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

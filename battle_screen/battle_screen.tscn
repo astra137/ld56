@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://1grm4pt8jc23"]
+[gd_scene load_steps=17 format=3 uid="uid://1grm4pt8jc23"]
 
 [ext_resource type="Script" path="res://battle_screen/battle_screen.gd" id="1_ehdtu"]
 [ext_resource type="Texture2D" uid="uid://db30ob1ls2bvy" path="res://battle_screen/background_front.png" id="2_182w5"]
@@ -7,6 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bevyce63t3o8p" path="res://battle_screen/skycolor.png" id="5_ertd1"]
 [ext_resource type="PackedScene" uid="uid://cyo576o0yu7wi" path="res://battle_screen/test_furbles.tscn" id="6_xxhjp"]
 [ext_resource type="Texture2D" uid="uid://cgxcsilhby6u0" path="res://battle_screen/goal_post.png" id="7_crwak"]
+[ext_resource type="PackedScene" uid="uid://crbeqqerg6bu" path="res://battle_screen/obstables/wooden_barricade.tscn" id="8_ll4mj"]
+[ext_resource type="PackedScene" uid="uid://c415qr4ssheo8" path="res://battle_screen/obstables/wooden_barrel.tscn" id="9_dgv4n"]
+[ext_resource type="PackedScene" uid="uid://dwmyb7hjof4i3" path="res://battle_screen/obstables/wooden_tower.tscn" id="10_w8m2m"]
+[ext_resource type="PackedScene" uid="uid://coreolkh7tv7g" path="res://battle_screen/obstables/wooden_wall.tscn" id="11_lqc6w"]
+[ext_resource type="PackedScene" uid="uid://ch1a25dm8b50t" path="res://battle_screen/obstables/stone_wall.tscn" id="12_370uc"]
+[ext_resource type="PackedScene" uid="uid://7lgqxcdt8qlm" path="res://battle_screen/obstables/stone_tower.tscn" id="13_bx4i8"]
+[ext_resource type="PackedScene" uid="uid://7g141agq5py" path="res://battle_screen/obstables/magic_tower.tscn" id="14_xrv7o"]
+[ext_resource type="PackedScene" uid="uid://c0aub7ebtuo37" path="res://battle_screen/obstables/magic_barrier.tscn" id="15_km1a5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmqk3"]
 size = Vector2(230.536, 78.9124)
@@ -14,51 +22,51 @@ size = Vector2(230.536, 78.9124)
 [node name="BattleScreen" type="Node2D"]
 script = ExtResource("1_ehdtu")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["ground"]]
+[node name="Ground" type="StaticBody2D" parent="." groups=["ground"]]
 
-[node name="Ground" type="Sprite2D" parent="StaticBody2D"]
-z_index = 1
-position = Vector2(256, 891)
-texture = ExtResource("2_182w5")
-
-[node name="Ground4" type="Sprite2D" parent="StaticBody2D"]
-z_index = 1
-position = Vector2(-256, 891)
-texture = ExtResource("2_182w5")
-
-[node name="Ground2" type="Sprite2D" parent="StaticBody2D"]
-z_index = 1
-position = Vector2(768, 891)
-texture = ExtResource("2_182w5")
-
-[node name="Ground3" type="Sprite2D" parent="StaticBody2D"]
-z_index = 1
-position = Vector2(1280, 891)
-texture = ExtResource("2_182w5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(509, 879.059)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(509, 862.059)
 scale = Vector2(8.97038, 2.38138)
 shape = SubResource("RectangleShape2D_vmqk3")
 
-[node name="BackgroundBehindGrass" type="Sprite2D" parent="StaticBody2D"]
+[node name="Ground" type="Sprite2D" parent="Ground"]
+z_index = 1
+position = Vector2(256, 870)
+texture = ExtResource("2_182w5")
+
+[node name="Ground4" type="Sprite2D" parent="Ground"]
+z_index = 1
+position = Vector2(-256, 870)
+texture = ExtResource("2_182w5")
+
+[node name="Ground2" type="Sprite2D" parent="Ground"]
+z_index = 1
+position = Vector2(768, 870)
+texture = ExtResource("2_182w5")
+
+[node name="Ground3" type="Sprite2D" parent="Ground"]
+z_index = 1
+position = Vector2(1280, 870)
+texture = ExtResource("2_182w5")
+
+[node name="BackgroundBehindGrass" type="Sprite2D" parent="Ground"]
 z_index = -1
-position = Vector2(253, 779)
+position = Vector2(253, 757)
 texture = ExtResource("3_w407b")
 
-[node name="BackgroundBehindGrass4" type="Sprite2D" parent="StaticBody2D"]
+[node name="BackgroundBehindGrass4" type="Sprite2D" parent="Ground"]
 z_index = -1
-position = Vector2(-251, 779)
+position = Vector2(-251, 757)
 texture = ExtResource("3_w407b")
 
-[node name="BackgroundBehindGrass2" type="Sprite2D" parent="StaticBody2D"]
+[node name="BackgroundBehindGrass2" type="Sprite2D" parent="Ground"]
 z_index = -1
-position = Vector2(754, 780)
+position = Vector2(754, 758)
 texture = ExtResource("3_w407b")
 
-[node name="BackgroundBehindGrass3" type="Sprite2D" parent="StaticBody2D"]
+[node name="BackgroundBehindGrass3" type="Sprite2D" parent="Ground"]
 z_index = -1
-position = Vector2(1262, 781)
+position = Vector2(1262, 759)
 texture = ExtResource("3_w407b")
 
 [node name="GoalPoint" parent="." instance=ExtResource("3_ama50")]
@@ -75,5 +83,30 @@ texture = ExtResource("5_ertd1")
 [node name="GoalPost" type="Sprite2D" parent="."]
 position = Vector2(1391, 563)
 texture = ExtResource("7_crwak")
+
+[node name="ObstacleWoodenBarricade" parent="." instance=ExtResource("8_ll4mj")]
+position = Vector2(990, 737)
+
+[node name="ObstacleWoodenBarrel" parent="." instance=ExtResource("9_dgv4n")]
+position = Vector2(926, 736)
+
+[node name="ObstacleWoodenTower" parent="." instance=ExtResource("10_w8m2m")]
+position = Vector2(1118, 636)
+mass = 200.0
+
+[node name="ObstacleWoodenLog" parent="." instance=ExtResource("11_lqc6w")]
+position = Vector2(863, 672)
+
+[node name="ObstacleStoneWall" parent="." instance=ExtResource("12_370uc")]
+position = Vector2(800, 672)
+
+[node name="ObstacleStoneTower" parent="." instance=ExtResource("13_bx4i8")]
+position = Vector2(669, 640)
+
+[node name="ObstacleMagicTower" parent="." instance=ExtResource("14_xrv7o")]
+position = Vector2(494, 641)
+
+[node name="ObstacleMagicBarrier" parent="." instance=ExtResource("15_km1a5")]
+position = Vector2(290, 726)
 
 [connection signal="body_entered" from="GoalPoint" to="." method="_on_goal_point_body_entered"]

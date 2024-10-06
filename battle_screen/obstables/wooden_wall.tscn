@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://coreolkh7tv7g"]
+
+[ext_resource type="PackedScene" uid="uid://vm7g05yf7ijp" path="res://battle_screen/obstables/obstacle.tscn" id="1_u2g5s"]
+[ext_resource type="Texture2D" uid="uid://c4r1uckxe2uan" path="res://battle_screen/obstables/wooden_wall.png" id="2_4kimx"]
+
+[node name="Obstacle" instance=ExtResource("1_u2g5s")]
+mass = 150.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_4kimx")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-16, -96, -21, -89, -21, 89, -18, 95.6, 16, 96, 20, 91, 21, 88, 21, -89, 16, -96)

@@ -27,8 +27,6 @@ enum MovementStates {
 	PILED
 }
 
-var jumped = false
-
 enum CreatureTypes {
 	FIRE,
 	ICE,
@@ -171,11 +169,6 @@ func rotate_upright():
 
 func normalize_angle(angle):
 	return fmod(angle + PI, 2 * PI) - PI
-
-func _on_sprite_animation_looped() -> void:
-	#if %Sprite.animation == "Jump":
-		#%Sprite.play("default")
-	pass
 
 
 
