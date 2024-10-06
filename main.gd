@@ -23,6 +23,8 @@ func _on_button_view_pressed() -> void:
 
 
 func _on_button_spill_pressed() -> void:
+	camera_right = false
+	toggle_camera()
 	%Workshop.spill()
 
 
