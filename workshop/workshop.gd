@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const FAUX_FURBLE = preload('res://workshop/faux_furble.tscn')
+const FURBLE = preload('res://battle_screen/little_creature.tscn')
 
 var count := 0
 
@@ -15,8 +15,8 @@ func _on_cauldron_clicked(cursor: Vector2) -> void:
 
 
 func spawn_furble(cursor: Vector2) -> void:
-	var body: FauxFurble = FAUX_FURBLE.instantiate()
+	var body: Furble = FURBLE.instantiate()
 	add_child(body)
-	body.type = randi_range(0, 8) as Furble.CreatureTypes
+	body.type = randi_range(0, 7) as Furble.CreatureTypes
 	body.global_position = cursor
 	count += 1

@@ -1,12 +1,19 @@
+@tool
 extends RigidBody2D
-class_name FauxFurble
 
 
-@export var type := Furble.CreatureTypes.FIRE
+@export var type := Furble.CreatureTypes.FIRE:
+	set(value):
+		type = value
+		modulate = CreatureConfiguration.type_configuration[type].color
+
+
+#func _draw() -> void:
+	#modulate = CreatureConfiguration.type_configuration[type].color
 
 
 func _on_body_entered(body: Node) -> void:
-	if body is FauxFurble:
+	if body is Furble:
 		pass
 		#print_verbose('%s touched %s' % [self.type, body.type])
 		#angular_velocity = 10.0 * TAU

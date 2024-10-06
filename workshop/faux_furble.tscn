@@ -30,6 +30,7 @@ animations = [{
 }]
 
 [node name="FauxFurble" type="RigidBody2D"]
+modulate = Color(0.957769, 0.397084, 0.370897, 1)
 can_sleep = false
 contact_monitor = true
 max_contacts_reported = 6

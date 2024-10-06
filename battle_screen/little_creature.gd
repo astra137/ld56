@@ -9,11 +9,17 @@ class_name Furble
 @export var jump_impulse := Vector2(300.0, -600.0)
 @export var jump_probability := 0.001
 
-@export var type := CreatureTypes.FIRE
+@export var type := CreatureTypes.FIRE:
+	set(value):
+		type = value
+		if is_node_ready():
+			update_type()
 
-var state = MovementStates.FALLING
+
+var state := MovementStates.BOTTLED
 
 enum MovementStates {
+	BOTTLED,
 	FALLING,
 	WALK,
 	PREPARING_JUMP,
@@ -36,18 +42,21 @@ enum CreatureTypes {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var configuration: CreatureTypeAttribute = CreatureConfiguration.type_configuration[type]
+	update_type()
+	%Sprite.play("default")
 
+
+func update_type() -> void:
+	var configuration: CreatureTypeAttribute = CreatureConfiguration.type_configuration[type]
 	%Sprite.modulate = configuration.color
 	mass *= configuration.weight_multiplier
 	max_speed *= configuration.speed_multiplier
 	gravity_scale *= configuration.gravity_multiplier
 	torque_gain_proportional *= (configuration.gravity_multiplier * configuration.weight_multiplier)
 
-	%Sprite.play("default")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _physics_process(delta):

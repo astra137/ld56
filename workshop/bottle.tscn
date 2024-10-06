@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cx8km15ds51f3" path="res://workshop/bottle.png" id="1_61s1m"]
 [ext_resource type="Script" path="res://workshop/bottle.gd" id="1_ynuk4"]
 [ext_resource type="PackedScene" uid="uid://xjuighokdi1k" path="res://workshop/cork.tscn" id="2_8gils"]
-[ext_resource type="PackedScene" uid="uid://btjeodbojes83" path="res://workshop/faux_furble.tscn" id="2_lisl3"]
+[ext_resource type="PackedScene" uid="uid://v4cyox7q5hs7" path="res://battle_screen/little_creature.tscn" id="4_op2hc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gf5bm"]
 size = Vector2(50, 66)
@@ -52,35 +52,34 @@ shape = SubResource("CircleShape2D_kf81o")
 [node name="Creatures" type="Marker2D" parent="."]
 unique_name_in_owner = true
 
-[node name="Furble" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(-5, 0)
+[node name="LittleCreature" parent="Creatures" instance=ExtResource("4_op2hc")]
 
-[node name="Furble2" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(15, -5)
+[node name="LittleCreature2" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(9, 0)
 
-[node name="Furble3" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(5, -1)
+[node name="LittleCreature3" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(-9, 0)
 
-[node name="Furble4" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(4, 10)
+[node name="LittleCreature4" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(-4, -11)
 
-[node name="Furble5" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(-13, 9)
+[node name="LittleCreature5" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(5, -13)
 
-[node name="Furble6" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(-15, -6)
+[node name="LittleCreature6" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(-4, 10)
 
-[node name="Furble7" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(-6, -14)
+[node name="LittleCreature7" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(5, 12)
 
-[node name="Furble8" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(6, -14)
+[node name="LittleCreature8" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(14, 11)
 
-[node name="Furble9" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(13, 9)
+[node name="LittleCreature9" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(-13, 10)
 
-[node name="Furble10" parent="Creatures" instance=ExtResource("2_lisl3")]
-position = Vector2(-4, 15)
+[node name="LittleCreature10" parent="Creatures" instance=ExtResource("4_op2hc")]
+position = Vector2(-13, -12)
 
 [connection signal="input_event" from="Clickable" to="." method="_on_clickable_input_event"]
 [connection signal="body_exited" from="Container" to="." method="_on_container_body_exited"]

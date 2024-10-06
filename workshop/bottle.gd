@@ -8,7 +8,7 @@ const SHARD = preload('res://workshop/shatter/shard.tscn')
 
 var _is_dragging := false
 var _mouse_motion: InputEventMouseMotion = null
-var _tracking: Array[FauxFurble] = []
+var _tracking: Array[Furble] = []
 
 
 func shatter() -> void:
@@ -29,7 +29,7 @@ func shatter() -> void:
 
 
 func _ready() -> void:
-	for body: FauxFurble in %Creatures.get_children():
+	for body: Furble in %Creatures.get_children():
 		body.type = type
 		_tracking.push_back(body)
 
@@ -64,9 +64,10 @@ func _on_clickable_input_event(viewport: Node, event: InputEvent, _shape_idx: in
 
 
 func _on_container_body_exited(body: Node2D) -> void:
-	if body is FauxFurble and _tracking.has(body):
+	if body is Furble and _tracking.has(body):
 		body.linear_velocity = Vector2.ZERO
-		body.teleport(global_position - body.global_position)
+		body.global_position = global_position
+		#body.teleport(global_position - body.global_position)
 
 
 func _on_shatter_trigger_body_entered(body: Node2D) -> void:

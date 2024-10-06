@@ -15,14 +15,14 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(0, 540)
+position = Vector2(0, 810)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_vf0sc")
 
 [node name="Cauldron" parent="." instance=ExtResource("2_weu8n")]
-position = Vector2(480, 425)
+position = Vector2(669, 699)
 
 [node name="Bottle" parent="." instance=ExtResource("3_hxohg")]
 position = Vector2(148, 78)
