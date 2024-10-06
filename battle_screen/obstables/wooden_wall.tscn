@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c4r1uckxe2uan" path="res://battle_screen/obstables/wooden_wall.png" id="2_4kimx"]
 
 [node name="Obstacle" instance=ExtResource("1_u2g5s")]
-mass = 150.0
+mass = 200.0
 
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_4kimx")

@@ -73,4 +73,4 @@ func _physics_process(delta: float) -> void:
 
 func burning_tick(delta: float):
 	burn_health -= delta * burning_entities
-	print("burning health: ", burn_health)
+	%MainSprite.modulate = Color.RED.lerp(Color.WHITE, clamp((burn_health / 50.0), 0.0, 1.0))
