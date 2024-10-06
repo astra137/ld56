@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ra851ou483ls" path="res://battle_screen/obstables/wooden_barricade.png" id="2_5lv2q"]
 
 [node name="Obstacle" instance=ExtResource("1_gk3h1")]
+collision_mask = 5
 mass = 50.0
 burn_health = 25.0
 
