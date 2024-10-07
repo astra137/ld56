@@ -28,6 +28,7 @@ func shatter() -> void:
 func _shatter() -> void:
 	for body in get_furbles():
 		body.state = Furble.MovementStates.FALLING
+		body.is_legal_furble = false
 		body.reparent(get_tree().root)
 
 	var cork_sprite := $Cork

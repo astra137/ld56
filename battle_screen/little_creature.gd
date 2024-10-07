@@ -11,7 +11,7 @@ class_name Furble
 @export var chirp_probability := 0.005
 @export var lifetime_min := 40.0
 @export var lifetime_max := 60.0
-@export var is_legal_furble := false
+@export var is_legal_furble := true
 
 @export var type := CreatureTypes.FIRE:
 	set(value):

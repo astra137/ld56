@@ -23,19 +23,26 @@ var current_points := 0:
 
 func start_level(list: Array[Furble]) -> bool:
 	assert(is_complete)
-	if list.is_empty():
-		return false
 	is_complete = false
 	current_points = 0
 	tracking = list
 	for body in tracking: body.tree_exiting.connect(_furble_ded.bind(body))
-	return await level_complete
+	check_victory.call_deferred()
+	var victory = await level_complete
+	for body in tracking: body.queue_free()
+	tracking.clear()
+	return victory
+
+
+func check_victory() -> void:
+	if is_complete: return
+	if tracking.size() < victory_points - current_points and not is_complete:
+		is_complete = true
 
 
 func _furble_ded(body: Furble) -> void:
 	tracking.erase(body)
-	if tracking.size() < victory_points - current_points and not is_complete:
-		is_complete = true
+	check_victory()
 
 
 func _on_goal_point_body_entered(body: Node2D) -> void:
