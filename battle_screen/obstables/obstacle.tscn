@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://vm7g05yf7ijp"]
+[gd_scene load_steps=12 format=3 uid="uid://vm7g05yf7ijp"]
 
 [ext_resource type="Script" path="res://battle_screen/obstables/obstacle.gd" id="1_of2ma"]
+[ext_resource type="Texture2D" uid="uid://dfvqkefb807lc" path="res://battle_screen/obstables/transparent_magic_barrier.png" id="2_kwgwj"]
 [ext_resource type="Texture2D" uid="uid://ckdykv7y4w2cs" path="res://battle_screen/obstables/effects/fire_effect.png" id="2_ywmyy"]
 [ext_resource type="Texture2D" uid="uid://bl332qhub4o3r" path="res://battle_screen/obstables/effects/ash_effect.png" id="3_dqlqd"]
 [ext_resource type="AudioStream" uid="uid://c52jw6hxd4lom" path="res://battle_screen/obstables/effects/Fire Ignition 1.wav" id="4_k36c3"]
 [ext_resource type="AudioStream" uid="uid://c7m1m42mlgug0" path="res://battle_screen/obstables/effects/Fire Ignition 2.wav" id="5_5hrs2"]
 [ext_resource type="AudioStream" uid="uid://b618otarjp3ji" path="res://battle_screen/obstables/effects/Stone Crack 1.wav" id="6_8owvx"]
+[ext_resource type="AudioStream" uid="uid://desqj7gae2d72" path="res://battle_screen/obstables/effects/barrier_dispelled.wav" id="8_mmo3u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w10sr"]
 particles_animation = true
@@ -47,6 +49,10 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 
+[node name="MagicBarrier" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_kwgwj")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
 [node name="FireParticles" type="GPUParticles2D" parent="."]
@@ -77,3 +83,8 @@ max_polyphony = 20
 unique_name_in_owner = true
 stream = ExtResource("6_8owvx")
 volume_db = -10.0
+
+[node name="BarrierDispelledSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_mmo3u")
+volume_db = -5.0

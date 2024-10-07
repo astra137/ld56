@@ -8,10 +8,12 @@ class_name Obstacle
 @export var wind_furble_impulse := Vector2(2000, -20000)
 @export var can_wash_away := false
 @export var can_crack := false
+@export var magic_barrier := false
 
 var fire_sound_counter := 0.0
 
 const disappearing_smoke = preload("res://battle_screen/obstables/effects/disappearing_smoke.tscn")
+const barrier_dispelled = preload("res://battle_screen/obstables/effects/barrier_dispelled.tscn")
 
 var burning_entities := 0
 
@@ -39,7 +41,7 @@ enum ObstacleTypes {
 }
 
 func try_burn():
-	if type == ObstacleTypes.WOOD:
+	if type == ObstacleTypes.WOOD and state != ObstacleStates.BARRIER:
 		burning_entities += 1
 
 		match state:
@@ -47,8 +49,19 @@ func try_burn():
 				burning()
 
 func try_freeze():
-	if type == ObstacleTypes.STONE:
+	if type == ObstacleTypes.STONE and state != ObstacleStates.BARRIER:
 		freeze()
+
+func try_remove_barrier():
+	if state == ObstacleStates.BARRIER:
+		default()
+	elif type == ObstacleTypes.ARCANE:
+		var instance = disappearing_smoke.instantiate()
+		get_tree().get_root().add_child(instance)
+		instance.global_position = global_position
+		instance.emitting = true
+		queue_free()
+
 
 func freeze():
 	freeze_amount += freeze_applied_amount
@@ -77,15 +90,27 @@ func burnt():
 
 func default():
 	if !is_queued_for_deletion():
+		if state == ObstacleStates.BARRIER:
+			var instance = barrier_dispelled.instantiate()
+			get_tree().get_root().add_child(instance)
+			instance.global_position = global_position
+			instance.emitting = true
+			%BarrierDispelledSound.play()
+
+		%MagicBarrier.visible = false
 		%FireParticles.emitting = false
 		%AshParticles.emitting = false
 		state = ObstacleStates.DEFAULT
 
-func try_stop_burn():
-	burning_entities -= 1
+func barrier():
+	state = ObstacleStates.BARRIER
 
-	if burning_entities <= 0:
-		default()
+func try_stop_burn():
+	if state != ObstacleStates.BARRIER:
+		burning_entities -= 1
+
+		if burning_entities <= 0:
+			default()
 
 func try_crack():
 	if can_crack and state == ObstacleStates.FROZEN:
@@ -104,6 +129,10 @@ func try_crack():
 
 func _ready() -> void:
 	%CrackedSprite.modulate = Color(1.0, 1.0, 1.0, 0.0)
+	if magic_barrier == true:
+		barrier()
+	else:
+		default()
 
 func _physics_process(delta: float) -> void:
 	match state:

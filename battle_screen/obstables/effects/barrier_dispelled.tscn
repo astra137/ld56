@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8tngk484wvcm"]
+[gd_scene load_steps=4 format=3 uid="uid://bibybavnrk5sc"]
 
-[ext_resource type="Texture2D" uid="uid://dypnv5xdrumac" path="res://battle_screen/obstables/effects/disappearing_smoke.png" id="1_3qj4l"]
+[ext_resource type="Texture2D" uid="uid://cm1xbo50amasn" path="res://battle_screen/obstables/effects/barrier_dispelled_effect.png" id="1_gucxb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kxehs"]
 particles_animation = true
-particles_anim_h_frames = 10
+particles_anim_h_frames = 11
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
@@ -22,12 +22,12 @@ gravity = Vector3(0, 0, 0)
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="DisappearingSmoke2" type="GPUParticles2D"]
+[node name="DisappearingSmoke" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_kxehs")
 emitting = false
-amount = 1000
+amount = 10
 process_material = SubResource("ParticleProcessMaterial_s73of")
-texture = ExtResource("1_3qj4l")
+texture = ExtResource("1_gucxb")
 lifetime = 10.0
 one_shot = true
 speed_scale = 10.0

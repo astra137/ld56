@@ -334,6 +334,10 @@ func _on_area_obstacle_entered(body: Node2D) -> void:
 						crack(body as Obstacle)
 			CreatureTypes.ICE:
 				(body as Obstacle).try_freeze()
+			CreatureTypes.ARCANE:
+				(body as Obstacle).try_remove_barrier()
+			CreatureTypes.ELECTRICITY:
+				(body as Obstacle).try_remove_barrier()
 
 
 
