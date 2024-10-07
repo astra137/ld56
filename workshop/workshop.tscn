@@ -31,3 +31,57 @@ spill_target = NodePath("../CauldronDump")
 [node name="Shelf" parent="." instance=ExtResource("3_wgtfx")]
 position = Vector2(225, 437)
 collision_layer = 65
+
+[node name="HBoxContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 177.0
+offset_bottom = 40.0
+
+[node name="Fire Label" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 283.0
+offset_right = 543.0
+offset_bottom = 360.0
+bbcode_enabled = true
+text = "[font size=26
+][wave amp=10.0 freq=2.0 connected=1]Fire[/wave][/font]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Fire Label2" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 374.0
+offset_right = 543.0
+offset_bottom = 451.0
+bbcode_enabled = true
+text = "[font size=26
+][wave amp=10.0 freq=2.0 connected=1]Ice[/wave][/font]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Fire Label3" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 466.0
+offset_right = 543.0
+offset_bottom = 543.0
+bbcode_enabled = true
+text = "[font size=26
+][wave amp=10.0 freq=2.0 connected=1]Earth[/wave][/font]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Fire Label4" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 556.0
+offset_right = 543.0
+offset_bottom = 633.0
+bbcode_enabled = true
+text = "[font size=26
+][wave amp=10.0 freq=2.0 connected=1]Magic[/wave][/font]"
+fit_content = true
+autowrap_mode = 0
