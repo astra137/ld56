@@ -9,8 +9,8 @@ class_name Furble
 @export var jump_impulse := Vector2(300.0, -600.0)
 @export var jump_probability := 0.001
 @export var chirp_probability := 0.005
-@export var lifetime_min := 50.0
-@export var lifetime_max := 70.0
+@export var lifetime_min := 40.0
+@export var lifetime_max := 60.0
 
 @export var type := CreatureTypes.FIRE:
 	set(value):

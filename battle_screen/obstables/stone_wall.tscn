@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch1a25dm8b50t"]
+[gd_scene load_steps=5 format=3 uid="uid://ch1a25dm8b50t"]
 
 [ext_resource type="PackedScene" uid="uid://vm7g05yf7ijp" path="res://battle_screen/obstables/obstacle.tscn" id="1_neq7m"]
 [ext_resource type="Texture2D" uid="uid://j2cfprno7kgl" path="res://battle_screen/obstables/stone_wall.png" id="2_17vm3"]
+[ext_resource type="Script" path="res://battle_screen/obstables/stone_wall.gd" id="2_sm58k"]
 [ext_resource type="Texture2D" uid="uid://bd3swa5wxbis1" path="res://battle_screen/obstables/stone_wall_cracked.png" id="3_nni0f"]
 
 [node name="Obstacle" instance=ExtResource("1_neq7m")]
 mass = 240.0
+script = ExtResource("2_sm58k")
 type = 1
 structure_health = 200.0
 can_crack = true

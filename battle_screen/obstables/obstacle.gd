@@ -110,6 +110,9 @@ func _physics_process(delta: float) -> void:
 		ObstacleStates.BURNING:
 			if burn_health <= 0.0:
 				burnt()
+		ObstacleStates.FROZEN:
+			if freeze_amount <= 0.0:
+				default()
 
 	match state:
 		ObstacleStates.BURNING:
