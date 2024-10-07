@@ -67,8 +67,6 @@ func _ready() -> void:
 		%LabelFurbles.visible = false
 	workshop()
 
-func _process(delta: float) -> void:
-	pass
 
 # State transitions
 func workshop():

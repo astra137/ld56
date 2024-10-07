@@ -1,27 +1,28 @@
-[gd_scene load_steps=13 format=3 uid="uid://dn1wbggy63c18"]
+[gd_scene load_steps=14 format=3 uid="uid://dn1wbggy63c18"]
 
 [ext_resource type="PackedScene" uid="uid://bee5ds54ef40t" path="res://workshop/workshop.tscn" id="1_ldq7e"]
 [ext_resource type="Script" path="res://main.gd" id="1_oj766"]
 [ext_resource type="PackedScene" uid="uid://whj6b7t2m0e4" path="res://battle_screen/levels/level_1.tscn" id="1_vb2us"]
+[ext_resource type="PackedScene" uid="uid://c8netiwsomeja" path="res://menus/button/btn.tscn" id="4_4dsck"]
 [ext_resource type="Script" path="res://menus/label_fps.gd" id="4_k0iw8"]
 [ext_resource type="AudioStream" uid="uid://c71s841c4vs0e" path="res://background_music.wav" id="6_82ls8"]
 [ext_resource type="Script" path="res://label_furbles_goal.gd" id="6_fdbtx"]
-[ext_resource type="PackedScene" uid="uid://dhvhg3tfs05mu" path="res://menus/victory_banner.tscn" id="6_x7h3v"]
+[ext_resource type="PackedScene" uid="uid://cqyayvhkvx4m2" path="res://menus/victory_banner.tscn" id="6_x7h3v"]
 [ext_resource type="Script" path="res://menus/label_furbles.gd" id="7_swf12"]
 
-[sub_resource type="InputEventAction" id="InputEventAction_0kv1m"]
+[sub_resource type="InputEventAction" id="InputEventAction_bleqc"]
 action = &"ui_focus_next"
 pressed = true
 
-[sub_resource type="Shortcut" id="Shortcut_g005w"]
-events = [SubResource("InputEventAction_0kv1m")]
+[sub_resource type="Shortcut" id="Shortcut_0rmm8"]
+events = [SubResource("InputEventAction_bleqc")]
 
-[sub_resource type="InputEventAction" id="InputEventAction_yfvsd"]
+[sub_resource type="InputEventAction" id="InputEventAction_w77o3"]
 action = &"ui_accept"
 pressed = true
 
-[sub_resource type="Shortcut" id="Shortcut_8w8y7"]
-events = [SubResource("InputEventAction_yfvsd")]
+[sub_resource type="Shortcut" id="Shortcut_dr03h"]
+events = [SubResource("InputEventAction_w77o3")]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_oj766")
@@ -48,25 +49,22 @@ metadata/_edit_lock_ = true
 offset_right = 177.0
 offset_bottom = 40.0
 
-[node name="ButtonView" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="ButtonView" parent="CanvasLayer/HBoxContainer" instance=ExtResource("4_4dsck")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 0
-shortcut = SubResource("Shortcut_g005w")
+shortcut = SubResource("Shortcut_0rmm8")
 text = "View"
 
-[node name="ButtonReset" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="ButtonSpill" parent="CanvasLayer/HBoxContainer" instance=ExtResource("4_4dsck")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 0
-text = "Reset"
-
-[node name="ButtonSpill" type="Button" parent="CanvasLayer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_mode = 0
-shortcut = SubResource("Shortcut_8w8y7")
+shortcut = SubResource("Shortcut_dr03h")
 text = "Spill"
+
+[node name="ButtonReset" parent="CanvasLayer/HBoxContainer" instance=ExtResource("4_4dsck")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset"
 
 [node name="LabelFPS" type="Label" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
@@ -86,9 +84,6 @@ layout_mode = 2
 text = "? left"
 script = ExtResource("6_fdbtx")
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
-
 [node name="VictoryBanner" parent="CanvasLayer" instance=ExtResource("6_x7h3v")]
 unique_name_in_owner = true
 
@@ -98,5 +93,5 @@ volume_db = -10.0
 autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonView" to="." method="_on_button_view_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonReset" to="." method="_on_button_reset_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonSpill" to="." method="_on_button_spill_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonReset" to="." method="_on_button_reset_pressed"]
