@@ -331,6 +331,8 @@ func _on_area_obstacle_entered(body: Node2D) -> void:
 				if (body as Obstacle).can_crack:
 					if state != MovementStates.CRACK and state != MovementStates.CRACK_JUMP:
 						crack(body as Obstacle)
+			CreatureTypes.ICE:
+				(body as Obstacle).try_freeze()
 
 
 

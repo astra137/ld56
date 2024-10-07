@@ -19,11 +19,16 @@ var state := ObstacleStates.DEFAULT
 
 const crack_damage := 20.0
 
+# Freeze variables
+var freeze_amount := 0.0
+const freeze_applied_amount := 0.3
+
+
 enum ObstacleStates {
 	DEFAULT,
 	BURNING,
 	BURNT,
-	CRACKED,
+	FROZEN,
 	BARRIER
 }
 
@@ -40,6 +45,18 @@ func try_burn():
 		match state:
 			ObstacleStates.DEFAULT:
 				burning()
+
+func try_freeze():
+	if type == ObstacleTypes.STONE:
+		freeze()
+
+func freeze():
+	freeze_amount += freeze_applied_amount
+	%MainSprite.modulate = Color.WHITE.lerp(Color(0.605, 0.902, 1.0), clamp(freeze_amount, 0.0, 1.0))
+	var current_alpha = %CrackedSprite.modulate.a
+	%CrackedSprite.modulate = Color("white", current_alpha).lerp(Color(0.605, 0.902, 1.0, current_alpha), clamp(freeze_amount, 0.0, 1.0))
+	state = ObstacleStates.FROZEN
+
 
 func burning():
 	%FireParticles.emitting = true
@@ -71,7 +88,7 @@ func try_stop_burn():
 		default()
 
 func try_crack():
-	if can_crack:
+	if can_crack and state == ObstacleStates.FROZEN:
 		structure_health -= crack_damage
 		if structure_health <= 0.0:
 			var instance = disappearing_smoke.instantiate()
@@ -79,7 +96,7 @@ func try_crack():
 			instance.global_position = global_position
 			instance.emitting = true
 
-			state = ObstacleStates.CRACKED
+			state = ObstacleStates.FROZEN
 			queue_free()
 		else:
 			%CrackedSprite.modulate = Color(1.0, 1.0, 1.0, 1.0 - clamp((structure_health / 100.0), 0.0, 1.0))
@@ -98,6 +115,8 @@ func _physics_process(delta: float) -> void:
 		ObstacleStates.BURNING:
 			if burn_health >= 0.0:
 				burning_tick(delta)
+		ObstacleStates.FROZEN:
+			freeze_tick(delta)
 
 
 func burning_tick(delta: float):
@@ -109,3 +128,9 @@ func burning_tick(delta: float):
 		%BurningSound.play()
 
 	%MainSprite.modulate = Color.RED.lerp(Color.WHITE, clamp((burn_health / 50.0), 0.0, 1.0))
+
+func freeze_tick(delta: float):
+	freeze_amount -= delta * 0.1
+	%MainSprite.modulate = Color.WHITE.lerp(Color(0.605, 0.902, 1.0), clamp(freeze_amount, 0.0, 1.0))
+	var current_alpha = %CrackedSprite.modulate.a
+	%CrackedSprite.modulate = Color("white", current_alpha).lerp(Color(0.605, 0.902, 1.0, current_alpha), clamp(freeze_amount, 0.0, 1.0))
