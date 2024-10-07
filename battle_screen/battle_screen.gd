@@ -28,10 +28,7 @@ func start_level(list: Array[Furble]) -> bool:
 	tracking = list
 	for body in tracking: body.tree_exiting.connect(_furble_ded.bind(body))
 	check_victory.call_deferred()
-	var victory = await level_complete
-	for body in tracking: body.queue_free()
-	tracking.clear()
-	return victory
+	return await level_complete
 
 
 func check_victory() -> void:

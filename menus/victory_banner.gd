@@ -14,6 +14,7 @@ extends CenterContainer
 
 
 func _draw() -> void:
+	%RichTextLabel.visible = not text.is_empty()
 	%RichTextLabel.text = template.format({ 'text': text })
 
 

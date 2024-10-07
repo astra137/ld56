@@ -73,8 +73,12 @@ enum CreatureTypes {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_type()
-	current_lifetime = randf_range(lifetime_min, lifetime_max)
+	refresh_lifetime()
 	%Sprite.play("default")
+
+
+func refresh_lifetime():
+	current_lifetime = randf_range(lifetime_min, lifetime_max)
 
 
 func update_type() -> void:

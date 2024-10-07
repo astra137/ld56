@@ -20,9 +20,9 @@ func gather_furbles() -> Array[Furble]:
 
 func awaken_furbles(list: Array[Furble]) -> void:
 	for body in list:
+		body.refresh_lifetime()
 		body.is_legal_furble = true
 		body.reparent(get_tree().root)
-
 
 
 func spill() -> Array[Furble]:
