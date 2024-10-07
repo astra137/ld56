@@ -25,9 +25,9 @@ position = Vector2(1583, 318)
 
 [node name="Cauldron" parent="." node_paths=PackedStringArray("spill_target") instance=ExtResource("2_weu8n")]
 unique_name_in_owner = true
-position = Vector2(609, 522)
+position = Vector2(801, 522)
 spill_target = NodePath("../CauldronDump")
 
 [node name="Shelf" parent="." instance=ExtResource("3_wgtfx")]
-position = Vector2(224, 437)
+position = Vector2(225, 437)
 collision_layer = 65

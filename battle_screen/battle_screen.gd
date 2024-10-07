@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name LevelBaseLayer
+
 
 signal level_complete(victory: bool)
 

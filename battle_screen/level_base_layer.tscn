@@ -24,7 +24,7 @@ stream_0/stream = ExtResource("8_bung1")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v0gd1"]
 distance = -1.0
 
-[node name="LevelBaseLayer" type="Node2D"]
+[node name="LevelBaseLayer" type="Node2D" groups=["level_base_layer"]]
 script = ExtResource("1_45ncr")
 
 [node name="MountainpassFront" type="Sprite2D" parent="."]

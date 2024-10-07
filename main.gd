@@ -61,6 +61,9 @@ func pan_camera(rightside: bool) -> void:
 
 
 func _ready() -> void:
+	if !OS.is_debug_build():
+		%LabelFPS.visible = false
+		%LabelFurbles.visible = false
 	workshop()
 
 func _process(delta: float) -> void:
@@ -112,7 +115,7 @@ func defeat():
 	%ButtonSpill.disabled = true
 	%ButtonReset.disabled = true
 	game_state = GameState.DEFEAT
-	await %VictoryBanner.show_message('Massive L!')
+	await %VictoryBanner.show_message('Nice Try!')
 	resetting()
 
 func resetting():

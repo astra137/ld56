@@ -10,4 +10,4 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	text = '%s furbles' % [get_tree().get_node_count_in_group(&'furble')]
+	text = '%s critters' % [get_tree().get_node_count_in_group(&'furble')]
