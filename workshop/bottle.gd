@@ -99,9 +99,6 @@ func _shatter() -> void:
 
 	queue_free()
 
-func reset():
-	queue_free()
-
 
 func falling() -> void:
 	state = BottleStates.FALLING

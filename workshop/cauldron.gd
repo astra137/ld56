@@ -74,3 +74,8 @@ func _on_container_body_exited(body: Node2D) -> void:
 		body.state = Furble.MovementStates.FALLING
 	if body is Bottle:
 		bottles.erase(body)
+
+
+func _on_bottle_entered(body: Node2D) -> void:
+	if body is Bottle:
+		(body as Bottle).shatter()

@@ -8,6 +8,7 @@ radius = 109.0
 height = 256.0
 
 [node name="Cauldron" type="CharacterBody2D"]
+collision_priority = 10.0
 script = ExtResource("1_5vegq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -27,5 +28,13 @@ position = Vector2(0, -31)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_okb0k")
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(81, 17, 58, 42, 36, 49, -38, 49, -68, 34, -83, 12, -59, 24, -30, 34, 2, 37, 32, 36, 60, 26)
+
 [connection signal="body_entered" from="Container" to="." method="_on_container_body_entered"]
 [connection signal="body_exited" from="Container" to="." method="_on_container_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_bottle_entered"]
