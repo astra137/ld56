@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgjcrfxvgjx77"]
+[gd_scene load_steps=6 format=3 uid="uid://cgjcrfxvgjx77"]
 
 [ext_resource type="Texture2D" uid="uid://cx8km15ds51f3" path="res://workshop/bottle.png" id="1_61s1m"]
 [ext_resource type="Script" path="res://workshop/bottle.gd" id="1_ynuk4"]
 [ext_resource type="Texture2D" uid="uid://b5gbrw2g8ls25" path="res://workshop/cork.png" id="2_1xi41"]
-[ext_resource type="PackedScene" uid="uid://v4cyox7q5hs7" path="res://battle_screen/little_creature.tscn" id="4_op2hc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tetba"]
 radius = 25.0
@@ -54,35 +53,6 @@ shape = SubResource("CircleShape2D_t101l")
 
 [node name="Creatures" type="Marker2D" parent="."]
 unique_name_in_owner = true
-
-[node name="LittleCreature" parent="Creatures" instance=ExtResource("4_op2hc")]
-
-[node name="LittleCreature2" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(9, 0)
-
-[node name="LittleCreature3" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(-9, 0)
-
-[node name="LittleCreature4" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(-4, -11)
-
-[node name="LittleCreature5" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(5, -13)
-
-[node name="LittleCreature6" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(-4, 10)
-
-[node name="LittleCreature7" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(5, 12)
-
-[node name="LittleCreature8" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(14, 11)
-
-[node name="LittleCreature9" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(-13, 10)
-
-[node name="LittleCreature10" parent="Creatures" instance=ExtResource("4_op2hc")]
-position = Vector2(-13, -12)
 
 [connection signal="input_event" from="Clickable" to="." method="_on_clickable_input_event"]
 [connection signal="body_exited" from="Container" to="." method="_on_container_body_exited"]

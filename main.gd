@@ -23,11 +23,11 @@ func _on_button_view_pressed() -> void:
 
 
 func _on_button_spill_pressed() -> void:
-	camera_right = false
-	toggle_camera()
+	camera_right = false; toggle_camera()
 	%Workshop.spill()
 
 
 func _on_button_clean_pressed() -> void:
+	camera_right = true; toggle_camera()
 	get_tree().call_group(&'bottles', &'shatter')
 	get_tree().call_group(&'furble', &'queue_free')

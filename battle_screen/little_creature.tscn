@@ -215,7 +215,7 @@ stream_9/stream = ExtResource("20_0ff3d")
 
 [node name="LittleCreature" type="RigidBody2D" groups=["furble"]]
 collision_layer = 4
-collision_mask = 53
+collision_mask = 55
 gravity_scale = 0.7
 contact_monitor = true
 max_contacts_reported = 6

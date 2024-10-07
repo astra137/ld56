@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://uj8w2h5msu2s"]
+[gd_scene load_steps=4 format=3 uid="uid://uj8w2h5msu2s"]
 
 [ext_resource type="Texture2D" uid="uid://yfdirvmlpmf5" path="res://workshop/shelf.png" id="1_07wrv"]
+[ext_resource type="Script" path="res://workshop/shelf.gd" id="1_wokb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_25d8y"]
 size = Vector2(350.5, 10)
 
 [node name="Shelf" type="StaticBody2D"]
+script = ExtResource("1_wokb3")
 
 [node name="Shelf" type="Sprite2D" parent="."]
 texture = ExtResource("1_07wrv")

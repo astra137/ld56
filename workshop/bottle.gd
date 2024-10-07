@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+const FURBLE = preload('res://battle_screen/little_creature.tscn')
+
 @export var type := Furble.CreatureTypes.FIRE
 
 var should_shatter := false
@@ -7,10 +9,7 @@ var _shattering := false
 var _mouse_motion: InputEventMouseMotion = null
 var _previous_position := global_position
 var _previous_velocity := linear_velocity
-var _is_dragging := false:
-	set(value):
-		_is_dragging = value
-		#custom_integrator = value
+var _is_dragging := false
 
 
 func drain_mouse_motion() -> Vector2:
@@ -26,16 +25,15 @@ func shatter() -> void:
 
 
 func _shatter() -> void:
+	for body in get_furbles():
+		body.reparent(get_tree().root)
+
 	var cork_sprite := $Cork
 	var cork: RigidBody2D = load('res://workshop/cork.tscn').instantiate()
 	get_tree().root.add_child(cork)
 	cork.global_position = cork_sprite.global_position
 	cork.linear_velocity = Vector2.UP.rotated(randf_range(-PI/2., PI/2.)) * 480.0
 	cork.angular_velocity = TAU
-
-	for body in get_furbles():
-		body.reparent(get_tree().root)
-		body.freeze = false
 
 	for node in BottleShard.spawn_shards():
 		get_tree().root.add_child(node)
@@ -59,10 +57,11 @@ func has_furble(body: Furble) -> bool:
 
 func _ready() -> void:
 	#body_entered.connect(_body_entered)
-	for body in get_furbles():
+	for idx in 10:
+		var body: Furble = FURBLE.instantiate()
 		body.type = type
-		body.freeze = true
 		body.state = Furble.MovementStates.BOTTLED
+		%Creatures.add_child(body)
 
 
 func _process(delta: float) -> void:
