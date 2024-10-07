@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Bottle
 
 const FURBLE = preload('res://battle_screen/little_creature.tscn')
 

@@ -26,3 +26,6 @@ shape = SubResource("RectangleShape2D_25d8y")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
 position = Vector2(0, 179)
 shape = SubResource("RectangleShape2D_25d8y")
+
+[node name="Bottles" type="Marker2D" parent="."]
+unique_name_in_owner = true

@@ -9,6 +9,16 @@ signal clicked()
 
 var is_spilling := false
 var furbles: Array[Furble] = []
+var bottles: Array[Bottle] = []
+
+
+func gather_furbles() -> Array[Furble]:
+	var list: Array[Furble] = []
+	list.append_array(furbles)
+	for bottle in bottles:
+		list.append_array(bottle.get_furbles())
+		bottle._shatter()
+	return list
 
 
 func awaken_furbles(list: Array[Furble]) -> void:
@@ -18,9 +28,10 @@ func awaken_furbles(list: Array[Furble]) -> void:
 
 
 func spill() -> void:
+	if is_spilling: return
 	is_spilling = true
 	var original := global_position
-	var list := furbles.duplicate()
+	var list := gather_furbles()
 	for body in list: body.reparent(self)
 	var tween := create_tween()
 	tween.set_parallel(true)
@@ -77,8 +88,14 @@ func _physics_process(delta):
 
 
 func _on_container_body_entered(body: Node2D) -> void:
-	furbles.push_back(body)
+	if body is Furble:
+		furbles.push_back(body)
+	if body is Bottle:
+		bottles.push_back(body)
 
 
 func _on_container_body_exited(body: Node2D) -> void:
-	furbles.erase(body)
+	if body is Furble:
+		furbles.erase(body)
+	if body is Bottle:
+		bottles.erase(body)
