@@ -5,6 +5,7 @@ const CENTER_LEFT := Vector2(1440, 810) * 0.5
 const CENTER_RIGHT := CENTER_LEFT + Vector2(1440, 0)
 
 
+var level_node: Node
 var level_number := 1:
 	set(value):
 		level_number = clampi(value, 1, 5)
@@ -18,6 +19,7 @@ func swap_level(node: Node) -> void:
 		%Level.remove_child(n)
 		n.queue_free()
 	%Level.add_child(node)
+	level_node = node
 
 
 func load_next_level(num = level_number + 1) -> void:
@@ -37,6 +39,10 @@ func pan_camera(rightside: bool) -> void:
 	camera_tween = get_tree().create_tween()
 	camera_tween.set_trans(Tween.TRANS_EXPO)
 	camera_tween.tween_property(%Camera2D, ^'position', pos, 0.6)
+
+
+func _ready() -> void:
+	load_next_level(level_number)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -63,10 +69,10 @@ func _on_button_spill_pressed() -> void:
 	%ButtonClean.disabled = true
 	pan_camera(true)
 	var list: Array[Furble] = await %Workshop.spill()
-	var victory: bool = await $BattleScreen/LevelBaseLayer.start_level(list)
+	var victory: bool = await level_node.get_node('LevelBaseLayer').start_level(list)
+	await %VictoryBanner.show_message('Victory!' if victory else 'Massive L!')
 	%ButtonView.disabled = false
 	%ButtonSpill.disabled = false
 	%ButtonClean.disabled = false
 	_on_button_clean_pressed()
-	%VictoryBanner.show_message('Victory!' if victory else 'Massive L!')
 	if victory: load_next_level()
