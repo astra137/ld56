@@ -29,11 +29,11 @@ position = Vector2(1185, 554)
 rotation = 1.57079
 
 [node name="Obstacle12" parent="." instance=ExtResource("3_3m6eb")]
-position = Vector2(742, 299)
+position = Vector2(742, 313)
 rotation = 1.57079
 
 [node name="Obstacle13" parent="." instance=ExtResource("3_3m6eb")]
-position = Vector2(673, 255)
+position = Vector2(673, 268)
 rotation = 1.57079
 
 [node name="Obstacle6" parent="." instance=ExtResource("2_t5lmw")]
@@ -45,7 +45,7 @@ position = Vector2(547, 673)
 magic_barrier = true
 
 [node name="Obstacle10" parent="." instance=ExtResource("2_t5lmw")]
-position = Vector2(685, 418)
+position = Vector2(687, 431)
 
 [node name="Obstacle16" parent="." instance=ExtResource("2_t5lmw")]
 position = Vector2(226, 673)
@@ -58,22 +58,22 @@ position = Vector2(161, 554)
 rotation = 1.57079
 
 [node name="Obstacle11" parent="." instance=ExtResource("2_t5lmw")]
-position = Vector2(805, 420)
+position = Vector2(802, 433)
 
 [node name="Obstacle15" parent="." instance=ExtResource("2_t5lmw")]
-position = Vector2(763, 149)
+position = Vector2(763, 173)
 rotation = 1.57079
 
 [node name="Obstacle8" parent="." instance=ExtResource("4_gtwyn")]
-position = Vector2(614, 545)
+position = Vector2(614, 553)
 rotation = 1.57079
 
 [node name="Obstacle14" parent="." instance=ExtResource("4_gtwyn")]
-position = Vector2(712, 202)
+position = Vector2(712, 221)
 rotation = 1.57079
 
 [node name="Obstacle9" parent="." instance=ExtResource("4_gtwyn")]
-position = Vector2(872, 546)
+position = Vector2(872, 552)
 rotation = 1.57079
 
 [node name="RotatingPitchfork" parent="." instance=ExtResource("5_tru85")]

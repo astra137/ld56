@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://whj6b7t2m0e4" path="res://battle_screen/levels/level_1.tscn" id="1_vb2us"]
 [ext_resource type="Script" path="res://menus/label_fps.gd" id="4_k0iw8"]
 [ext_resource type="AudioStream" uid="uid://c71s841c4vs0e" path="res://background_music.wav" id="6_82ls8"]
-[ext_resource type="PackedScene" uid="uid://cqyayvhkvx4m2" path="res://menus/victory_banner.tscn" id="6_x7h3v"]
+[ext_resource type="PackedScene" path="res://menus/victory_banner.tscn" id="6_x7h3v"]
 [ext_resource type="Script" path="res://menus/label_furbles.gd" id="7_swf12"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_0kv1m"]

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bx7woh0fuqik3" path="res://battle_screen/obstables/arcane_wall.tscn" id="4_lt0li"]
 [ext_resource type="PackedScene" uid="uid://bj0wwh5cgl07p" path="res://battle_screen/obstables/rotating_pitchfork.tscn" id="5_e5yrj"]
 
-[node name="BattleScreen" type="Node2D"]
+[node name="BattleScreen4" type="Node2D"]
 
 [node name="LevelBaseLayer" parent="." instance=ExtResource("1_acwor")]
 

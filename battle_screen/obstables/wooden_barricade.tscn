@@ -9,11 +9,11 @@ collision_layer = 24
 collision_mask = 5
 mass = 50.0
 script = ExtResource("2_yqkog")
-burn_health = 25.0
+burn_health = 10.0
 can_stick = true
 
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_5lv2q")
 
-[node name="CollisionPolygon2D" parent="." index="1"]
+[node name="CollisionPolygon2D" parent="." index="3"]
 polygon = PackedVector2Array(-4, -4, -25, -17, -19, -8, 0, 18, -3, 22, -3, 32, 2.2, 32, 13.5, 32, 16, 32, 21, 32, 26, 32, 29, 32, 22.9, 20, 28, 15, 27, 8.1, 22.7, 6, 16.6, 6, 12.3, 11.1, 8, 7)

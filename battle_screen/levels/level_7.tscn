@@ -4,16 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://coreolkh7tv7g" path="res://battle_screen/obstables/wooden_wall.tscn" id="2_8q0fv"]
 [ext_resource type="PackedScene" uid="uid://bx7woh0fuqik3" path="res://battle_screen/obstables/arcane_wall.tscn" id="3_duwnw"]
 
-[node name="BattleScreen" type="Node2D"]
+[node name="BattleScreen3" type="Node2D"]
 
 [node name="LevelBaseLayer" parent="." instance=ExtResource("1_nxpvv")]
 
 [node name="Obstacle14" parent="." instance=ExtResource("2_8q0fv")]
-position = Vector2(735, 302)
+position = Vector2(735, 313)
 rotation = 1.57079
 
 [node name="Obstacle17" parent="." instance=ExtResource("2_8q0fv")]
-position = Vector2(989, 297)
+position = Vector2(989, 311)
 rotation = 1.57079
 
 [node name="Obstacle" parent="." instance=ExtResource("3_duwnw")]
@@ -35,25 +35,25 @@ position = Vector2(672, 675)
 position = Vector2(542, 674)
 
 [node name="Obstacle10" parent="." instance=ExtResource("3_duwnw")]
-position = Vector2(674, 423)
+position = Vector2(674, 432)
 
 [node name="Obstacle11" parent="." instance=ExtResource("3_duwnw")]
-position = Vector2(795, 421)
+position = Vector2(792, 433)
 
 [node name="Obstacle12" parent="." instance=ExtResource("3_duwnw")]
-position = Vector2(926, 419)
+position = Vector2(927, 429)
 
 [node name="Obstacle13" parent="." instance=ExtResource("3_duwnw")]
-position = Vector2(1055, 420)
+position = Vector2(1048, 433)
 
 [node name="Obstacle7" parent="." instance=ExtResource("3_duwnw")]
-position = Vector2(608, 550)
+position = Vector2(608, 555)
 rotation = 1.57079
 
 [node name="Obstacle8" parent="." instance=ExtResource("3_duwnw")]
-position = Vector2(865, 546)
+position = Vector2(865, 551)
 rotation = 1.57079
 
 [node name="Obstacle9" parent="." instance=ExtResource("3_duwnw")]
-position = Vector2(1120, 544)
+position = Vector2(1120, 552)
 rotation = 1.57079

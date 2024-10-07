@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c415qr4ssheo8" path="res://battle_screen/obstables/wooden_barrel.tscn" id="4_kxiff"]
 [ext_resource type="PackedScene" uid="uid://bx7woh0fuqik3" path="res://battle_screen/obstables/arcane_wall.tscn" id="5_m1rpd"]
 
-[node name="BattleScreen" type="Node2D"]
+[node name="BattleScreen3" type="Node2D"]
 
 [node name="LevelBaseLayer" parent="." instance=ExtResource("1_3fqq5")]
 
@@ -47,5 +47,5 @@ position = Vector2(927, 439)
 position = Vector2(799, 439)
 
 [node name="Obstacle9" parent="." instance=ExtResource("5_m1rpd")]
-position = Vector2(866, 312)
+position = Vector2(866, 319)
 rotation = 1.57079

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bj0wwh5cgl07p" path="res://battle_screen/obstables/rotating_pitchfork.tscn" id="5_acoef"]
 [ext_resource type="PackedScene" uid="uid://7lgqxcdt8qlm" path="res://battle_screen/obstables/stone_tower.tscn" id="5_oc4al"]
 
-[node name="BattleScreen" type="Node2D"]
+[node name="BattleScreen4" type="Node2D"]
 
 [node name="LevelBaseLayer" parent="." instance=ExtResource("1_jwth4")]
 

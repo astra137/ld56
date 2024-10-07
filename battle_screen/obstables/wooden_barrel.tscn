@@ -5,12 +5,12 @@
 
 [node name="Obstacle" instance=ExtResource("1_fr4pq")]
 mass = 50.0
-burn_health = 40.0
+burn_health = 15.0
 can_stick = true
 can_wash_away = true
 
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_fi1mk")
 
-[node name="CollisionPolygon2D" parent="." index="1"]
+[node name="CollisionPolygon2D" parent="." index="3"]
 polygon = PackedVector2Array(21, -27, -21, -27, -21, -24.3, -24, -13, -25, -8, -26, 8.1, -24, 17, -21, 31.3, -21, 32, 21, 32, 24, 13, 25, 4, 25, -8, 21, -24.5)

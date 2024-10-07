@@ -9,5 +9,5 @@ mass = 600.0
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_2icc2")
 
-[node name="CollisionPolygon2D" parent="." index="1"]
+[node name="CollisionPolygon2D" parent="." index="3"]
 polygon = PackedVector2Array(87, -122, -87, -122, -87, -119.8, -87.8, -119, -90, -119, -91, -51, -91, -44.4, -86, -43.4, -86, 128, -69, 128, -69, 111.4, -0.900002, 83.6, 65.6, 112, 69, 112, 69, 128, 86, 128, 87, -44, 91.4, -44, 90, -51.4, 90, -118.1, 87, -120.1)

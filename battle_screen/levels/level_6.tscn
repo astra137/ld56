@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c415qr4ssheo8" path="res://battle_screen/obstables/wooden_barrel.tscn" id="5_mekgq"]
 [ext_resource type="PackedScene" uid="uid://bx7woh0fuqik3" path="res://battle_screen/obstables/arcane_wall.tscn" id="6_3pyg3"]
 
-[node name="BattleScreen" type="Node2D"]
+[node name="BattleScreen2" type="Node2D"]
 
 [node name="LevelBaseLayer" parent="." instance=ExtResource("1_ov10w")]
 
@@ -49,7 +49,6 @@ position = Vector2(290, 669)
 
 [node name="RotatingPitchfork" parent="." instance=ExtResource("5_dnqla")]
 position = Vector2(802, 673)
-rotation_speed = 2.0
 
 [node name="Obstacle5" parent="." instance=ExtResource("6_3pyg3")]
 position = Vector2(1057, 674)
@@ -58,5 +57,5 @@ position = Vector2(1057, 674)
 position = Vector2(929, 671)
 
 [node name="Obstacle7" parent="." instance=ExtResource("6_3pyg3")]
-position = Vector2(991, 542)
+position = Vector2(991, 552)
 rotation = 1.57079

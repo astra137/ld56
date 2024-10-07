@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ch1a25dm8b50t" path="res://battle_screen/obstables/stone_wall.tscn" id="3_he4jx"]
 [ext_resource type="PackedScene" uid="uid://d1ugeq3lkri4p" path="res://battle_screen/obstables/stone_barricade.tscn" id="4_j560n"]
 
-[node name="BattleScreen" type="Node2D"]
+[node name="BattleScreen4" type="Node2D"]
 
 [node name="LevelBaseLayer" parent="." instance=ExtResource("1_oliwg")]
 
@@ -14,17 +14,17 @@ position = Vector2(1186, 673)
 magic_barrier = true
 
 [node name="Obstacle5" parent="." instance=ExtResource("3_he4jx")]
-position = Vector2(1185, 421)
+position = Vector2(1194, 430)
 
 [node name="Obstacle6" parent="." instance=ExtResource("3_he4jx")]
-position = Vector2(1055, 425)
+position = Vector2(1049, 434)
 
 [node name="Obstacle2" parent="." instance=ExtResource("3_he4jx")]
 position = Vector2(1055, 673)
 magic_barrier = true
 
 [node name="Obstacle3" parent="." instance=ExtResource("3_6bgw4")]
-position = Vector2(1123, 547)
+position = Vector2(1123, 552)
 rotation = 1.57079
 
 [node name="Obstacle4" parent="." instance=ExtResource("4_j560n")]
@@ -43,5 +43,5 @@ position = Vector2(606, 673)
 position = Vector2(481, 675)
 
 [node name="Obstacle11" parent="." instance=ExtResource("3_6bgw4")]
-position = Vector2(543, 544)
+position = Vector2(543, 553)
 rotation = 1.57079

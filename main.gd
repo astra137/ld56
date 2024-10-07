@@ -8,7 +8,7 @@ const CENTER_RIGHT := CENTER_LEFT + Vector2(1440, 0)
 var level_node: Node
 var level_number := 1:
 	set(value):
-		level_number = clampi(value, 1, 5)
+		level_number = clampi(value, 1, 11)
 
 var camera_toggle := false
 var camera_tween: Tween
@@ -24,11 +24,18 @@ func swap_level(node: Node) -> void:
 
 func load_level(next_level := level_number) -> void:
 	level_number = next_level
+	print(level_number)
 	match level_number:
 		2: swap_level(load('res://battle_screen/levels/level_2.tscn').instantiate())
 		3: swap_level(load('res://battle_screen/levels/level_4.tscn').instantiate())
 		4: swap_level(load('res://battle_screen/levels/level_5.tscn').instantiate())
 		5: swap_level(load('res://battle_screen/levels/level_6.tscn').instantiate())
+		6: swap_level(load('res://battle_screen/levels/level_7.tscn').instantiate())
+		7: swap_level(load('res://battle_screen/levels/level_8.tscn').instantiate())
+		8: swap_level(load('res://battle_screen/levels/level_9.tscn').instantiate())
+		9: swap_level(load('res://battle_screen/levels/level_10.tscn').instantiate())
+		10: swap_level(load('res://battle_screen/levels/level_11.tscn').instantiate())
+		11: swap_level(load('res://battle_screen/levels/level_12.tscn').instantiate())
 		_: swap_level(load('res://battle_screen/levels/level_1.tscn').instantiate())
 
 
