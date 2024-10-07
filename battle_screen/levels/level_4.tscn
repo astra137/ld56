@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhb5eajm55gqq"]
+[gd_scene load_steps=4 format=3 uid="uid://dxmv6ojvs8ugd"]
 
 [ext_resource type="PackedScene" uid="uid://ch1a25dm8b50t" path="res://battle_screen/obstables/stone_wall.tscn" id="2_ymuwh"]
 [ext_resource type="PackedScene" uid="uid://ceaylh01qsm1o" path="res://battle_screen/level_base_layer.tscn" id="3_ipvoj"]
