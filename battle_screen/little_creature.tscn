@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://v4cyox7q5hs7"]
+[gd_scene load_steps=51 format=3 uid="uid://v4cyox7q5hs7"]
 
 [ext_resource type="Script" path="res://battle_screen/little_creature.gd" id="1_bckxk"]
 [ext_resource type="Texture2D" uid="uid://dd7tar31kdtmv" path="res://battle_screen/furble.png" id="2_w2s3r"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://bilhgk3nwsf1j" path="res://battle_screen/little_creature/Furble Pop 2.wav" id="22_qvtja"]
 [ext_resource type="AudioStream" uid="uid://dc7ag4jp1xhg7" path="res://battle_screen/little_creature/Furble Pop 3.wav" id="23_hre2r"]
 [ext_resource type="AudioStream" uid="uid://ded3mr3jxxjnp" path="res://battle_screen/little_creature/Furble Pop 4.wav" id="24_yydf2"]
+[ext_resource type="AudioStream" uid="uid://bahapn87ppvyy" path="res://battle_screen/little_creature/Furble Combining.wav" id="25_v416d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2pafy"]
 atlas = ExtResource("2_w2s3r")
@@ -224,6 +225,11 @@ stream_1/stream = ExtResource("22_qvtja")
 stream_2/stream = ExtResource("23_hre2r")
 stream_3/stream = ExtResource("24_yydf2")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vtk36"]
+random_pitch = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("25_v416d")
+
 [node name="LittleCreature" type="RigidBody2D" groups=["furble"]]
 collision_layer = 4
 collision_mask = 55
@@ -274,6 +280,11 @@ volume_db = 1.0
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_m3xkf")
+
+[node name="CombiningSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_vtk36")
+volume_db = -10.0
 
 [connection signal="animation_looped" from="Sprite" to="." method="_on_sprite_animation_looped"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_obstacle_entered"]

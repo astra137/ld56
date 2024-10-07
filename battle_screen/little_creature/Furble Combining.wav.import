@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bahapn87ppvyy"
+path="res://.godot/imported/Furble Combining.wav-6289d4c5e01c02d9bd4a63b75d5ef2ee.sample"
+
+[deps]
+
+source_file="res://battle_screen/little_creature/Furble Combining.wav"
+dest_files=["res://.godot/imported/Furble Combining.wav-6289d4c5e01c02d9bd4a63b75d5ef2ee.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

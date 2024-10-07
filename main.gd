@@ -79,6 +79,7 @@ func spilling():
 	%ButtonSpill.disabled = true
 	%ButtonReset.disabled = true
 	game_state = GameState.SPILLING
+	load_level()
 	pan_camera(true)
 	var list: Array[Furble] = await %Workshop.spill()
 	battling(list)

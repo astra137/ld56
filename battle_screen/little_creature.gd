@@ -45,8 +45,12 @@ const knock_back_impulse := Vector2(-2000.0, -2000.0)
 const knockback_time := 0.5
 var knockback_current_time := 0.0
 
+# Combining variables
+const combining_particles = preload("res://battle_screen/little_creature/combining_particles.tscn")
+
 enum MovementStates {
 	BOTTLED,
+	CAULDRON,
 	FALLING,
 	WALK,
 	PREPARING_JUMP,
@@ -157,9 +161,8 @@ func _physics_process(delta):
 				falling()
 
 
-	if state != MovementStates.BOTTLED:
+	if state != MovementStates.BOTTLED and state != MovementStates.CAULDRON:
 		rotate_upright()
-
 		current_lifetime -= delta if is_legal_furble else delta * 10.0
 
 	match state:
@@ -179,6 +182,8 @@ func _physics_process(delta):
 			knock_down_tick()
 		MovementStates.CRACK_JUMP:
 			crack_jump_tick(delta)
+		MovementStates.CAULDRON:
+			cauldron_tick()
 
 
 # State transition functions
@@ -243,6 +248,9 @@ func death():
 
 	queue_free()
 
+func cauldron():
+	state = MovementStates.CAULDRON
+
 # State tick functions
 func piled_tick():
 	chirp()
@@ -277,6 +285,33 @@ func knock_down_tick():
 
 func crack_jump_tick(delta: float):
 	knockback_current_time -= delta
+
+func cauldron_tick():
+	match type:
+		CreatureTypes.FIRE, CreatureTypes.ICE, CreatureTypes.EARTH, CreatureTypes.ARCANE:
+			var bodies = get_colliding_bodies()
+
+			for body in bodies:
+				if body is Furble:
+					var other_furble = (body as Furble)
+					for type_map in CreatureConfiguration.type_mapping:
+						if type_map.type1 == type and type_map.type2 == other_furble.type:
+							var length = CreatureConfiguration.type_mapping.size()
+							combine(type_map.result)
+							return
+
+
+func combine(new_type: CreatureTypes):
+	type = new_type
+	%CombiningSound.play()
+	var instance = combining_particles.instantiate()
+	get_tree().get_root().add_child(instance)
+
+	var modulate_color = CreatureConfiguration.type_configuration[new_type].color
+	instance.modulate = modulate_color
+
+	instance.global_position = global_position
+	instance.emitting = true
 
 func chirp():
 	if randf() <= chirp_probability:

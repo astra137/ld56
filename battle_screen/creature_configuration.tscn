@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpxpr0cexmstu"]
+[gd_scene load_steps=20 format=3 uid="uid://bpxpr0cexmstu"]
 
 [ext_resource type="Script" path="res://battle_screen/creature_configuration.gd" id="1_m66vh"]
 [ext_resource type="Script" path="res://battle_screen/creature_type_attribute.gd" id="2_hdcue"]
+[ext_resource type="Script" path="res://battle_screen/creature_mapping.gd" id="3_gc20x"]
 
 [sub_resource type="Resource" id="Resource_b86ix"]
 script = ExtResource("2_hdcue")
@@ -67,6 +68,55 @@ weight_multiplier = 1.0
 speed_multiplier = 1.0
 gravity_multiplier = 1.1
 
+[sub_resource type="Resource" id="Resource_mexyf"]
+script = ExtResource("3_gc20x")
+type1 = 0
+type2 = 1
+result = 4
+
+[sub_resource type="Resource" id="Resource_ixb0k"]
+script = ExtResource("3_gc20x")
+type1 = 1
+type2 = 0
+result = 4
+
+[sub_resource type="Resource" id="Resource_kkwf0"]
+script = ExtResource("3_gc20x")
+type1 = 0
+type2 = 3
+result = 5
+
+[sub_resource type="Resource" id="Resource_f0506"]
+script = ExtResource("3_gc20x")
+type1 = 3
+type2 = 0
+result = 5
+
+[sub_resource type="Resource" id="Resource_58tbx"]
+script = ExtResource("3_gc20x")
+type1 = 1
+type2 = 3
+result = 6
+
+[sub_resource type="Resource" id="Resource_8jeo2"]
+script = ExtResource("3_gc20x")
+type1 = 3
+type2 = 1
+result = 6
+
+[sub_resource type="Resource" id="Resource_un751"]
+script = ExtResource("3_gc20x")
+type1 = 2
+type2 = 3
+result = 7
+
+[sub_resource type="Resource" id="Resource_1ybh2"]
+script = ExtResource("3_gc20x")
+type1 = 3
+type2 = 2
+result = 7
+
 [node name="CreatureConfiguration" type="Node"]
 script = ExtResource("1_m66vh")
 type_configuration = Array[ExtResource("2_hdcue")]([SubResource("Resource_b86ix"), SubResource("Resource_2qs3c"), SubResource("Resource_i87uk"), SubResource("Resource_yym8f"), SubResource("Resource_c20up"), SubResource("Resource_38867"), SubResource("Resource_ywj5f"), SubResource("Resource_g0g63")])
+type_mapping = Array[ExtResource("3_gc20x")]([SubResource("Resource_mexyf"), SubResource("Resource_ixb0k"), SubResource("Resource_kkwf0"), SubResource("Resource_f0506"), SubResource("Resource_58tbx"), SubResource("Resource_8jeo2"), SubResource("Resource_un751"), SubResource("Resource_1ybh2")])

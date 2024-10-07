@@ -24,7 +24,7 @@ func idx_to_pos(idx: int) -> Vector2:
 func spawn_bottle(idx: int) -> RigidBody2D:
 	var bottle: RigidBody2D = BOTTLE.instantiate()
 	bottle.tree_exiting.connect(handle_bottle_gone.bind(idx))
-	bottle.type = idx as Furble.CreatureTypes
+	bottle.type = (idx % 4) as Furble.CreatureTypes
 	bottle.position = idx_to_pos(idx)
 	%Bottles.add_child.call_deferred(bottle)
 	bottles[idx] = bottle

@@ -63,7 +63,7 @@ func _physics_process(delta):
 func _on_container_body_entered(body: Node2D) -> void:
 	if body is Furble:
 		furbles.push_back(body)
-		body.state = Furble.MovementStates.BOTTLED
+		body.cauldron()
 	if body is Bottle:
 		bottles.push_back(body)
 
