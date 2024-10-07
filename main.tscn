@@ -78,6 +78,10 @@ layout_mode = 2
 text = "? critters"
 script = ExtResource("7_swf12")
 
+[node name="LabelLevel" type="Label" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="LabelFurblesGoal" type="Label" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

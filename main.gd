@@ -36,6 +36,8 @@ func swap_level(node: Node) -> void:
 
 func load_level(next_level := level_number) -> void:
 	level_number = next_level
+	save_persistent_level()
+	%LabelLevel.text = 'Level %s' % [level_number]
 	match level_number:
 		2: swap_level(load('res://battle_screen/levels/level_2.tscn').instantiate())
 		3: swap_level(load('res://battle_screen/levels/level_4.tscn').instantiate())
@@ -65,6 +67,7 @@ func _ready() -> void:
 	if !OS.is_debug_build():
 		%LabelFPS.visible = false
 		%LabelFurbles.visible = false
+	load_persistent_level()
 	workshop()
 
 
@@ -148,3 +151,15 @@ func _on_button_reset_pressed() -> void:
 func _on_button_spill_pressed() -> void:
 	if game_state == GameState.WORKSHOP:
 		spilling()
+
+
+func load_persistent_level() -> void:
+	var cfg := ConfigFile.new()
+	cfg.load('user://save.cfg')
+	level_number = cfg.get_value('', 'level', 1)
+
+
+func save_persistent_level() -> void:
+	var cfg := ConfigFile.new()
+	cfg.set_value('', 'level', level_number)
+	cfg.save('user://save.cfg')
