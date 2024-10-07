@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxhev5t0yqbom"]
+
+[ext_resource type="PackedScene" uid="uid://ceaylh01qsm1o" path="res://battle_screen/level_base_layer.tscn" id="1_vkh51"]
+[ext_resource type="PackedScene" uid="uid://coreolkh7tv7g" path="res://battle_screen/obstables/wooden_wall.tscn" id="2_t5lmw"]
+[ext_resource type="PackedScene" uid="uid://ch1a25dm8b50t" path="res://battle_screen/obstables/stone_wall.tscn" id="3_3m6eb"]
+[ext_resource type="PackedScene" uid="uid://bx7woh0fuqik3" path="res://battle_screen/obstables/arcane_wall.tscn" id="4_gtwyn"]
+[ext_resource type="PackedScene" uid="uid://bj0wwh5cgl07p" path="res://battle_screen/obstables/rotating_pitchfork.tscn" id="5_tru85"]
+
+[node name="BattleScreen" type="Node2D"]
+
+[node name="LevelBaseLayer" parent="." instance=ExtResource("1_vkh51")]
+
+[node name="Obstacle" parent="." instance=ExtResource("3_3m6eb")]
+position = Vector2(1252, 674)
+
+[node name="Obstacle2" parent="." instance=ExtResource("3_3m6eb")]
+position = Vector2(1122, 674)
+
+[node name="Obstacle4" parent="." instance=ExtResource("3_3m6eb")]
+position = Vector2(931, 673)
+magic_barrier = true
+
+[node name="Obstacle5" parent="." instance=ExtResource("3_3m6eb")]
+position = Vector2(803, 671)
+magic_barrier = true
+
+[node name="Obstacle3" parent="." instance=ExtResource("3_3m6eb")]
+position = Vector2(1185, 554)
+rotation = 1.57079
+
+[node name="Obstacle12" parent="." instance=ExtResource("3_3m6eb")]
+position = Vector2(742, 299)
+rotation = 1.57079
+
+[node name="Obstacle13" parent="." instance=ExtResource("3_3m6eb")]
+position = Vector2(673, 255)
+rotation = 1.57079
+
+[node name="Obstacle6" parent="." instance=ExtResource("2_t5lmw")]
+position = Vector2(673, 673)
+magic_barrier = true
+
+[node name="Obstacle7" parent="." instance=ExtResource("2_t5lmw")]
+position = Vector2(547, 673)
+magic_barrier = true
+
+[node name="Obstacle10" parent="." instance=ExtResource("2_t5lmw")]
+position = Vector2(685, 418)
+
+[node name="Obstacle16" parent="." instance=ExtResource("2_t5lmw")]
+position = Vector2(226, 673)
+
+[node name="Obstacle17" parent="." instance=ExtResource("2_t5lmw")]
+position = Vector2(95, 673)
+
+[node name="Obstacle18" parent="." instance=ExtResource("2_t5lmw")]
+position = Vector2(161, 554)
+rotation = 1.57079
+
+[node name="Obstacle11" parent="." instance=ExtResource("2_t5lmw")]
+position = Vector2(805, 420)
+
+[node name="Obstacle15" parent="." instance=ExtResource("2_t5lmw")]
+position = Vector2(763, 149)
+rotation = 1.57079
+
+[node name="Obstacle8" parent="." instance=ExtResource("4_gtwyn")]
+position = Vector2(614, 545)
+rotation = 1.57079
+
+[node name="Obstacle14" parent="." instance=ExtResource("4_gtwyn")]
+position = Vector2(712, 202)
+rotation = 1.57079
+
+[node name="Obstacle9" parent="." instance=ExtResource("4_gtwyn")]
+position = Vector2(872, 546)
+rotation = 1.57079
+
+[node name="RotatingPitchfork" parent="." instance=ExtResource("5_tru85")]
+position = Vector2(354, 672)
+
+[node name="RotatingPitchfork2" parent="." instance=ExtResource("5_tru85")]
+position = Vector2(994, 290)

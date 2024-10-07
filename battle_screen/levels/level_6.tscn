@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://csjpk20ualu2n"]
+[gd_scene load_steps=7 format=3 uid="uid://csjpk20ualu2n"]
 
 [ext_resource type="PackedScene" uid="uid://ceaylh01qsm1o" path="res://battle_screen/level_base_layer.tscn" id="1_ov10w"]
 [ext_resource type="PackedScene" uid="uid://ch1a25dm8b50t" path="res://battle_screen/obstables/stone_wall.tscn" id="2_kx5ne"]
 [ext_resource type="PackedScene" uid="uid://coreolkh7tv7g" path="res://battle_screen/obstables/wooden_wall.tscn" id="3_4d2m7"]
+[ext_resource type="PackedScene" uid="uid://bj0wwh5cgl07p" path="res://battle_screen/obstables/rotating_pitchfork.tscn" id="5_dnqla"]
 [ext_resource type="PackedScene" uid="uid://c415qr4ssheo8" path="res://battle_screen/obstables/wooden_barrel.tscn" id="5_mekgq"]
+[ext_resource type="PackedScene" uid="uid://bx7woh0fuqik3" path="res://battle_screen/obstables/arcane_wall.tscn" id="6_3pyg3"]
 
 [node name="BattleScreen" type="Node2D"]
 
@@ -18,19 +20,6 @@ position = Vector2(1184, 672)
 [node name="Obstacle4" parent="." instance=ExtResource("3_4d2m7")]
 position = Vector2(1248, 555)
 rotation = 1.57079
-
-[node name="Obstacle7" parent="." instance=ExtResource("3_4d2m7")]
-position = Vector2(993, 556)
-rotation = 1.57079
-magic_barrier = true
-
-[node name="Obstacle5" parent="." instance=ExtResource("3_4d2m7")]
-position = Vector2(1057, 672)
-magic_barrier = true
-
-[node name="Obstacle6" parent="." instance=ExtResource("3_4d2m7")]
-position = Vector2(930, 673)
-magic_barrier = true
 
 [node name="Obstacle8" parent="." instance=ExtResource("3_4d2m7")]
 position = Vector2(543, 556)
@@ -57,3 +46,17 @@ position = Vector2(290, 730)
 
 [node name="Obstacle14" parent="." instance=ExtResource("5_mekgq")]
 position = Vector2(290, 669)
+
+[node name="RotatingPitchfork" parent="." instance=ExtResource("5_dnqla")]
+position = Vector2(802, 673)
+rotation_speed = 2.0
+
+[node name="Obstacle5" parent="." instance=ExtResource("6_3pyg3")]
+position = Vector2(1057, 674)
+
+[node name="Obstacle6" parent="." instance=ExtResource("6_3pyg3")]
+position = Vector2(929, 671)
+
+[node name="Obstacle7" parent="." instance=ExtResource("6_3pyg3")]
+position = Vector2(991, 542)
+rotation = 1.57079

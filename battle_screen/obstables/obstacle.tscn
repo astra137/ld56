@@ -51,6 +51,7 @@ modulate = Color(1, 1, 1, 0)
 
 [node name="MagicBarrier" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+visible = false
 texture = ExtResource("2_kwgwj")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx7woh0fuqik3"]
+
+[ext_resource type="PackedScene" uid="uid://vm7g05yf7ijp" path="res://battle_screen/obstables/obstacle.tscn" id="1_re8iy"]
+[ext_resource type="Texture2D" uid="uid://bpml306dk884a" path="res://battle_screen/obstables/arcane_wall.png" id="2_txp16"]
+
+[node name="Obstacle" instance=ExtResource("1_re8iy")]
+mass = 500.0
+type = 2
+
+[node name="MainSprite" parent="." index="0"]
+texture = ExtResource("2_txp16")
+
+[node name="CollisionPolygon2D" parent="." index="3"]
+polygon = PackedVector2Array(23, -96, -20.5, -96, -30, -95, -30, -75, -29, -54, -29, -35, -27, -20, -24, -8, -27, 2.9, -27, 17.7, -24, 25, -23, 31, -26, 38, -26, 53, -23.8, 61.1, -26, 77, -26, 96, 26, 96, 28, 95, 28, 41.1, 24, 31, 23, 25, 24, 18, 22, 0, 22, -5, 30, -53, 30, -64, 28, -95)

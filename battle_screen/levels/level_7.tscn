@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbjp13iq2ynf6"]
+
+[ext_resource type="PackedScene" uid="uid://ceaylh01qsm1o" path="res://battle_screen/level_base_layer.tscn" id="1_nxpvv"]
+[ext_resource type="PackedScene" uid="uid://coreolkh7tv7g" path="res://battle_screen/obstables/wooden_wall.tscn" id="2_8q0fv"]
+[ext_resource type="PackedScene" uid="uid://bx7woh0fuqik3" path="res://battle_screen/obstables/arcane_wall.tscn" id="3_duwnw"]
+
+[node name="BattleScreen" type="Node2D"]
+
+[node name="LevelBaseLayer" parent="." instance=ExtResource("1_nxpvv")]
+
+[node name="Obstacle14" parent="." instance=ExtResource("2_8q0fv")]
+position = Vector2(735, 302)
+rotation = 1.57079
+
+[node name="Obstacle17" parent="." instance=ExtResource("2_8q0fv")]
+position = Vector2(989, 297)
+rotation = 1.57079
+
+[node name="Obstacle" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(1183, 670)
+
+[node name="Obstacle2" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(1054, 674)
+
+[node name="Obstacle3" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(927, 675)
+
+[node name="Obstacle4" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(804, 673)
+
+[node name="Obstacle5" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(672, 675)
+
+[node name="Obstacle6" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(542, 674)
+
+[node name="Obstacle10" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(674, 423)
+
+[node name="Obstacle11" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(795, 421)
+
+[node name="Obstacle12" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(926, 419)
+
+[node name="Obstacle13" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(1055, 420)
+
+[node name="Obstacle7" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(608, 550)
+rotation = 1.57079
+
+[node name="Obstacle8" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(865, 546)
+rotation = 1.57079
+
+[node name="Obstacle9" parent="." instance=ExtResource("3_duwnw")]
+position = Vector2(1120, 544)
+rotation = 1.57079

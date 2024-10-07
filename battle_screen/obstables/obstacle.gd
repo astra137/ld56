@@ -103,6 +103,7 @@ func default():
 		state = ObstacleStates.DEFAULT
 
 func barrier():
+	%MagicBarrier.visible = true
 	state = ObstacleStates.BARRIER
 
 func try_stop_burn():

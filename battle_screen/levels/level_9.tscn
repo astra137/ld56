@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk33c6y3n4ju0"]
+
+[ext_resource type="PackedScene" uid="uid://ceaylh01qsm1o" path="res://battle_screen/level_base_layer.tscn" id="1_oliwg"]
+[ext_resource type="PackedScene" uid="uid://bx7woh0fuqik3" path="res://battle_screen/obstables/arcane_wall.tscn" id="3_6bgw4"]
+[ext_resource type="PackedScene" uid="uid://ch1a25dm8b50t" path="res://battle_screen/obstables/stone_wall.tscn" id="3_he4jx"]
+[ext_resource type="PackedScene" uid="uid://d1ugeq3lkri4p" path="res://battle_screen/obstables/stone_barricade.tscn" id="4_j560n"]
+
+[node name="BattleScreen" type="Node2D"]
+
+[node name="LevelBaseLayer" parent="." instance=ExtResource("1_oliwg")]
+
+[node name="Obstacle" parent="." instance=ExtResource("3_he4jx")]
+position = Vector2(1186, 673)
+magic_barrier = true
+
+[node name="Obstacle5" parent="." instance=ExtResource("3_he4jx")]
+position = Vector2(1185, 421)
+
+[node name="Obstacle6" parent="." instance=ExtResource("3_he4jx")]
+position = Vector2(1055, 425)
+
+[node name="Obstacle2" parent="." instance=ExtResource("3_he4jx")]
+position = Vector2(1055, 673)
+magic_barrier = true
+
+[node name="Obstacle3" parent="." instance=ExtResource("3_6bgw4")]
+position = Vector2(1123, 547)
+rotation = 1.57079
+
+[node name="Obstacle4" parent="." instance=ExtResource("4_j560n")]
+position = Vector2(865, 734)
+
+[node name="Obstacle7" parent="." instance=ExtResource("4_j560n")]
+position = Vector2(866, 671)
+
+[node name="Obstacle8" parent="." instance=ExtResource("4_j560n")]
+position = Vector2(739, 725)
+
+[node name="Obstacle9" parent="." instance=ExtResource("3_he4jx")]
+position = Vector2(606, 673)
+
+[node name="Obstacle10" parent="." instance=ExtResource("3_he4jx")]
+position = Vector2(481, 675)
+
+[node name="Obstacle11" parent="." instance=ExtResource("3_6bgw4")]
+position = Vector2(543, 544)
+rotation = 1.57079

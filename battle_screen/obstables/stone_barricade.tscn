@@ -15,6 +15,6 @@ texture = ExtResource("2_tsog6")
 [node name="CrackedSprite" parent="." index="1"]
 texture = ExtResource("3_lcjv8")
 
-[node name="CollisionPolygon2D" parent="." index="2"]
+[node name="CollisionPolygon2D" parent="." index="3"]
 visible = false
 polygon = PackedVector2Array(25, -20, -25, -20, -25, -18.4, -25.4, -18, -27, -18, -27, 32, 27, 32, 27, -17.6, 25, -18.6)
