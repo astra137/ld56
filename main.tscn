@@ -29,8 +29,12 @@ script = ExtResource("1_oj766")
 unique_name_in_owner = true
 position = Vector2(720, 405)
 
-[node name="BattleScreen" parent="." instance=ExtResource("1_vb2us")]
+[node name="Level" type="Marker2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(1440, -145)
+metadata/_edit_lock_ = true
+
+[node name="BattleScreen" parent="Level" instance=ExtResource("1_vb2us")]
 metadata/_edit_lock_ = true
 
 [node name="Workshop" parent="." instance=ExtResource("1_ldq7e")]
@@ -75,7 +79,6 @@ script = ExtResource("7_swf12")
 
 [node name="VictoryBanner" parent="CanvasLayer" instance=ExtResource("6_x7h3v")]
 unique_name_in_owner = true
-mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_82ls8")

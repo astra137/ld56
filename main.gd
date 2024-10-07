@@ -5,8 +5,29 @@ const CENTER_LEFT := Vector2(1440, 810) * 0.5
 const CENTER_RIGHT := CENTER_LEFT + Vector2(1440, 0)
 
 
-var camera_toggle: bool = false
+var level_number := 1:
+	set(value):
+		level_number = clampi(value, 1, 5)
+
+var camera_toggle := false
 var camera_tween: Tween
+
+
+func swap_level(node: Node) -> void:
+	for n in %Level.get_children():
+		%Level.remove_child(n)
+		n.queue_free()
+	%Level.add_child(node)
+
+
+func load_next_level(num = level_number + 1) -> void:
+	level_number = num
+	match level_number:
+		2: swap_level(load('res://battle_screen/levels/level_2.tscn').instantiate())
+		3: swap_level(load('res://battle_screen/levels/level_4.tscn').instantiate())
+		4: swap_level(load('res://battle_screen/levels/level_5.tscn').instantiate())
+		5: swap_level(load('res://battle_screen/levels/level_6.tscn').instantiate())
+		_: swap_level(load('res://battle_screen/levels/level_1.tscn').instantiate())
 
 
 func pan_camera(rightside: bool) -> void:
@@ -16,6 +37,14 @@ func pan_camera(rightside: bool) -> void:
 	camera_tween = get_tree().create_tween()
 	camera_tween.set_trans(Tween.TRANS_EXPO)
 	camera_tween.tween_property(%Camera2D, ^'position', pos, 0.6)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not OS.is_debug_build(): return
+	if event is InputEventKey and event.is_released():
+		match event.keycode:
+			KEY_F1: load_next_level(level_number - 1)
+			KEY_F2: load_next_level(level_number + 1)
 
 
 func _on_button_view_pressed() -> void:
@@ -40,3 +69,4 @@ func _on_button_spill_pressed() -> void:
 	%ButtonClean.disabled = false
 	_on_button_clean_pressed()
 	%VictoryBanner.show_message('Victory!' if victory else 'Massive L!')
+	if victory: load_next_level()
