@@ -53,6 +53,7 @@ func get_furbles() -> Array[Furble]:
 
 
 func has_furble(body: Furble) -> bool:
+	if is_queued_for_deletion(): return false
 	return %Creatures == body.get_parent()
 
 
