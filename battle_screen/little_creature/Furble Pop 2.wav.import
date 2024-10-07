@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bilhgk3nwsf1j"
+path="res://.godot/imported/Furble Pop 2.wav-5dd022c6f0dee860b47f94c88f200181.sample"
+
+[deps]
+
+source_file="res://battle_screen/little_creature/Furble Pop 2.wav"
+dest_files=["res://.godot/imported/Furble Pop 2.wav-5dd022c6f0dee860b47f94c88f200181.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -6,7 +6,8 @@
 
 [node name="Obstacle" instance=ExtResource("1_neq7m")]
 mass = 240.0
-structure_health = 300.0
+type = 1
+structure_health = 200.0
 can_crack = true
 
 [node name="MainSprite" parent="." index="0"]

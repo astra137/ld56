@@ -5,9 +5,10 @@
 
 [node name="Obstacle" instance=ExtResource("1_yraas")]
 mass = 960.0
+type = 1
 
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_yn3ta")
 
-[node name="CollisionPolygon2D" parent="." index="1"]
+[node name="CollisionPolygon2D" parent="." index="2"]
 polygon = PackedVector2Array(66, -98, -66, -98, -66, -90, -74, -90, -74, -54, -66, -54, -66, -46, -58, -46, -58, -38, -50, -38, -50, 128, 50, 128, 50, -38, 58, -38, 58, -46, 66, -46, 66, -54, 74, -54, 74, -90, 66, -90)

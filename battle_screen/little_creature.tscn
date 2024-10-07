@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://v4cyox7q5hs7"]
+[gd_scene load_steps=49 format=3 uid="uid://v4cyox7q5hs7"]
 
 [ext_resource type="Script" path="res://battle_screen/little_creature.gd" id="1_bckxk"]
 [ext_resource type="Texture2D" uid="uid://dd7tar31kdtmv" path="res://battle_screen/furble.png" id="2_w2s3r"]
@@ -20,6 +20,10 @@
 [ext_resource type="AudioStream" uid="uid://b5y2231stbv2y" path="res://battle_screen/little_creature/Furble Chirp 8.wav" id="18_r3len"]
 [ext_resource type="AudioStream" uid="uid://s7x0bdqks43l" path="res://battle_screen/little_creature/Furble Chirp 9.wav" id="19_b81y8"]
 [ext_resource type="AudioStream" uid="uid://bxb1v27oqh1w0" path="res://battle_screen/little_creature/Furble Chirp 10.wav" id="20_0ff3d"]
+[ext_resource type="AudioStream" uid="uid://c7nlpaxcounjm" path="res://battle_screen/little_creature/Furble Pop 1.wav" id="21_jsx6x"]
+[ext_resource type="AudioStream" uid="uid://bilhgk3nwsf1j" path="res://battle_screen/little_creature/Furble Pop 2.wav" id="22_qvtja"]
+[ext_resource type="AudioStream" uid="uid://dc7ag4jp1xhg7" path="res://battle_screen/little_creature/Furble Pop 3.wav" id="23_hre2r"]
+[ext_resource type="AudioStream" uid="uid://ded3mr3jxxjnp" path="res://battle_screen/little_creature/Furble Pop 4.wav" id="24_yydf2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2pafy"]
 atlas = ExtResource("2_w2s3r")
@@ -213,6 +217,13 @@ stream_7/stream = ExtResource("18_r3len")
 stream_8/stream = ExtResource("19_b81y8")
 stream_9/stream = ExtResource("20_0ff3d")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m3xkf"]
+streams_count = 4
+stream_0/stream = ExtResource("21_jsx6x")
+stream_1/stream = ExtResource("22_qvtja")
+stream_2/stream = ExtResource("23_hre2r")
+stream_3/stream = ExtResource("24_yydf2")
+
 [node name="LittleCreature" type="RigidBody2D" groups=["furble"]]
 collision_layer = 4
 collision_mask = 55
@@ -230,7 +241,7 @@ chirp_probability = 0.001
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_ehn78")
-animation = &"falling"
+animation = &"death"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -259,6 +270,10 @@ pitch_scale = 4.0
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_dy65m")
 volume_db = 1.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_m3xkf")
 
 [connection signal="animation_looped" from="Sprite" to="." method="_on_sprite_animation_looped"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_obstacle_entered"]

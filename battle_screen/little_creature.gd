@@ -9,6 +9,8 @@ class_name Furble
 @export var jump_impulse := Vector2(300.0, -600.0)
 @export var jump_probability := 0.001
 @export var chirp_probability := 0.005
+@export var lifetime_min := 50.0
+@export var lifetime_max := 70.0
 
 @export var type := CreatureTypes.FIRE:
 	set(value):
@@ -18,6 +20,10 @@ class_name Furble
 
 
 var state := MovementStates.FALLING
+
+# Death variables
+var current_lifetime := 0.0
+const death_particles := preload("res://battle_screen/little_creature/death_smoke.tscn")
 
 # Object sticking variables
 var stuck_object: Obstacle
@@ -48,7 +54,8 @@ enum MovementStates {
 	STUCK,
 	KNOCK_DOWN,
 	CRACK,
-	CRACK_JUMP
+	CRACK_JUMP,
+	DEATH
 }
 
 enum CreatureTypes {
@@ -65,6 +72,7 @@ enum CreatureTypes {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_type()
+	current_lifetime = randf_range(lifetime_min, lifetime_max)
 	%Sprite.play("default")
 
 
@@ -95,6 +103,9 @@ func _physics_process(delta):
 			is_grounded = true
 
 	var should_jump := randf() <= jump_probability
+
+	if current_lifetime <= 0.0 and state != MovementStates.DEATH:
+		death()
 
 	# State transitions
 	match state:
@@ -143,6 +154,8 @@ func _physics_process(delta):
 
 	if state != MovementStates.BOTTLED:
 		rotate_upright()
+
+		current_lifetime -= delta
 
 	match state:
 		MovementStates.FALLING:
@@ -207,6 +220,23 @@ func crack(object: Obstacle):
 	crack_target = object
 	%Sprite.play("jump")
 	state = MovementStates.CRACK
+
+func death():
+	%Sprite.play("death")
+	state = MovementStates.DEATH
+	await %Sprite.animation_looped
+	%Sprite.play("squish")
+	await get_tree().create_timer(1.0).timeout
+
+	var instance = death_particles.instantiate()
+	get_tree().get_root().add_child(instance)
+	instance.global_position = global_position
+	instance.emitting = true
+
+	%DeathSound.play()
+	await %DeathSound.finished
+
+	queue_free()
 
 # State tick functions
 func piled_tick():

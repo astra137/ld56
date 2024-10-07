@@ -5,9 +5,10 @@
 
 [node name="Obstacle" instance=ExtResource("1_6bshr")]
 mass = 65.0
+type = 2
 
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_lvvug")
 
-[node name="CollisionPolygon2D" parent="." index="1"]
+[node name="CollisionPolygon2D" parent="." index="2"]
 polygon = PackedVector2Array(17, -11.8, 2, -13.2, 2, -11.3, -9.5, -5, -15, 0, -19, 5, -24, 15, -29, 27, -30, 30, -32, 32, 25.8, 32, 27, 24.1, 27, 11.7, 24, 1.7, 21, -4, 17, -9.8)
