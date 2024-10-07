@@ -22,8 +22,8 @@ func swap_level(node: Node) -> void:
 	level_node = node
 
 
-func load_next_level(num = level_number + 1) -> void:
-	level_number = num
+func load_level(next_level := level_number) -> void:
+	level_number = next_level
 	match level_number:
 		2: swap_level(load('res://battle_screen/levels/level_2.tscn').instantiate())
 		3: swap_level(load('res://battle_screen/levels/level_4.tscn').instantiate())
@@ -39,40 +39,42 @@ func pan_camera(rightside: bool) -> void:
 	camera_tween = get_tree().create_tween()
 	camera_tween.set_trans(Tween.TRANS_EXPO)
 	camera_tween.tween_property(%Camera2D, ^'position', pos, 0.6)
+	await camera_tween.finished
 
 
 func _ready() -> void:
-	load_next_level(level_number)
+	load_level()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not OS.is_debug_build(): return
 	if event is InputEventKey and event.is_released():
 		match event.keycode:
-			KEY_F1: load_next_level(level_number - 1)
-			KEY_F2: load_next_level(level_number + 1)
+			KEY_F1: load_level(level_number - 1)
+			KEY_F2: load_level(level_number + 1)
 
 
 func _on_button_view_pressed() -> void:
 	pan_camera(not camera_toggle)
 
 
-func _on_button_clean_pressed() -> void:
-	pan_camera(false)
+func _on_button_reset_pressed() -> void:
 	get_tree().call_group(&'bottles', &'shatter')
 	get_tree().call_group(&'furble', &'queue_free')
+	await pan_camera(false)
+	load_level()
 
 
 func _on_button_spill_pressed() -> void:
 	%ButtonView.disabled = true
 	%ButtonSpill.disabled = true
-	%ButtonClean.disabled = true
+	%ButtonReset.disabled = true
 	pan_camera(true)
 	var list: Array[Furble] = await %Workshop.spill()
+	%ButtonReset.disabled = false
 	var victory: bool = await level_node.get_node('LevelBaseLayer').start_level(list)
 	await %VictoryBanner.show_message('Victory!' if victory else 'Massive L!')
+	if victory: level_number += 1
+	await _on_button_reset_pressed()
 	%ButtonView.disabled = false
 	%ButtonSpill.disabled = false
-	%ButtonClean.disabled = false
-	_on_button_clean_pressed()
-	if victory: load_next_level()

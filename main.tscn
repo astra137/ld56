@@ -54,11 +54,11 @@ focus_mode = 0
 shortcut = SubResource("Shortcut_g005w")
 text = "View"
 
-[node name="ButtonClean" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="ButtonReset" type="Button" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-text = "Clean"
+text = "Reset"
 
 [node name="ButtonSpill" type="Button" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
@@ -77,6 +77,9 @@ layout_mode = 2
 text = "? furbles"
 script = ExtResource("7_swf12")
 
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
 [node name="VictoryBanner" parent="CanvasLayer" instance=ExtResource("6_x7h3v")]
 unique_name_in_owner = true
 
@@ -86,5 +89,5 @@ volume_db = -10.0
 autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonView" to="." method="_on_button_view_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonClean" to="." method="_on_button_clean_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonReset" to="." method="_on_button_reset_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonSpill" to="." method="_on_button_spill_pressed"]
