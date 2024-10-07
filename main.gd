@@ -66,9 +66,6 @@ func pan_camera(rightside: bool) -> void:
 
 
 func _ready() -> void:
-	if !OS.is_debug_build():
-		%LabelFPS.visible = false
-		%LabelFurbles.visible = false
 	%GameMenu.hide()
 
 
@@ -133,11 +130,30 @@ func resetting():
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not OS.is_debug_build(): return
-	if event is InputEventKey and event.is_released():
+	if not sandbox: return
+	if event is InputEventKey and event.is_pressed():
 		match event.keycode:
 			KEY_F1: load_level(level_number - 1)
 			KEY_F2: load_level(level_number + 1)
+			KEY_1: spawn_furble(Furble.CreatureTypes.FIRE)
+			KEY_2: spawn_furble(Furble.CreatureTypes.ICE)
+			KEY_3: spawn_furble(Furble.CreatureTypes.EARTH)
+			KEY_4: spawn_furble(Furble.CreatureTypes.ARCANE)
+			KEY_5: spawn_furble(Furble.CreatureTypes.WATER)
+			KEY_6: spawn_furble(Furble.CreatureTypes.ELECTRICITY)
+			KEY_7: spawn_furble(Furble.CreatureTypes.WIND)
+			KEY_8: spawn_furble(Furble.CreatureTypes.GRAVITY)
+
+
+const furble := preload("res://battle_screen/little_creature.tscn")
+
+func spawn_furble(type: Furble.CreatureTypes):
+	var node: Furble = furble.instantiate()
+	node.type = type
+	node.state = Furble.MovementStates.FALLING
+	node.update_type()
+	add_child(node)
+	node.global_position = node.get_global_mouse_position()
 
 
 func _on_button_view_pressed() -> void:
@@ -172,6 +188,8 @@ func _on_btn_play_pressed() -> void:
 	resetting()
 	%MainMenu.hide()
 	%GameMenu.show()
+	%LabelFPS.visible = sandbox
+	%LabelFurbles.visible = sandbox
 
 
 func _on_btn_sandbox_pressed() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ceaylh01qsm1o"]
+[gd_scene load_steps=16 format=3 uid="uid://ceaylh01qsm1o"]
 
 [ext_resource type="Texture2D" uid="uid://bgd1i86b8ax5p" path="res://battle_screen/background/mountainpass_front.png" id="1_0mk7v"]
 [ext_resource type="Script" path="res://battle_screen/battle_screen.gd" id="1_45ncr"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dkj1h28lnoe1r" path="res://battle_screen/background/cloud_2.png" id="4_rjqwk"]
 [ext_resource type="Texture2D" uid="uid://uxfgncang0kq" path="res://battle_screen/background/cloud_3.png" id="5_bfneq"]
 [ext_resource type="Texture2D" uid="uid://7uja4y22g5l3" path="res://battle_screen/background/cloud_4.png" id="6_weot7"]
-[ext_resource type="PackedScene" uid="uid://dpiu1p20emf4t" path="res://battle_screen/spawning_input.tscn" id="7_0mdpe"]
 [ext_resource type="AudioStream" uid="uid://b8ix2gvdesrnk" path="res://battle_screen/goal_sound.wav" id="8_bung1"]
 [ext_resource type="PackedScene" uid="uid://kfch1r3nj1jm" path="res://battle_screen/goal_point.tscn" id="9_per3b"]
 [ext_resource type="Texture2D" uid="uid://bevyce63t3o8p" path="res://battle_screen/skycolor.png" id="10_xdi3i"]
@@ -83,8 +82,6 @@ position = Vector2(1403.54, 307.544)
 rotation = 3.14638
 scale = Vector2(1, 0.800194)
 texture = ExtResource("3_wi2pa")
-
-[node name="SpawningInput" parent="." instance=ExtResource("7_0mdpe")]
 
 [node name="GoalSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
