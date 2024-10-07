@@ -11,6 +11,12 @@ var is_spilling := false
 var furbles: Array[Furble] = []
 
 
+func awaken_furbles(list: Array[Furble]) -> void:
+	for body in list:
+		body.reparent(get_tree().root)
+		body.state = Furble.MovementStates.FALLING
+
+
 func spill() -> void:
 	is_spilling = true
 	var original := global_position
@@ -22,7 +28,7 @@ func spill() -> void:
 	tween.tween_property(self, ^'global_position', spill_target.global_position, 1.0)
 	tween.tween_property(self, ^'rotation', PI*0.99, 1.0)
 	tween.chain()
-	tween.tween_callback(func(): for body in list: body.reparent(get_tree().root))
+	tween.tween_callback(awaken_furbles.bind(list))
 	tween.tween_interval(2.0)
 	tween.chain()
 	tween.set_trans(Tween.TRANS_EXPO)

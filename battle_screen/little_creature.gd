@@ -17,7 +17,7 @@ class_name Furble
 			update_type()
 
 
-var state := MovementStates.BOTTLED
+var state := MovementStates.FALLING
 
 # Object sticking variables
 var stuck_object: Obstacle
@@ -79,8 +79,6 @@ func update_type() -> void:
 			set_collision_layer_value(3, false)
 			set_collision_layer_value(6, true)
 
-func awaken_furble() -> void:
-	state = MovementStates.FALLING
 
 func _physics_process(delta):
 	var bodies = get_colliding_bodies()

@@ -61,6 +61,7 @@ func _ready() -> void:
 	for body in get_furbles():
 		body.type = type
 		body.freeze = true
+		body.state = Furble.MovementStates.BOTTLED
 
 
 func _process(delta: float) -> void:
