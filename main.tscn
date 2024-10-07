@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn1wbggy63c18"]
+[gd_scene load_steps=12 format=3 uid="uid://dn1wbggy63c18"]
 
 [ext_resource type="PackedScene" uid="uid://bee5ds54ef40t" path="res://workshop/workshop.tscn" id="1_ldq7e"]
 [ext_resource type="Script" path="res://main.gd" id="1_oj766"]
 [ext_resource type="PackedScene" uid="uid://whj6b7t2m0e4" path="res://battle_screen/levels/level_1.tscn" id="1_vb2us"]
 [ext_resource type="Script" path="res://menus/label_fps.gd" id="4_k0iw8"]
 [ext_resource type="AudioStream" uid="uid://c71s841c4vs0e" path="res://background_music.wav" id="6_82ls8"]
+[ext_resource type="PackedScene" uid="uid://cqyayvhkvx4m2" path="res://menus/victory_banner.tscn" id="6_x7h3v"]
 [ext_resource type="Script" path="res://menus/label_furbles.gd" id="7_swf12"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_0kv1m"]
@@ -71,6 +72,9 @@ script = ExtResource("4_k0iw8")
 layout_mode = 2
 text = "? furbles"
 script = ExtResource("7_swf12")
+
+[node name="VictoryBanner" parent="CanvasLayer" instance=ExtResource("6_x7h3v")]
+unique_name_in_owner = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_82ls8")

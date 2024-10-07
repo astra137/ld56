@@ -28,13 +28,13 @@ func start_level(list: Array[Furble]) -> bool:
 	is_complete = false
 	current_points = 0
 	tracking = list
-	for body in tracking: body.tree_exiting.connect(_furble_ded)
+	for body in tracking: body.tree_exiting.connect(_furble_ded.bind(body))
 	return await level_complete
 
 
 func _furble_ded(body: Furble) -> void:
 	tracking.erase(body)
-	if tracking.is_empty() and not is_complete:
+	if tracking.size() < victory_points - current_points and not is_complete:
 		is_complete = true
 
 

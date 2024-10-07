@@ -49,25 +49,14 @@ func spill() -> Array[Furble]:
 	return list
 
 
-const SPEED = 600.0
-
 var gravity: Vector2 = ProjectSettings.get_setting("physics/2d/default_gravity") \
 	* ProjectSettings.get_setting("physics/2d/default_gravity_vector")
 
 
 func _physics_process(delta):
-	if is_spilling:
-		#velocity = Vector2.ZERO
-		#move_and_slide()
-		return
-
+	if is_spilling: return
 	if not is_on_floor():
 		velocity += gravity * delta
-	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
 	move_and_slide()
 
 

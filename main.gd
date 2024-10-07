@@ -39,3 +39,4 @@ func _on_button_spill_pressed() -> void:
 	%ButtonSpill.disabled = false
 	%ButtonClean.disabled = false
 	_on_button_clean_pressed()
+	%VictoryBanner.show_message('Victory!' if victory else 'Massive L!')
