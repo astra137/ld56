@@ -7,6 +7,7 @@ class_name Obstacle
 @export var can_stick := false
 @export var wind_furble_impulse := Vector2(2000, -20000)
 @export var can_wash_away := false
+@export var can_crack := false
 
 var fire_sound_counter := 0.0
 
@@ -15,6 +16,8 @@ const disappearing_smoke = preload("res://battle_screen/obstables/effects/disapp
 var burning_entities := 0
 
 var state := ObstacleStates.DEFAULT
+
+const crack_damage := 20.0
 
 enum ObstacleStates {
 	DEFAULT,
@@ -68,10 +71,21 @@ func try_stop_burn():
 		default()
 
 func try_crack():
-	pass
+	if can_crack:
+		structure_health -= crack_damage
+		if structure_health <= 0.0:
+			var instance = disappearing_smoke.instantiate()
+			get_tree().get_root().add_child(instance)
+			instance.global_position = global_position
+			instance.emitting = true
+
+			state = ObstacleStates.CRACKED
+			queue_free()
+		else:
+			%CrackedSprite.modulate = Color(1.0, 1.0, 1.0, 1.0 - clamp((structure_health / 100.0), 0.0, 1.0))
 
 func _ready() -> void:
-	pass
+	%CrackedSprite.modulate = Color(1.0, 1.0, 1.0, 0.0)
 
 func _physics_process(delta: float) -> void:
 	match state:

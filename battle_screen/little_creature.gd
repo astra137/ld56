@@ -32,6 +32,11 @@ const knock_down_force := 800.0
 const knock_down_max_time := 5.0
 var knock_down_current_time := 0.0
 
+# Crack variables
+var crack_target: Obstacle
+const knock_back_impulse := Vector2(-2000.0, -2000.0)
+const knockback_time := 0.5
+var knockback_current_time := 0.0
 
 enum MovementStates {
 	BOTTLED,
@@ -42,7 +47,8 @@ enum MovementStates {
 	PILED,
 	STUCK,
 	KNOCK_DOWN,
-	ATTACK
+	CRACK,
+	CRACK_JUMP
 }
 
 enum CreatureTypes {
@@ -111,6 +117,15 @@ func _physics_process(delta):
 		MovementStates.JUMPING:
 			if linear_velocity.y <= 0.0:
 				falling()
+		MovementStates.CRACK:
+			if %Sprite.frame == 5:
+				crack_jump()
+		MovementStates.CRACK_JUMP:
+			if knockback_current_time <= 0:
+				if is_instance_valid(crack_target):
+					crack_target.try_crack()
+				apply_central_impulse(knock_back_impulse)
+				falling()
 		MovementStates.PILED:
 			if bodies.is_empty():
 				falling()
@@ -124,6 +139,7 @@ func _physics_process(delta):
 			elif stuck_object.linear_velocity.y <= unstuck_breaking_speed or stuck_current_time >= stuck_max_time:
 				stuck_object = null
 				falling()
+
 
 	if state != MovementStates.BOTTLED:
 		rotate_upright()
@@ -143,6 +159,8 @@ func _physics_process(delta):
 			stuck_tick(delta)
 		MovementStates.KNOCK_DOWN:
 			knock_down_tick()
+		MovementStates.CRACK_JUMP:
+			crack_jump_tick(delta)
 
 
 # State transition functions
@@ -166,7 +184,15 @@ func preparing_jump():
 func jump():
 	apply_central_impulse(jump_impulse)
 	%JumpSounds.play()
+
 	state = MovementStates.JUMPING
+
+func crack_jump():
+	knockback_current_time = knockback_time
+	apply_central_impulse(jump_impulse)
+	%JumpSounds.play()
+
+	state = MovementStates.CRACK_JUMP
 
 func stuck(body: Obstacle):
 	stuck_current_time = 0.0
@@ -176,6 +202,11 @@ func stuck(body: Obstacle):
 func knock_down(object: Obstacle):
 	knock_down_target = object
 	state = MovementStates.KNOCK_DOWN
+
+func crack(object: Obstacle):
+	crack_target = object
+	%Sprite.play("jump")
+	state = MovementStates.CRACK
 
 # State tick functions
 func piled_tick():
@@ -208,6 +239,9 @@ func knock_down_tick():
 	chirp()
 	knock_down_target.apply_force(Vector2.RIGHT * -knock_down_force, global_position)
 	walk_tick()
+
+func crack_jump_tick(delta: float):
+	knockback_current_time -= delta
 
 func chirp():
 	if randf() <= chirp_probability:
@@ -263,6 +297,10 @@ func _on_area_obstacle_entered(body: Node2D) -> void:
 			CreatureTypes.WATER:
 				if (body as Obstacle).can_wash_away:
 					knock_down(body as Obstacle)
+			CreatureTypes.EARTH:
+				if (body as Obstacle).can_crack:
+					if state != MovementStates.CRACK and state != MovementStates.CRACK_JUMP:
+						crack(body as Obstacle)
 
 
 

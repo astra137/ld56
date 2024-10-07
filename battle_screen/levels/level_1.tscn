@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://coreolkh7tv7g" path="res://battle_screen/obstables/wooden_wall.tscn" id="3_srqgg"]
 [ext_resource type="PackedScene" uid="uid://ceaylh01qsm1o" path="res://battle_screen/level_base_layer.tscn" id="4_8g7f7"]
 
-[node name="BattleScreen" type="Node2D"]
+[node name="BattleScreen2" type="Node2D"]
 
 [node name="ObstacleWoodenBarricade" parent="." instance=ExtResource("1_pdlyw")]
 position = Vector2(919, 735)

@@ -1,14 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1ugeq3lkri4p"]
+[gd_scene load_steps=4 format=3 uid="uid://d1ugeq3lkri4p"]
 
 [ext_resource type="PackedScene" uid="uid://vm7g05yf7ijp" path="res://battle_screen/obstables/obstacle.tscn" id="1_6qslj"]
 [ext_resource type="Texture2D" uid="uid://6sv5ca4xguoy" path="res://battle_screen/obstables/stone_barricade.png" id="2_tsog6"]
+[ext_resource type="Texture2D" uid="uid://kqx4agmkla1d" path="res://battle_screen/obstables/stone_barricade_cracked.png" id="3_lcjv8"]
 
 [node name="Obstacle" instance=ExtResource("1_6qslj")]
 mass = 80.0
 type = 1
+can_crack = true
 
 [node name="MainSprite" parent="." index="0"]
 texture = ExtResource("2_tsog6")
 
-[node name="CollisionPolygon2D" parent="." index="1"]
+[node name="CrackedSprite" parent="." index="1"]
+texture = ExtResource("3_lcjv8")
+
+[node name="CollisionPolygon2D" parent="." index="2"]
+visible = false
 polygon = PackedVector2Array(25, -20, -25, -20, -25, -18.4, -25.4, -18, -27, -18, -27, 32, 27, 32, 27, -17.6, 25, -18.6)
