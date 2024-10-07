@@ -1,10 +1,12 @@
 extends Node
 
 
-const CENTER_LEFT := Vector2(1440, 810) * 0.5
+const CENTER_MENU := Vector2(1750, 405)
+const CENTER_LEFT := Vector2(720, 405)
 const CENTER_RIGHT := CENTER_LEFT + Vector2(1440, 0)
 
 
+var sandbox := false
 var level_node: Node
 var level_number := 1:
 	set(value):
@@ -67,8 +69,7 @@ func _ready() -> void:
 	if !OS.is_debug_build():
 		%LabelFPS.visible = false
 		%LabelFurbles.visible = false
-	load_persistent_level()
-	workshop()
+	%GameMenu.hide()
 
 
 # State transitions
@@ -160,6 +161,19 @@ func load_persistent_level() -> void:
 
 
 func save_persistent_level() -> void:
+	if sandbox: return
 	var cfg := ConfigFile.new()
 	cfg.set_value('', 'level', level_number)
 	cfg.save('user://save.cfg')
+
+
+func _on_btn_play_pressed() -> void:
+	load_persistent_level()
+	resetting()
+	%MainMenu.hide()
+	%GameMenu.show()
+
+
+func _on_btn_sandbox_pressed() -> void:
+	sandbox = true
+	_on_btn_play_pressed()

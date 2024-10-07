@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bee5ds54ef40t" path="res://workshop/workshop.tscn" id="1_ldq7e"]
 [ext_resource type="Script" path="res://main.gd" id="1_oj766"]
-[ext_resource type="PackedScene" uid="uid://whj6b7t2m0e4" path="res://battle_screen/levels/level_1.tscn" id="1_vb2us"]
+[ext_resource type="PackedScene" uid="uid://83p1ls7fktyd" path="res://battle_screen/levels/level_null.tscn" id="2_da7ms"]
 [ext_resource type="PackedScene" uid="uid://c8netiwsomeja" path="res://menus/button/btn.tscn" id="4_4dsck"]
 [ext_resource type="Script" path="res://menus/label_fps.gd" id="4_k0iw8"]
 [ext_resource type="AudioStream" uid="uid://c71s841c4vs0e" path="res://background_music.wav" id="6_82ls8"]
@@ -29,15 +29,14 @@ script = ExtResource("1_oj766")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(720, 405)
+position = Vector2(1750, 405)
 
 [node name="Level" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(1440, -145)
 metadata/_edit_lock_ = true
 
-[node name="BattleScreen" parent="Level" instance=ExtResource("1_vb2us")]
-metadata/_edit_lock_ = true
+[node name="LevelNull" parent="Level" instance=ExtResource("2_da7ms")]
 
 [node name="Workshop" parent="." instance=ExtResource("1_ldq7e")]
 unique_name_in_owner = true
@@ -45,44 +44,45 @@ metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="GameMenu" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
 offset_right = 177.0
 offset_bottom = 40.0
 
-[node name="ButtonView" parent="CanvasLayer/HBoxContainer" instance=ExtResource("4_4dsck")]
+[node name="ButtonView" parent="CanvasLayer/GameMenu" instance=ExtResource("4_4dsck")]
 unique_name_in_owner = true
 layout_mode = 2
 shortcut = SubResource("Shortcut_0rmm8")
 text = "View"
 
-[node name="ButtonSpill" parent="CanvasLayer/HBoxContainer" instance=ExtResource("4_4dsck")]
+[node name="ButtonSpill" parent="CanvasLayer/GameMenu" instance=ExtResource("4_4dsck")]
 unique_name_in_owner = true
 layout_mode = 2
 shortcut = SubResource("Shortcut_dr03h")
 text = "Spill"
 
-[node name="ButtonReset" parent="CanvasLayer/HBoxContainer" instance=ExtResource("4_4dsck")]
+[node name="ButtonReset" parent="CanvasLayer/GameMenu" instance=ExtResource("4_4dsck")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Reset"
 
-[node name="LabelFPS" type="Label" parent="CanvasLayer/HBoxContainer"]
+[node name="LabelFPS" type="Label" parent="CanvasLayer/GameMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "? fps"
 script = ExtResource("4_k0iw8")
 
-[node name="LabelFurbles" type="Label" parent="CanvasLayer/HBoxContainer"]
+[node name="LabelFurbles" type="Label" parent="CanvasLayer/GameMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "? critters"
 script = ExtResource("7_swf12")
 
-[node name="LabelLevel" type="Label" parent="CanvasLayer/HBoxContainer"]
+[node name="LabelLevel" type="Label" parent="CanvasLayer/GameMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LabelFurblesGoal" type="Label" parent="CanvasLayer/HBoxContainer"]
+[node name="LabelFurblesGoal" type="Label" parent="CanvasLayer/GameMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "? left"
@@ -91,11 +91,32 @@ script = ExtResource("6_fdbtx")
 [node name="VictoryBanner" parent="CanvasLayer" instance=ExtResource("6_x7h3v")]
 unique_name_in_owner = true
 
+[node name="MainMenu" type="CenterContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+
+[node name="BtnPlay" parent="CanvasLayer/MainMenu/VBoxContainer" instance=ExtResource("4_4dsck")]
+layout_mode = 2
+text = "Play"
+
+[node name="BtnSandbox" parent="CanvasLayer/MainMenu/VBoxContainer" instance=ExtResource("4_4dsck")]
+layout_mode = 2
+text = "Sandbox"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_82ls8")
 volume_db = -10.0
 autoplay = true
 
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonView" to="." method="_on_button_view_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonSpill" to="." method="_on_button_spill_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonReset" to="." method="_on_button_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameMenu/ButtonView" to="." method="_on_button_view_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameMenu/ButtonSpill" to="." method="_on_button_spill_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameMenu/ButtonReset" to="." method="_on_button_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/BtnPlay" to="." method="_on_btn_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/BtnSandbox" to="." method="_on_btn_sandbox_pressed"]
