@@ -24,7 +24,6 @@ func swap_level(node: Node) -> void:
 
 func load_level(next_level := level_number) -> void:
 	level_number = next_level
-	print(level_number)
 	match level_number:
 		2: swap_level(load('res://battle_screen/levels/level_2.tscn').instantiate())
 		3: swap_level(load('res://battle_screen/levels/level_4.tscn').instantiate())

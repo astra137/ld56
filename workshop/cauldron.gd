@@ -14,7 +14,7 @@ func gather_furbles() -> Array[Furble]:
 	list.append_array(furbles)
 	for bottle in bottles:
 		list.append_array(bottle.get_furbles())
-		bottle._shatter()
+		bottle.shatter()
 	return list
 
 

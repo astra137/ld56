@@ -5,12 +5,23 @@ const FURBLE = preload('res://battle_screen/little_creature.tscn')
 
 @export var type := Furble.CreatureTypes.FIRE
 
+enum BottleStates {
+	RESTING,
+	DRAGGING,
+	FALLING,
+	SHATTERING
+}
+
+var state := BottleStates.RESTING
+
 var should_shatter := false
-var _shattering := false
 var _mouse_motion: InputEventMouseMotion = null
 var _previous_position := global_position
 var _previous_velocity := linear_velocity
-var _is_dragging := false
+
+# reset bottles
+var initial_position := Vector2.ZERO
+const resting_movement_limit := 30.0
 
 
 func drain_mouse_motion() -> Vector2:
@@ -18,10 +29,47 @@ func drain_mouse_motion() -> Vector2:
 	_mouse_motion = null
 	return rel
 
+func get_furbles() -> Array[Furble]:
+	var list: Array[Furble] = []
+	list.assign(%Creatures.get_children())
+	return list
 
+
+func has_furble(body: Furble) -> bool:
+	if is_queued_for_deletion(): return false
+	return %Creatures == body.get_parent()
+
+
+func _ready() -> void:
+	#body_entered.connect(_body_entered)
+	add_collision_exception_with($Inside)
+	for idx in 10:
+		var body: Furble = FURBLE.instantiate()
+		body.type = type
+		body.state = Furble.MovementStates.BOTTLED
+		%Creatures.add_child(body)
+		add_collision_exception_with(body)
+	initial_position = global_position
+
+
+func _process(delta: float) -> void:
+	# state transitions
+	match state:
+		BottleStates.DRAGGING:
+			if should_shatter:
+				shatter()
+
+	# tick state functions
+	match state:
+		BottleStates.DRAGGING:
+			dragging_tick(delta)
+		BottleStates.RESTING:
+			resting_tick()
+
+
+# State transition functions
 func shatter() -> void:
-	if _shattering: return
-	_shattering = true
+	state = BottleStates.SHATTERING
 	_shatter.call_deferred()
 
 
@@ -47,40 +95,24 @@ func _shatter() -> void:
 	queue_free()
 
 
-func get_furbles() -> Array[Furble]:
-	var list: Array[Furble] = []
-	list.assign(%Creatures.get_children())
-	return list
+func falling() -> void:
+	state = BottleStates.FALLING
 
+func dragging() -> void:
+	state = BottleStates.DRAGGING
 
-func has_furble(body: Furble) -> bool:
-	if is_queued_for_deletion(): return false
-	return %Creatures == body.get_parent()
+# tick events
+func dragging_tick(delta: float) -> void:
+	global_position = get_global_mouse_position()
+	linear_velocity = drain_mouse_motion() / delta if _mouse_motion else Vector2.ZERO
+	sleeping = false
 
-
-func _ready() -> void:
-	#body_entered.connect(_body_entered)
-	add_collision_exception_with($Inside)
-	for idx in 10:
-		var body: Furble = FURBLE.instantiate()
-		body.type = type
-		body.state = Furble.MovementStates.BOTTLED
-		%Creatures.add_child(body)
-		add_collision_exception_with(body)
-
-
-func _process(delta: float) -> void:
-	if should_shatter:
-		should_shatter = false
+func resting_tick() -> void:
+	if global_position.distance_to(initial_position) >= resting_movement_limit:
 		shatter()
-	if _is_dragging:
-		global_position = get_global_mouse_position()
-		linear_velocity = drain_mouse_motion() / delta if _mouse_motion else Vector2.ZERO
-		sleeping = false
-
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _is_dragging:
+	if state == BottleStates.DRAGGING:
 		if event is InputEventMouseMotion:
 			if not _mouse_motion:
 				_mouse_motion = event
@@ -89,9 +121,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if _is_dragging:
+	if state == BottleStates.DRAGGING:
 		if event is InputEventMouseButton:
-			_is_dragging = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+			if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+				falling()
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
@@ -102,7 +135,9 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			var body = state.get_contact_collider_object(idx)
 			if body is PhysicsBody2D:
 				if body.collision_layer & collision_mask:
-					valid_hits.push_back(body)
+					# exclude bottles or shelf
+					if !body.get_collision_layer_value(2) and !body.get_collision_layer_value(7):
+						valid_hits.push_back(body)
 		if not valid_hits.is_empty():
 			shatter()
 			for body in valid_hits:
@@ -114,12 +149,22 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 func _on_clickable_input_event(viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			_is_dragging = event.is_pressed()
-			viewport.set_input_as_handled()
+			match state:
+				BottleStates.FALLING:
+					if event.is_pressed():
+						dragging()
+						viewport.set_input_as_handled()
+				BottleStates.RESTING:
+					if event.is_pressed():
+						dragging()
+						viewport.set_input_as_handled()
+				BottleStates.DRAGGING:
+					if !event.is_pressed():
+						falling()
+						viewport.set_input_as_handled()
 
 
 func _on_container_body_exited(body: Node2D) -> void:
 	if body is Furble and has_furble(body):
 		body.linear_velocity = Vector2.ZERO
 		body.global_position = global_position
-		#body.teleport(global_position - body.global_position)

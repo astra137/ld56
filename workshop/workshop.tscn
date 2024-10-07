@@ -30,3 +30,4 @@ spill_target = NodePath("../CauldronDump")
 
 [node name="Shelf" parent="." instance=ExtResource("3_wgtfx")]
 position = Vector2(224, 437)
+collision_layer = 65

@@ -40,6 +40,7 @@ bottles=""
 2d_physics/layer_4="Obstacle Effects"
 2d_physics/layer_5="Wooden Barricade Obstacle"
 2d_physics/layer_6="Water Furble"
+2d_physics/layer_7="Shelf"
 
 [rendering]
 
