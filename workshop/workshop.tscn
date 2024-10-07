@@ -9,6 +9,7 @@
 script = ExtResource("1_3vfhv")
 
 [node name="BG" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("5_6l35a")
 centered = false
 
@@ -39,6 +40,7 @@ offset_right = 177.0
 offset_bottom = 40.0
 
 [node name="Fire Label" type="RichTextLabel" parent="HBoxContainer"]
+z_index = -1
 layout_mode = 0
 offset_left = 441.0
 offset_top = 283.0
@@ -51,6 +53,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Fire Label2" type="RichTextLabel" parent="HBoxContainer"]
+z_index = -1
 layout_mode = 0
 offset_left = 441.0
 offset_top = 374.0
@@ -63,6 +66,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Fire Label3" type="RichTextLabel" parent="HBoxContainer"]
+z_index = -1
 layout_mode = 0
 offset_left = 441.0
 offset_top = 466.0
@@ -75,6 +79,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Fire Label4" type="RichTextLabel" parent="HBoxContainer"]
+z_index = -1
 layout_mode = 0
 offset_left = 441.0
 offset_top = 556.0

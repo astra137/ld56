@@ -163,7 +163,7 @@ func _physics_process(delta):
 
 	if state != MovementStates.BOTTLED and state != MovementStates.CAULDRON:
 		rotate_upright()
-		current_lifetime -= delta if is_legal_furble else delta * 10.0
+		current_lifetime -= delta if is_legal_furble else delta * 30.0
 
 	match state:
 		MovementStates.FALLING:

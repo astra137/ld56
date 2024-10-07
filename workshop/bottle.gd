@@ -107,6 +107,10 @@ func dragging() -> void:
 	%PickupSound.play()
 	state = BottleStates.DRAGGING
 
+func screen_switch() -> void:
+	if state == BottleStates.DRAGGING:
+		shatter()
+
 # tick events
 func dragging_tick(delta: float) -> void:
 	global_position = get_global_mouse_position()

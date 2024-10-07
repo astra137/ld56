@@ -57,6 +57,7 @@ func pan_camera(rightside: bool) -> void:
 	camera_tween = get_tree().create_tween()
 	camera_tween.set_trans(Tween.TRANS_EXPO)
 	camera_tween.tween_property(%Camera2D, ^'position', pos, 0.6)
+	get_tree().call_group(&'bottles', &'screen_switch')
 	await camera_tween.finished
 
 
