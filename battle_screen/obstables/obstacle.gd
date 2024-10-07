@@ -3,6 +3,7 @@ class_name Obstacle
 
 @export var type := ObstacleTypes.WOOD
 @export var burn_health := 50.0
+@export var structure_health := 100.0
 @export var can_stick := false
 @export var wind_furble_impulse := Vector2(2000, -20000)
 @export var can_wash_away := false

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://whj6b7t2m0e4"]
+
+[ext_resource type="PackedScene" uid="uid://crbeqqerg6bu" path="res://battle_screen/obstables/wooden_barricade.tscn" id="1_pdlyw"]
+[ext_resource type="PackedScene" uid="uid://c415qr4ssheo8" path="res://battle_screen/obstables/wooden_barrel.tscn" id="2_rksum"]
+[ext_resource type="PackedScene" uid="uid://coreolkh7tv7g" path="res://battle_screen/obstables/wooden_wall.tscn" id="3_srqgg"]
+[ext_resource type="PackedScene" uid="uid://ceaylh01qsm1o" path="res://battle_screen/level_base_layer.tscn" id="4_8g7f7"]
+
+[node name="BattleScreen" type="Node2D"]
+
+[node name="ObstacleWoodenBarricade" parent="." instance=ExtResource("1_pdlyw")]
+position = Vector2(919, 735)
+
+[node name="ObstacleWoodenBarricade2" parent="." instance=ExtResource("1_pdlyw")]
+position = Vector2(797, 731)
+
+[node name="ObstacleWoodenBarrel" parent="." instance=ExtResource("2_rksum")]
+position = Vector2(1056, 733)
+
+[node name="ObstacleWoodenBarrel2" parent="." instance=ExtResource("2_rksum")]
+position = Vector2(1056, 671)
+
+[node name="ObstacleWoodenLog" parent="." instance=ExtResource("3_srqgg")]
+position = Vector2(1184, 668)
+
+[node name="LevelBaseLayer" parent="." instance=ExtResource("4_8g7f7")]

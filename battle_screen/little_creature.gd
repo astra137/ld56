@@ -41,7 +41,8 @@ enum MovementStates {
 	JUMPING,
 	PILED,
 	STUCK,
-	KNOCK_DOWN
+	KNOCK_DOWN,
+	ATTACK
 }
 
 enum CreatureTypes {
