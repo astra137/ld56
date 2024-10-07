@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://vm7g05yf7ijp"]
+[gd_scene load_steps=10 format=3 uid="uid://vm7g05yf7ijp"]
 
 [ext_resource type="Script" path="res://battle_screen/obstables/obstacle.gd" id="1_of2ma"]
 [ext_resource type="Texture2D" uid="uid://ckdykv7y4w2cs" path="res://battle_screen/obstables/effects/fire_effect.png" id="2_ywmyy"]
 [ext_resource type="Texture2D" uid="uid://bl332qhub4o3r" path="res://battle_screen/obstables/effects/ash_effect.png" id="3_dqlqd"]
 [ext_resource type="AudioStream" uid="uid://c52jw6hxd4lom" path="res://battle_screen/obstables/effects/Fire Ignition 1.wav" id="4_k36c3"]
 [ext_resource type="AudioStream" uid="uid://c7m1m42mlgug0" path="res://battle_screen/obstables/effects/Fire Ignition 2.wav" id="5_5hrs2"]
+[ext_resource type="AudioStream" uid="uid://b618otarjp3ji" path="res://battle_screen/obstables/effects/Stone Crack 1.wav" id="6_8owvx"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w10sr"]
 particles_animation = true
@@ -71,3 +72,8 @@ unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_lf7a3")
 volume_db = 10.0
 max_polyphony = 20
+
+[node name="CrackSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_8owvx")
+volume_db = -10.0

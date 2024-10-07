@@ -83,6 +83,7 @@ func try_crack():
 			queue_free()
 		else:
 			%CrackedSprite.modulate = Color(1.0, 1.0, 1.0, 1.0 - clamp((structure_health / 100.0), 0.0, 1.0))
+			%CrackSound.play()
 
 func _ready() -> void:
 	%CrackedSprite.modulate = Color(1.0, 1.0, 1.0, 0.0)
