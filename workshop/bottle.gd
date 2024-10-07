@@ -23,6 +23,8 @@ var _previous_velocity := linear_velocity
 var initial_position := Vector2.ZERO
 const resting_movement_limit := 30.0
 
+const bottle_break_scene = preload("res://workshop/break_sound.tscn")
+
 
 func drain_mouse_motion() -> Vector2:
 	var rel := _mouse_motion.relative
@@ -92,6 +94,12 @@ func _shatter() -> void:
 		node.linear_velocity = Vector2.UP.rotated(randf_range(-PI/2., PI/2.)) * 480.0
 		node.angular_velocity = TAU
 
+	var instance = bottle_break_scene.instantiate()
+	get_tree().get_root().add_child(instance)
+
+	queue_free()
+
+func reset():
 	queue_free()
 
 
@@ -99,6 +107,7 @@ func falling() -> void:
 	state = BottleStates.FALLING
 
 func dragging() -> void:
+	%PickupSound.play()
 	state = BottleStates.DRAGGING
 
 # tick events

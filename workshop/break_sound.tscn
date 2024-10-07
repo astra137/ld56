@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://dipfry2kpjn8e"]
+
+[ext_resource type="AudioStream" uid="uid://dptdqdo3st2y4" path="res://workshop/shatter/Vial Shatter 1.wav" id="1_jo14w"]
+[ext_resource type="AudioStream" uid="uid://dre1aw0al1cmh" path="res://workshop/shatter/Vial Shatter 2.wav" id="2_h10vi"]
+[ext_resource type="AudioStream" uid="uid://t4ahilskhdlw" path="res://workshop/shatter/Vial Shatter 3.wav" id="3_w4coe"]
+[ext_resource type="Script" path="res://workshop/break_sound.gd" id="4_metjs"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ybfy7"]
+streams_count = 3
+stream_0/stream = ExtResource("1_jo14w")
+stream_1/stream = ExtResource("2_h10vi")
+stream_2/stream = ExtResource("3_w4coe")
+
+[node name="BreakSound" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamRandomizer_ybfy7")
+volume_db = -5.0
+autoplay = true
+script = ExtResource("4_metjs")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dptdqdo3st2y4"
+path="res://.godot/imported/Vial Shatter 1.wav-1fff84017bc646ebbb8a4d1c0a3ea2d5.sample"
+
+[deps]
+
+source_file="res://workshop/shatter/Vial Shatter 1.wav"
+dest_files=["res://.godot/imported/Vial Shatter 1.wav-1fff84017bc646ebbb8a4d1c0a3ea2d5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

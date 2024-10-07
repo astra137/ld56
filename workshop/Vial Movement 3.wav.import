@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://w832ldu7fxew"
+path="res://.godot/imported/Vial Movement 3.wav-5255c5e8a9b15cf371802303d3d4845e.sample"
+
+[deps]
+
+source_file="res://workshop/Vial Movement 3.wav"
+dest_files=["res://.godot/imported/Vial Movement 3.wav-5255c5e8a9b15cf371802303d3d4845e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

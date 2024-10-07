@@ -160,7 +160,7 @@ func burning_tick(delta: float):
 		fire_sound_counter = 0.0
 		%BurningSound.play()
 
-	%MainSprite.modulate = Color.RED.lerp(Color.WHITE, clamp((burn_health / 50.0), 0.0, 1.0))
+	%MainSprite.modulate = Color.RED.lerp(Color.WHITE, clamp((burn_health / 20.0), 0.0, 1.0))
 
 func freeze_tick(delta: float):
 	freeze_amount -= delta * 0.1

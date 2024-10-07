@@ -1,8 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgjcrfxvgjx77"]
+[gd_scene load_steps=22 format=3 uid="uid://cgjcrfxvgjx77"]
 
 [ext_resource type="Texture2D" uid="uid://cx8km15ds51f3" path="res://workshop/bottle.png" id="1_61s1m"]
 [ext_resource type="Script" path="res://workshop/bottle.gd" id="1_ynuk4"]
 [ext_resource type="Texture2D" uid="uid://b5gbrw2g8ls25" path="res://workshop/cork.png" id="2_1xi41"]
+[ext_resource type="AudioStream" uid="uid://by1btnvdimkhu" path="res://workshop/Vial Movement 1.wav" id="4_t426g"]
+[ext_resource type="AudioStream" uid="uid://bvenwhqwgnnol" path="res://workshop/Vial Movement 2.wav" id="5_pavur"]
+[ext_resource type="AudioStream" uid="uid://b2qgicytfuy54" path="res://workshop/Vial Movement 11.wav" id="6_bj8gy"]
+[ext_resource type="AudioStream" uid="uid://w832ldu7fxew" path="res://workshop/Vial Movement 3.wav" id="7_vme2x"]
+[ext_resource type="AudioStream" uid="uid://dxe0e6xbo18iv" path="res://workshop/Vial Movement 4.wav" id="8_20pfj"]
+[ext_resource type="AudioStream" uid="uid://6yc73md5piq0" path="res://workshop/Vial Movement 5.wav" id="9_o10be"]
+[ext_resource type="AudioStream" uid="uid://t7ibtaxjjv00" path="res://workshop/Vial Movement 6.wav" id="10_ok0af"]
+[ext_resource type="AudioStream" uid="uid://ba236qcwcrcvq" path="res://workshop/Vial Movement 7.wav" id="11_3gho5"]
+[ext_resource type="AudioStream" uid="uid://dk0hfyib4bkgt" path="res://workshop/Vial Movement 8.wav" id="12_fyl65"]
+[ext_resource type="AudioStream" uid="uid://eiu720img6yv" path="res://workshop/Vial Movement 9.wav" id="13_kkmkm"]
+[ext_resource type="AudioStream" uid="uid://cy12dbp7b8xk8" path="res://workshop/Vial Movement 10.wav" id="14_7kmyb"]
+[ext_resource type="AudioStream" uid="uid://dptdqdo3st2y4" path="res://workshop/shatter/Vial Shatter 1.wav" id="15_5vdmh"]
+[ext_resource type="AudioStream" uid="uid://dre1aw0al1cmh" path="res://workshop/shatter/Vial Shatter 2.wav" id="16_rjxc5"]
+[ext_resource type="AudioStream" uid="uid://t4ahilskhdlw" path="res://workshop/shatter/Vial Shatter 3.wav" id="17_pawi4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tetba"]
 radius = 25.0
@@ -10,6 +24,26 @@ height = 70.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t101l"]
 radius = 23.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v0ub6"]
+streams_count = 11
+stream_0/stream = ExtResource("4_t426g")
+stream_1/stream = ExtResource("5_pavur")
+stream_2/stream = ExtResource("7_vme2x")
+stream_3/stream = ExtResource("8_20pfj")
+stream_4/stream = ExtResource("9_o10be")
+stream_5/stream = ExtResource("10_ok0af")
+stream_6/stream = ExtResource("11_3gho5")
+stream_7/stream = ExtResource("12_fyl65")
+stream_8/stream = ExtResource("13_kkmkm")
+stream_9/stream = ExtResource("14_7kmyb")
+stream_10/stream = ExtResource("6_bj8gy")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ybfy7"]
+streams_count = 3
+stream_0/stream = ExtResource("15_5vdmh")
+stream_1/stream = ExtResource("16_rjxc5")
+stream_2/stream = ExtResource("17_pawi4")
 
 [node name="Bottle" type="RigidBody2D" groups=["bottles"]]
 collision_layer = 2
@@ -62,6 +96,15 @@ shape = SubResource("CircleShape2D_t101l")
 
 [node name="Creatures" type="Marker2D" parent="."]
 unique_name_in_owner = true
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_v0ub6")
+
+[node name="BreakSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_ybfy7")
+volume_db = -5.0
 
 [connection signal="input_event" from="Clickable" to="." method="_on_clickable_input_event"]
 [connection signal="body_exited" from="Container" to="." method="_on_container_body_exited"]

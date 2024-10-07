@@ -119,7 +119,7 @@ func resetting():
 	%ButtonView.disabled = true
 	%ButtonSpill.disabled = true
 	%ButtonReset.disabled = true
-	get_tree().call_group(&'bottles', &'shatter')
+	get_tree().call_group(&'bottles', &'queue_free')
 	get_tree().call_group(&'furble', &'queue_free')
 	game_state = GameState.RESETTING
 	await pan_camera(false)
