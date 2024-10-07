@@ -13,6 +13,18 @@ var level_number := 1:
 var camera_toggle := false
 var camera_tween: Tween
 
+enum GameState {
+	WORKSHOP,
+	SPILLING,
+	BATTLING,
+	VICTORY,
+	DEFEAT,
+	RESETTING
+}
+
+
+var game_state := GameState.WORKSHOP
+
 
 func swap_level(node: Node) -> void:
 	for n in %Level.get_children():
@@ -49,7 +61,68 @@ func pan_camera(rightside: bool) -> void:
 
 
 func _ready() -> void:
+	workshop()
+
+func _process(delta: float) -> void:
+	pass
+
+# State transitions
+func workshop():
+	%ButtonView.disabled = false
+	%ButtonSpill.disabled = false
+	%ButtonReset.disabled = false
 	load_level()
+	game_state = GameState.WORKSHOP
+
+func spilling():
+	%ButtonView.disabled = true
+	%ButtonSpill.disabled = true
+	%ButtonReset.disabled = true
+	game_state = GameState.SPILLING
+	pan_camera(true)
+	var list: Array[Furble] = await %Workshop.spill()
+	battling(list)
+
+
+func battling(list: Array[Furble]):
+	%ButtonView.disabled = true
+	%ButtonSpill.disabled = true
+	%ButtonReset.disabled = false
+	game_state = GameState.BATTLING
+	var victory: bool = await level_node.get_node('LevelBaseLayer').start_level(list)
+	if game_state == GameState.BATTLING:
+		if victory:
+			victory()
+		else:
+			defeat()
+
+
+func victory():
+	%ButtonView.disabled = true
+	%ButtonSpill.disabled = true
+	%ButtonReset.disabled = true
+	game_state = GameState.VICTORY
+	await %VictoryBanner.show_message('Victory!')
+	level_number += 1
+	resetting()
+
+func defeat():
+	%ButtonView.disabled = true
+	%ButtonSpill.disabled = true
+	%ButtonReset.disabled = true
+	game_state = GameState.DEFEAT
+	await %VictoryBanner.show_message('Massive L!')
+	resetting()
+
+func resetting():
+	%ButtonView.disabled = true
+	%ButtonSpill.disabled = true
+	%ButtonReset.disabled = true
+	get_tree().call_group(&'bottles', &'shatter')
+	get_tree().call_group(&'furble', &'queue_free')
+	game_state = GameState.RESETTING
+	await pan_camera(false)
+	workshop()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -65,22 +138,10 @@ func _on_button_view_pressed() -> void:
 
 
 func _on_button_reset_pressed() -> void:
-	get_tree().call_group(&'bottles', &'shatter')
-	get_tree().call_group(&'furble', &'queue_free')
-	await pan_camera(false)
-	load_level()
+	if game_state == GameState.WORKSHOP or game_state == GameState.BATTLING:
+		resetting()
 
 
 func _on_button_spill_pressed() -> void:
-	%ButtonView.disabled = true
-	%ButtonSpill.disabled = true
-	%ButtonReset.disabled = true
-	pan_camera(true)
-	var list: Array[Furble] = await %Workshop.spill()
-	%ButtonReset.disabled = false
-	var victory: bool = await level_node.get_node('LevelBaseLayer').start_level(list)
-	await %VictoryBanner.show_message('Victory!' if victory else 'Massive L!')
-	if victory: level_number += 1
-	await _on_button_reset_pressed()
-	%ButtonView.disabled = false
-	%ButtonSpill.disabled = false
+	if game_state == GameState.WORKSHOP:
+		spilling()
