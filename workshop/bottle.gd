@@ -27,6 +27,7 @@ func shatter() -> void:
 
 func _shatter() -> void:
 	for body in get_furbles():
+		body.state = Furble.MovementStates.FALLING
 		body.reparent(get_tree().root)
 
 	var cork_sprite := $Cork
@@ -58,11 +59,13 @@ func has_furble(body: Furble) -> bool:
 
 func _ready() -> void:
 	#body_entered.connect(_body_entered)
+	add_collision_exception_with($Inside)
 	for idx in 10:
 		var body: Furble = FURBLE.instantiate()
 		body.type = type
 		body.state = Furble.MovementStates.BOTTLED
 		%Creatures.add_child(body)
+		add_collision_exception_with(body)
 
 
 func _process(delta: float) -> void:

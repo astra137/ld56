@@ -30,5 +30,3 @@ spill_target = NodePath("../CauldronDump")
 
 [node name="Shelf" parent="." instance=ExtResource("3_wgtfx")]
 position = Vector2(224, 437)
-
-[connection signal="clicked" from="Cauldron" to="." method="_on_cauldron_clicked"]

@@ -11,6 +11,7 @@ class_name Furble
 @export var chirp_probability := 0.005
 @export var lifetime_min := 40.0
 @export var lifetime_max := 60.0
+@export var is_legal_furble := false
 
 @export var type := CreatureTypes.FIRE:
 	set(value):
@@ -155,7 +156,7 @@ func _physics_process(delta):
 	if state != MovementStates.BOTTLED:
 		rotate_upright()
 
-		current_lifetime -= delta
+		current_lifetime -= delta if is_legal_furble else delta * 10.0
 
 	match state:
 		MovementStates.FALLING:

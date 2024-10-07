@@ -43,21 +43,24 @@ offset_right = 177.0
 offset_bottom = 40.0
 
 [node name="ButtonView" type="Button" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 shortcut = SubResource("Shortcut_g005w")
 text = "View"
 
+[node name="ButtonClean" type="Button" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Clean"
+
 [node name="ButtonSpill" type="Button" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 shortcut = SubResource("Shortcut_8w8y7")
 text = "Spill"
-
-[node name="ButtonClean" type="Button" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-text = "Clean"
 
 [node name="LabelFPS" type="Label" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
@@ -75,5 +78,5 @@ volume_db = -10.0
 autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonView" to="." method="_on_button_view_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonSpill" to="." method="_on_button_spill_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonClean" to="." method="_on_button_clean_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/ButtonSpill" to="." method="_on_button_spill_pressed"]

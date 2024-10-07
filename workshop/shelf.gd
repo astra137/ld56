@@ -22,7 +22,6 @@ func idx_to_pos(idx: int) -> Vector2:
 
 
 func spawn_bottle(idx: int) -> RigidBody2D:
-	if bottles[idx]: bottles[idx].queue_free()
 	var bottle: RigidBody2D = BOTTLE.instantiate()
 	bottle.tree_exiting.connect(handle_bottle_gone.bind(idx))
 	bottle.type = idx as Furble.CreatureTypes
@@ -33,6 +32,8 @@ func spawn_bottle(idx: int) -> RigidBody2D:
 
 
 func handle_bottle_gone(idx: int) -> void:
+	bottles[idx].queue_free()
+	await get_tree().create_timer(1.0).timeout
 	spawn_bottle(idx)
 
 

@@ -1,9 +1,6 @@
 extends CharacterBody2D
 
 
-signal clicked()
-
-
 @export var spill_target: Marker2D
 
 
@@ -23,12 +20,13 @@ func gather_furbles() -> Array[Furble]:
 
 func awaken_furbles(list: Array[Furble]) -> void:
 	for body in list:
+		body.is_legal_furble = true
 		body.reparent(get_tree().root)
-		body.state = Furble.MovementStates.FALLING
 
 
-func spill() -> void:
-	if is_spilling: return
+
+func spill() -> Array[Furble]:
+	assert(not is_spilling)
 	is_spilling = true
 	var original := global_position
 	var list := gather_furbles()
@@ -48,21 +46,7 @@ func spill() -> void:
 	await tween.finished
 	for body in furbles: body.queue_free()
 	is_spilling = false
-
-
-func _on_clickable_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-			clicked.emit()
-
-
-func _on_clickable_mouse_entered() -> void:
-	print_verbose('_on_clickable_mouse_entered')
-
-
-func _on_clickable_mouse_exited() -> void:
-	print_verbose('_on_clickable_mouse_exited')
-
+	return list
 
 
 const SPEED = 600.0
@@ -90,6 +74,7 @@ func _physics_process(delta):
 func _on_container_body_entered(body: Node2D) -> void:
 	if body is Furble:
 		furbles.push_back(body)
+		body.state = Furble.MovementStates.BOTTLED
 	if body is Bottle:
 		bottles.push_back(body)
 
@@ -97,5 +82,6 @@ func _on_container_body_entered(body: Node2D) -> void:
 func _on_container_body_exited(body: Node2D) -> void:
 	if body is Furble:
 		furbles.erase(body)
+		body.state = Furble.MovementStates.FALLING
 	if body is Bottle:
 		bottles.erase(body)
