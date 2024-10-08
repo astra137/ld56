@@ -1,5 +1,5 @@
 extends Node2D
 
 
-func spill() -> Array[Furble]:
-	return await %Cauldron.spill()
+func spill(level: LevelBaseLayer) -> void:
+	await %Cauldron.spill(level)

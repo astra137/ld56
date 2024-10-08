@@ -1,81 +1,47 @@
 extends CharacterBody2D
+class_name Cauldron
 
 
 @export var spill_target: Marker2D
 
+@onready var original_position := global_position
 
-var is_spilling := false
+var tween: Tween
 var furbles: Array[Furble] = []
-var bottles: Array[Bottle] = []
 
 
-func gather_furbles() -> Array[Furble]:
-	var list: Array[Furble] = []
-	list.append_array(furbles)
-	for bottle in bottles:
-		list.append_array(bottle.get_furbles())
-		bottle.shatter()
-	return list
-
-
-func awaken_furbles(list: Array[Furble]) -> void:
+func spill(level: LevelBaseLayer) -> void:
+	assert(not tween)
+	var root := get_tree().root
+	var list := furbles.duplicate()
 	for body in list:
-		body.refresh_lifetime()
-		body.is_legal_furble = true
-		body.reparent(get_tree().root)
-
-
-func spill() -> Array[Furble]:
-	assert(not is_spilling)
-	is_spilling = true
-	var original := global_position
-	var list := gather_furbles()
-	for body in list: body.reparent(self)
-	var tween := create_tween()
+		body.reparent(self)
+		level.track_furble(body)
+	tween = create_tween()
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, ^'global_position', spill_target.global_position, 1.0)
 	tween.tween_property(self, ^'rotation', PI*0.99, 1.0)
 	tween.chain()
-	tween.tween_callback(awaken_furbles.bind(list))
+	tween.tween_callback(func(): for body in list: body.reparent(root))
 	tween.tween_interval(2.0)
 	tween.chain()
 	tween.set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(self, ^'global_position', original, 1.0)
+	tween.tween_property(self, ^'global_position', original_position, 1.0)
 	tween.tween_property(self, ^'rotation', 0, 1.0)
 	await tween.finished
-	for body in furbles: body.queue_free()
-	is_spilling = false
-	return list
+	tween = null
 
 
-var gravity: Vector2 = ProjectSettings.get_setting("physics/2d/default_gravity") \
-	* ProjectSettings.get_setting("physics/2d/default_gravity_vector")
+func _on_container_body_entered(body: Furble) -> void:
+	furbles.push_back(body)
+	body.cauldron = self
 
 
-func _physics_process(delta):
-	if is_spilling: return
-	if not is_on_floor():
-		velocity += gravity * delta
-	move_and_slide()
+func _on_container_body_exited(body: Furble) -> void:
+	furbles.erase(body)
+	body.cauldron = null
 
 
-func _on_container_body_entered(body: Node2D) -> void:
-	if body is Furble:
-		furbles.push_back(body)
-		body.cauldron()
-	if body is Bottle:
-		bottles.push_back(body)
-
-
-func _on_container_body_exited(body: Node2D) -> void:
-	if body is Furble:
-		furbles.erase(body)
-		body.state = Furble.MovementStates.FALLING
-	if body is Bottle:
-		bottles.erase(body)
-
-
-func _on_bottle_entered(body: Node2D) -> void:
-	if body is Bottle:
-		(body as Bottle).shatter()
+func _on_bottle_entered(body: Bottle) -> void:
+	body.shatter()

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8netiwsomeja" path="res://menus/button/btn.tscn" id="4_4dsck"]
 [ext_resource type="Script" path="res://menus/label_fps.gd" id="4_k0iw8"]
 [ext_resource type="AudioStream" uid="uid://c71s841c4vs0e" path="res://background_music.wav" id="6_82ls8"]
-[ext_resource type="Script" path="res://label_furbles_goal.gd" id="6_fdbtx"]
+[ext_resource type="Script" path="res://menus/label_furbles_goal.gd" id="6_fdbtx"]
 [ext_resource type="PackedScene" uid="uid://cqyayvhkvx4m2" path="res://menus/victory_banner.tscn" id="6_x7h3v"]
 [ext_resource type="Script" path="res://menus/label_furbles.gd" id="7_swf12"]
 

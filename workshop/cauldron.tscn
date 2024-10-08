@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://caws017gjfrr8" path="res://workshop/cauldron.png" id="1_a5vfq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okb0k"]
-radius = 109.0
-height = 256.0
+radius = 98.0
+height = 216.0
 
 [node name="Cauldron" type="CharacterBody2D"]
 collision_priority = 10.0
@@ -20,11 +20,11 @@ polygon = PackedVector2Array(-94, -55, -90, -65, -84, -73, -79, -84, -105, -98, 
 [node name="Container" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 0
-collision_mask = 38
+collision_mask = 36
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Container"]
-position = Vector2(0, -31)
+position = Vector2(0, -33)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_okb0k")
 

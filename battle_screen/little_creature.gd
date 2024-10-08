@@ -1,6 +1,9 @@
 extends RigidBody2D
-
 class_name Furble
+
+const DEATH = preload("res://battle_screen/little_creature/death.tscn")
+
+signal died
 
 @export var torque_gain_proportional := 6000.0
 @export var torque_gain_derivative := 900.0
@@ -11,7 +14,8 @@ class_name Furble
 @export var chirp_probability := 0.005
 @export var lifetime_min := 80.0
 @export var lifetime_max := 100.0
-@export var is_legal_furble := true
+@export var lifetime_unstable_min := 2.0
+@export var lifetime_unstable_max := 4.0
 
 @export var type := CreatureTypes.FIRE:
 	set(value):
@@ -19,12 +23,10 @@ class_name Furble
 		if is_node_ready():
 			update_type()
 
-
 var state := MovementStates.FALLING
 
 # Death variables
 var current_lifetime := 0.0
-const death_particles := preload("res://battle_screen/little_creature/death_smoke.tscn")
 
 # Object sticking variables
 var stuck_object: Obstacle
@@ -45,12 +47,14 @@ const knock_back_impulse := Vector2(-2000.0, -2000.0)
 const knockback_time := 0.5
 var knockback_current_time := 0.0
 
-# Combining variables
-const combining_particles = preload("res://battle_screen/little_creature/combining_particles.tscn")
+enum {
+	CONTAINMENT_NONE,
+	CONTAINMENT_BOTTLE,
+	CONTAINMENT_CAULDRON,
+	CONTAINMENT_LEVEL
+}
 
 enum MovementStates {
-	BOTTLED,
-	CAULDRON,
 	FALLING,
 	WALK,
 	PREPARING_JUMP,
@@ -74,20 +78,15 @@ enum CreatureTypes {
 	GRAVITY
 }
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	update_type()
-	refresh_lifetime()
 	%Sprite.play("default")
-
-
-func refresh_lifetime():
-	current_lifetime = randf_range(lifetime_min, lifetime_max)
 
 
 func update_type() -> void:
 	var configuration: CreatureTypeAttribute = CreatureConfiguration.type_configuration[type]
-	%Sprite.modulate = configuration.color
+	modulate = configuration.color
 	mass *= configuration.weight_multiplier
 	max_speed *= configuration.speed_multiplier
 	gravity_scale *= configuration.gravity_multiplier
@@ -95,7 +94,6 @@ func update_type() -> void:
 	torque_gain_derivative*= ((configuration.gravity_multiplier) * (configuration.weight_multiplier))
 	force_magnitude *= ((configuration.gravity_multiplier) * (configuration.weight_multiplier)) * configuration.speed_multiplier
 	jump_impulse *= ((configuration.gravity_multiplier) * (configuration.weight_multiplier))
-
 	match type:
 		CreatureTypes.WATER:
 			set_collision_mask_value(5, false)
@@ -103,18 +101,58 @@ func update_type() -> void:
 			set_collision_layer_value(6, true)
 
 
+var bottle: Bottle:
+	set(value):
+		bottle = value
+		update_lifetime()
+
+
+var cauldron: Cauldron:
+	set(value):
+		cauldron = value
+		update_lifetime()
+
+
+var level: LevelBaseLayer:
+	set(value):
+		level = value
+		update_lifetime()
+
+
+func update_lifetime() -> void:
+	if level:
+		current_lifetime = randf_range(lifetime_min, lifetime_max)
+	elif current_lifetime <= 0.0:
+		current_lifetime = randf_range(lifetime_unstable_min, lifetime_unstable_max)
+
+
+func random_jump() -> bool:
+	return level and randf() <= jump_probability
+
+
 func _physics_process(delta):
-	var bodies = get_colliding_bodies()
-	var is_grounded = false
+	# Don't move in containers
+	if bottle:
+		return
+	elif cauldron:
+		cauldron_tick()
+		return
 
-	for body in bodies:
-		if body.is_in_group("ground"):
-			is_grounded = true
-
-	var should_jump := randf() <= jump_probability
-
+	# Age
+	current_lifetime -= delta
 	if current_lifetime <= 0.0 and state != MovementStates.DEATH:
 		death()
+		return
+
+	var is_grounded := false
+	var is_colliding_furbles := false
+	var is_colliding_anything := get_contact_count() > 0
+
+	for body in get_colliding_bodies():
+		if body is Furble:
+			is_colliding_furbles = true
+		elif body.is_in_group("ground"):
+			is_grounded = true
 
 	# State transitions
 	match state:
@@ -122,14 +160,14 @@ func _physics_process(delta):
 			if is_grounded:
 				%LandingSounds.play()
 				walk()
-			elif !bodies.is_empty() and linear_velocity.length() <= 100.0:
+			elif is_colliding_anything and linear_velocity.length() <= 100.0:
 				piled()
 		MovementStates.WALK:
-			if bodies.is_empty():
+			if not is_colliding_anything:
 				falling()
-			elif should_jump:
+			elif random_jump():
 				preparing_jump()
-			elif !is_grounded and !bodies.is_empty():
+			elif not is_grounded and is_colliding_anything:
 				piled()
 		MovementStates.PREPARING_JUMP:
 			if %Sprite.frame == 5:
@@ -147,9 +185,9 @@ func _physics_process(delta):
 				apply_central_impulse(knock_back_impulse)
 				falling()
 		MovementStates.PILED:
-			if bodies.is_empty():
+			if not is_colliding_anything:
 				falling()
-			elif should_jump:
+			elif random_jump():
 				preparing_jump()
 			elif is_grounded:
 				walk()
@@ -160,10 +198,7 @@ func _physics_process(delta):
 				stuck_object = null
 				falling()
 
-
-	if state != MovementStates.BOTTLED and state != MovementStates.CAULDRON:
-		rotate_upright()
-		current_lifetime -= delta if is_legal_furble else delta * 30.0
+	rotate_upright()
 
 	match state:
 		MovementStates.FALLING:
@@ -182,8 +217,6 @@ func _physics_process(delta):
 			knock_down_tick()
 		MovementStates.CRACK_JUMP:
 			crack_jump_tick(delta)
-		MovementStates.CAULDRON:
-			cauldron_tick()
 
 
 # State transition functions
@@ -207,14 +240,12 @@ func preparing_jump():
 func jump():
 	apply_central_impulse(jump_impulse)
 	%JumpSounds.play()
-
 	state = MovementStates.JUMPING
 
 func crack_jump():
 	knockback_current_time = knockback_time
 	apply_central_impulse(jump_impulse)
 	%JumpSounds.play()
-
 	state = MovementStates.CRACK_JUMP
 
 func stuck(body: Obstacle):
@@ -237,19 +268,12 @@ func death():
 	await %Sprite.animation_looped
 	%Sprite.play("squish")
 	await get_tree().create_timer(1.0).timeout
-
-	var instance = death_particles.instantiate()
-	get_tree().get_root().add_child(instance)
-	instance.global_position = global_position
-	instance.emitting = true
-
-	%DeathSound.play()
-	await %DeathSound.finished
-
+	var node: Node2D = DEATH.instantiate()
+	node.modulate = modulate
+	get_tree().root.add_child(node)
+	node.global_position = global_position
 	queue_free()
-
-func cauldron():
-	state = MovementStates.CAULDRON
+	died.emit()
 
 # State tick functions
 func piled_tick():
@@ -257,7 +281,7 @@ func piled_tick():
 	pass
 
 func walk_tick():
-	if linear_velocity.x < max_speed:
+	if level and linear_velocity.x < max_speed:
 		# Create a force vector pointing to the right
 		var force = Vector2(1, 0) * force_magnitude
 		# Apply the force to the center of mass
@@ -290,7 +314,6 @@ func cauldron_tick():
 	match type:
 		CreatureTypes.FIRE, CreatureTypes.ICE, CreatureTypes.EARTH, CreatureTypes.ARCANE:
 			var bodies = get_colliding_bodies()
-
 			for body in bodies:
 				if body is Furble:
 					var other_furble = (body as Furble)
@@ -304,14 +327,8 @@ func cauldron_tick():
 func combine(new_type: CreatureTypes):
 	type = new_type
 	%CombiningSound.play()
-	var instance = combining_particles.instantiate()
-	get_tree().get_root().add_child(instance)
+	%CombiningParticles.emitting = true
 
-	var modulate_color = CreatureConfiguration.type_configuration[new_type].color
-	instance.modulate = modulate_color
-
-	instance.global_position = global_position
-	instance.emitting = true
 
 func chirp():
 	if randf() <= chirp_probability:
@@ -334,25 +351,6 @@ func rotate_upright():
 
 func normalize_angle(angle):
 	return fmod(angle + PI, 2 * PI) - PI
-
-
-
-#region Teleport
-
-var _teleport_pending := false
-var _teleport_vector := Vector2.ZERO
-
-func teleport(delta: Vector2) -> void:
-	_teleport_pending = true
-	_teleport_vector += delta
-
-func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	if _teleport_pending:
-		state.transform.origin += _teleport_vector
-		_teleport_pending = false
-		_teleport_vector = Vector2.ZERO
-
-#endregion
 
 
 func _on_area_obstacle_entered(body: Node2D) -> void:

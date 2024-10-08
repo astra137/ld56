@@ -2,6 +2,8 @@ extends RigidBody2D
 class_name Bottle
 
 const FURBLE = preload('res://battle_screen/little_creature.tscn')
+const BOTTLE_SHATTER = preload('res://workshop/shatter/bottle_shatter.tscn')
+
 
 @export var type := Furble.CreatureTypes.FIRE
 
@@ -23,13 +25,12 @@ var _previous_velocity := linear_velocity
 var initial_position := Vector2.ZERO
 const resting_movement_limit := 30.0
 
-const bottle_break_scene = preload("res://workshop/break_sound.tscn")
-
 
 func drain_mouse_motion() -> Vector2:
 	var rel := _mouse_motion.relative
 	_mouse_motion = null
 	return rel
+
 
 func get_furbles() -> Array[Furble]:
 	var list: Array[Furble] = []
@@ -38,7 +39,6 @@ func get_furbles() -> Array[Furble]:
 
 
 func has_furble(body: Furble) -> bool:
-	if is_queued_for_deletion(): return false
 	return %Creatures == body.get_parent()
 
 
@@ -48,7 +48,7 @@ func _ready() -> void:
 	for idx in 10:
 		var body: Furble = FURBLE.instantiate()
 		body.type = type
-		body.state = Furble.MovementStates.BOTTLED
+		body.bottle = self
 		%Creatures.add_child(body)
 		add_collision_exception_with(body)
 	initial_position = global_position
@@ -77,26 +77,11 @@ func shatter() -> void:
 
 func _shatter() -> void:
 	for body in get_furbles():
-		body.falling()
-		body.is_legal_furble = false
+		body.bottle = null
 		body.reparent(get_tree().root)
-
-	var cork_sprite := $Cork
-	var cork: RigidBody2D = load('res://workshop/cork.tscn').instantiate()
-	get_tree().root.add_child(cork)
-	cork.global_position = cork_sprite.global_position
-	cork.linear_velocity = Vector2.UP.rotated(randf_range(-PI/2., PI/2.)) * 480.0
-	cork.angular_velocity = TAU
-
-	for node in BottleShard.spawn_shards():
-		get_tree().root.add_child(node)
-		node.global_position = global_position
-		node.linear_velocity = Vector2.UP.rotated(randf_range(-PI/2., PI/2.)) * 480.0
-		node.angular_velocity = TAU
-
-	var instance = bottle_break_scene.instantiate()
-	get_tree().get_root().add_child(instance)
-
+	var node: Node2D = BOTTLE_SHATTER.instantiate()
+	get_tree().root.add_child(node)
+	node.global_position = global_position
 	queue_free()
 
 
@@ -175,6 +160,6 @@ func _on_clickable_input_event(viewport: Node, event: InputEvent, _shape_idx: in
 
 
 func _on_container_body_exited(body: Node2D) -> void:
-	if body is Furble and has_furble(body):
+	if body is Furble and not is_queued_for_deletion() and has_furble(body):
 		body.linear_velocity = Vector2.ZERO
 		body.global_position = global_position

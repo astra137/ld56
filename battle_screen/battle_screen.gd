@@ -23,13 +23,17 @@ var current_points := 0:
 			is_complete = true
 
 
-func start_level(list: Array[Furble]) -> bool:
-	assert(is_complete)
+func track_furble(body: Furble) -> void:
+	tracking.push_back(body)
+	body.level = self
+	body.died.connect(_furble_died.bind(body))
+
+
+func start_level() -> bool:
 	is_complete = false
 	current_points = 0
-	tracking = list
-	for body in tracking: body.tree_exiting.connect(_furble_ded.bind(body))
 	check_victory.call_deferred()
+	print('starting level with %d critters' % [tracking.size()])
 	return await level_complete
 
 
@@ -39,7 +43,7 @@ func check_victory() -> void:
 		is_complete = true
 
 
-func _furble_ded(body: Furble) -> void:
+func _furble_died(body: Furble) -> void:
 	tracking.erase(body)
 	check_victory()
 

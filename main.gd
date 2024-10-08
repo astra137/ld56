@@ -1,5 +1,6 @@
 extends Node
 
+const FURBLE := preload("res://battle_screen/little_creature.tscn")
 
 const CENTER_MENU := Vector2(1750, 405)
 const CENTER_LEFT := Vector2(720, 405)
@@ -84,16 +85,17 @@ func spilling():
 	game_state = GameState.SPILLING
 	load_level()
 	pan_camera(true)
-	var list: Array[Furble] = await %Workshop.spill()
-	battling(list)
+	var level: LevelBaseLayer = level_node.get_node('LevelBaseLayer')
+	await %Workshop.spill(level)
+	battling(level)
 
 
-func battling(list: Array[Furble]):
+func battling(level: LevelBaseLayer):
 	%ButtonView.disabled = true
 	%ButtonSpill.disabled = true
 	%ButtonReset.disabled = false
 	game_state = GameState.BATTLING
-	var victory: bool = await level_node.get_node('LevelBaseLayer').start_level(list)
+	var victory := await level.start_level()
 	if game_state == GameState.BATTLING:
 		if victory:
 			victory()
@@ -145,14 +147,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_8: spawn_furble(Furble.CreatureTypes.GRAVITY)
 
 
-const furble := preload("res://battle_screen/little_creature.tscn")
-
 func spawn_furble(type: Furble.CreatureTypes):
-	var node: Furble = furble.instantiate()
-	node.type = type
-	node.state = Furble.MovementStates.FALLING
-	node.update_type()
+	var node: Furble = FURBLE.instantiate()
 	add_child(node)
+	node.type = type
+	if camera_toggle:
+		node.level = level_node.get_node('LevelBaseLayer')
+	else:
+		node.update_lifetime()
 	node.global_position = node.get_global_mouse_position()
 
 
